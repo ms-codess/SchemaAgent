@@ -31,9 +31,16 @@ DB_PATH = str(
 DB_ID = "california_schools"
 DB_ROOT = str(PROJECT_ROOT / "data" / "bird" / "dev_databases")
 
+# Tests that require the real SQLite file are skipped if BIRD data isn't present
+needs_bird_db = pytest.mark.skipif(
+    not Path(DB_PATH).exists(),
+    reason="BIRD data not present (data/ is gitignored — download separately)",
+)
+
 
 # ── runner: get_full_schema ───────────────────────────────────────────────────
 
+@needs_bird_db
 def test_get_full_schema_returns_text():
     schema = get_full_schema(DB_PATH)
     assert isinstance(schema, str)
@@ -58,6 +65,7 @@ def test_db_path_for():
 
 # ── runner: execution_match ───────────────────────────────────────────────────
 
+@needs_bird_db
 def test_execution_match_correct():
     gold = "SELECT COUNT(*) FROM schools"
     pred = "SELECT COUNT(*) FROM schools"
@@ -231,6 +239,7 @@ def test_baseline_c_smoke(tmp_path):
     assert 0.0 <= result["execution_accuracy"] <= 1.0
 
 
+@needs_bird_db
 def test_baseline_c_retries_on_error(tmp_path):
     """Baseline C should retry when SQL fails, up to MAX_ATTEMPTS."""
     bad_sql = "SELECT * FROM nonexistent_table_xyz"
