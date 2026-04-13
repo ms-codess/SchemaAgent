@@ -6,7 +6,7 @@ polished chat interface. Connect to a database, optionally add documents,
 then ask questions in plain English.
 """
 
-import os
+import re
 import sqlite3
 from pathlib import Path
 
@@ -16,7 +16,7 @@ from dotenv import load_dotenv
 
 load_dotenv()
 
-# -- Page config (must be first Streamlit call) --------------------------------
+# -- Page config ---------------------------------------------------------------
 st.set_page_config(
     page_title="SchemaAgent",
     page_icon="◈",
@@ -24,9 +24,7 @@ st.set_page_config(
     initial_sidebar_state="expanded",
 )
 
-# -- Custom CSS ----------------------------------------------------------------
-# .streamlit/config.toml sets base="dark" so all Streamlit text/inputs are
-# already light-on-dark.  This CSS only handles brand/bubble/badge styling.
+# -- CSS -----------------------------------------------------------------------
 st.markdown("""
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
@@ -34,12 +32,11 @@ st.markdown("""
 html, body, [class*="css"] {
     font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif !important;
 }
-
 #MainMenu, footer, header { visibility: hidden; }
 .stDeployButton { display: none; }
 
-/* ── Backgrounds ── */
-.stApp                   { background: #07070F !important; }
+/* Backgrounds */
+.stApp { background: #07070F !important; }
 section[data-testid="stSidebar"] {
     background: #0C0C18 !important;
     border-right: 1px solid rgba(124,58,237,.18) !important;
@@ -50,7 +47,7 @@ section[data-testid="stSidebar"] {
     margin: 0 auto;
 }
 
-/* ── Brand ── */
+/* Brand */
 .brand { padding: 4px 0 20px; display: flex; align-items: center; gap: 12px; }
 .brand-mark {
     width: 38px; height: 38px; border-radius: 11px; flex-shrink: 0;
@@ -62,41 +59,32 @@ section[data-testid="stSidebar"] {
 .brand-name { font-size: 17px; font-weight: 700; color: #EEEEF5; letter-spacing: -.4px; }
 .brand-tag  { font-size: 10px; color: #44446A; letter-spacing: 1.3px; text-transform: uppercase; }
 
-/* ── Sidebar section label ── */
+/* Sidebar section label */
 .sl {
     font-size: 10px; font-weight: 700; letter-spacing: 1.6px;
     text-transform: uppercase; color: #7C3AED; margin-bottom: 6px;
 }
 
-/* ── Connection tabs styling ── */
+/* Connection tabs */
 .stTabs [data-baseweb="tab-list"] {
     background: rgba(124,58,237,.06) !important;
-    border-radius: 10px !important;
-    gap: 2px !important;
-    padding: 3px !important;
-    border: 1px solid rgba(124,58,237,.15) !important;
+    border-radius: 10px !important; gap: 2px !important;
+    padding: 3px !important; border: 1px solid rgba(124,58,237,.15) !important;
 }
 .stTabs [data-baseweb="tab"] {
-    background: transparent !important;
-    color: #6B6B9A !important;
-    border-radius: 8px !important;
-    font-size: 12px !important;
-    font-weight: 600 !important;
-    padding: 5px 12px !important;
-    border: none !important;
+    background: transparent !important; color: #6B6B9A !important;
+    border-radius: 8px !important; font-size: 12px !important;
+    font-weight: 600 !important; padding: 5px 12px !important; border: none !important;
 }
 .stTabs [aria-selected="true"] {
-    background: rgba(124,58,237,.3) !important;
-    color: #C4B5FD !important;
+    background: rgba(124,58,237,.3) !important; color: #C4B5FD !important;
 }
 
-/* ── Text inputs (connection string, path) ── */
+/* Text inputs */
 .stTextInput > div > div > input {
     background: rgba(124,58,237,.06) !important;
     border: 1px solid rgba(124,58,237,.25) !important;
-    border-radius: 9px !important;
-    color: #EEEEF5 !important;
-    font-size: 13px !important;
+    border-radius: 9px !important; color: #EEEEF5 !important; font-size: 13px !important;
 }
 .stTextInput > div > div > input:focus {
     border-color: rgba(124,58,237,.6) !important;
@@ -105,7 +93,7 @@ section[data-testid="stSidebar"] {
 .stTextInput > div > div > input::placeholder { color: #3E3E60 !important; }
 .stTextInput label { color: #8B8BA7 !important; font-size: 12px !important; }
 
-/* ── File uploader ── */
+/* File uploader */
 [data-testid="stFileUploader"] > div {
     background: rgba(124,58,237,.04) !important;
     border: 1px dashed rgba(124,58,237,.28) !important;
@@ -114,22 +102,20 @@ section[data-testid="stSidebar"] {
 [data-testid="stFileUploader"] span { color: #6B6B9A !important; }
 [data-testid="stFileUploader"] small { color: #44446A !important; }
 
-/* ── Buttons ── */
+/* Default buttons (sidebar) */
 .stButton > button {
     background: transparent !important;
     border: 1px solid rgba(124,58,237,.3) !important;
-    color: #A78BFA !important;
-    border-radius: 9px !important;
+    color: #A78BFA !important; border-radius: 9px !important;
     font-size: 13px !important; font-weight: 500 !important;
     transition: all .15s !important;
 }
 .stButton > button:hover {
     background: rgba(124,58,237,.15) !important;
-    border-color: rgba(124,58,237,.55) !important;
-    color: #C4B5FD !important;
+    border-color: rgba(124,58,237,.55) !important; color: #C4B5FD !important;
 }
 
-/* Connect button — accent fill */
+/* Connect button */
 .btn-connect > button {
     background: linear-gradient(135deg,#7C3AED,#6D28D9) !important;
     border: none !important; color: #fff !important;
@@ -144,7 +130,22 @@ section[data-testid="stSidebar"] {
     color: #fff !important;
 }
 
-/* ── Status pills ── */
+/* Example chip buttons — only main area, not sidebar */
+.main .stButton > button {
+    background: rgba(124,58,237,.07) !important;
+    border: 1px solid rgba(124,58,237,.22) !important;
+    color: #A78BFA !important; border-radius: 22px !important;
+    font-size: 13px !important; font-weight: 400 !important;
+    padding: 7px 16px !important; width: 100% !important;
+    text-align: left !important; transition: all .15s !important;
+}
+.main .stButton > button:hover {
+    background: rgba(124,58,237,.18) !important;
+    border-color: rgba(124,58,237,.5) !important;
+    color: #C4B5FD !important; transform: translateY(-1px) !important;
+}
+
+/* Status pills */
 .pill {
     display: inline-flex; align-items: center; gap: 7px;
     padding: 5px 11px 5px 9px; border-radius: 20px;
@@ -156,78 +157,60 @@ section[data-testid="stSidebar"] {
 .dot-pulse { animation: dp 2s ease-in-out infinite; }
 @keyframes dp { 0%,100%{opacity:1} 50%{opacity:.3} }
 
-/* ── Sliders ── */
+/* Sliders + checkboxes */
 .stSlider label { color: #8B8BA7 !important; font-size: 12px !important; }
-.stSlider [data-testid="stTickBarMin"],
-.stSlider [data-testid="stTickBarMax"] { color: #44446A !important; font-size: 11px !important; }
-
-/* ── Checkboxes ── */
 .stCheckbox label { color: #8B8BA7 !important; font-size: 13px !important; }
 
-/* ── Expanders (sidebar) ── */
-[data-testid="stSidebar"] [data-testid="stExpander"] > div:first-child {
+/* Sidebar expanders */
+section[data-testid="stSidebar"] [data-testid="stExpander"] > div:first-child {
     background: rgba(124,58,237,.05) !important;
-    border: 1px solid rgba(124,58,237,.16) !important;
-    border-radius: 9px !important;
+    border: 1px solid rgba(124,58,237,.16) !important; border-radius: 9px !important;
 }
-[data-testid="stSidebar"] [data-testid="stExpander"] summary {
+section[data-testid="stSidebar"] [data-testid="stExpander"] summary {
     color: #8B8BA7 !important; font-size: 13px !important; font-weight: 600 !important;
 }
 
-/* ── Welcome screen ── */
+/* Welcome screen */
 .welcome {
     display: flex; flex-direction: column; align-items: center;
-    text-align: center; padding: 60px 20px 36px;
+    text-align: center; padding: 60px 20px 28px;
 }
 .wmark {
     width: 68px; height: 68px; border-radius: 22px;
     background: linear-gradient(135deg, #7C3AED, #3B82F6);
     display: flex; align-items: center; justify-content: center;
-    font-size: 34px; font-weight: 900; color: white;
-    margin-bottom: 22px;
+    font-size: 34px; font-weight: 900; color: white; margin-bottom: 22px;
     box-shadow: 0 14px 44px rgba(124,58,237,.38);
 }
-.wtitle {
-    font-size: 32px; font-weight: 700; color: #EEEEF5;
-    letter-spacing: -1.2px; margin-bottom: 12px;
-}
-.wsub {
-    font-size: 15px; color: #EEEEF5; line-height: 1.7;
-    max-width: 460px; margin-bottom: 38px;
-}
-.chips { display: flex; flex-wrap: wrap; gap: 9px; justify-content: center; max-width: 580px; }
-.chip {
-    background: rgba(124,58,237,.07); border: 1px solid rgba(124,58,237,.2);
-    border-radius: 22px; padding: 7px 16px; font-size: 13px; color: #A78BFA;
+.wtitle { font-size: 32px; font-weight: 700; color: #EEEEF5; letter-spacing: -1.2px; margin-bottom: 12px; }
+.wsub   { font-size: 15px; color: #EEEEF5; line-height: 1.7; max-width: 460px; margin-bottom: 10px; }
+.chips-label {
+    font-size: 11px; color: #44446A; letter-spacing: 1px; text-transform: uppercase;
+    margin-bottom: 14px; margin-top: 24px;
 }
 
-/* ── Chat messages ── */
+/* Chat messages */
 [data-testid="stChatMessage"] {
-    background: transparent !important;
-    border: none !important;
-    padding: 3px 0 !important;
+    background: transparent !important; border: none !important; padding: 3px 0 !important;
 }
 [data-testid="stChatMessage"] > div { background: transparent !important; }
 
-/* ── User bubble ── */
+/* User bubble */
 .ub {
     background: linear-gradient(135deg, #6D28D9, #7C3AED);
     border-radius: 18px 18px 4px 18px;
     padding: 13px 18px; max-width: 76%; margin-left: auto;
     font-size: 15px; line-height: 1.55; color: #F0EEFF;
-    box-shadow: 0 4px 22px rgba(109,40,217,.30);
-    word-break: break-word;
+    box-shadow: 0 4px 22px rgba(109,40,217,.30); word-break: break-word;
 }
 
-/* ── Assistant bubble ── */
+/* Assistant bubble */
 .ab {
-    background: #111120;
-    border: 1px solid rgba(255,255,255,.08);
+    background: #111120; border: 1px solid rgba(255,255,255,.08);
     border-radius: 4px 18px 18px 18px;
     padding: 16px 20px; max-width: 88%;
     font-size: 15px; line-height: 1.68; color: #DCDCF0;
-    box-shadow: 0 4px 28px rgba(0,0,0,.38);
-    word-break: break-word;
+    box-shadow: 0 4px 28px rgba(0,0,0,.38); word-break: break-word;
 }
 .ab strong { color: #EEEEF5; }
 .ab code {
@@ -235,7 +218,7 @@ section[data-testid="stSidebar"] {
     padding: 1px 5px; border-radius: 4px; font-size: 13px;
 }
 
-/* ── Route / meta badges ── */
+/* Route / meta badges */
 .badge {
     display: inline-flex; align-items: center; gap: 5px;
     padding: 3px 10px; border-radius: 20px;
@@ -247,41 +230,47 @@ section[data-testid="stSidebar"] {
 .badge-hyb { background:rgba(139,92,246,.1);  color:#A78BFA; border:1px solid rgba(139,92,246,.22); }
 .badge-att { background:rgba(245,158,11,.08); color:#FBBF24; border:1px solid rgba(245,158,11,.18); margin-left:5px; }
 
-/* ── Main-area expanders (SQL / results) ── */
+/* Main expanders */
 .main [data-testid="stExpander"] {
     background: rgba(255,255,255,.025) !important;
     border: 1px solid rgba(255,255,255,.08) !important;
-    border-radius: 10px !important;
-    margin-top: 10px !important;
+    border-radius: 10px !important; margin-top: 10px !important;
 }
 .main [data-testid="stExpander"] summary {
     color: #6B6B9A !important; font-size: 12px !important; font-weight: 600 !important;
 }
 .main [data-testid="stExpander"] summary:hover { color: #EEEEF5 !important; }
 
-/* ── Code blocks ── */
+/* Context used items */
+.ctx-row {
+    display: flex; align-items: baseline; gap: 10px;
+    font-size: 13px; color: #8B8BA7; padding: 4px 0;
+    border-bottom: 1px solid rgba(255,255,255,.04);
+}
+.ctx-row:last-child { border-bottom: none; }
+.ctx-key { font-size: 10px; font-weight: 700; letter-spacing: .8px;
+           text-transform: uppercase; color: #44446A; min-width: 80px; }
+.ctx-val { color: #C4B5FD; }
+
+/* Code blocks */
 .stCode > div, pre {
     background: #0A0A18 !important;
-    border: 1px solid rgba(124,58,237,.22) !important;
-    border-radius: 10px !important;
+    border: 1px solid rgba(124,58,237,.22) !important; border-radius: 10px !important;
 }
 
-/* ── Chat input ── */
+/* Chat input */
 [data-testid="stChatInput"] > div {
     background: #111120 !important;
     border: 1px solid rgba(124,58,237,.28) !important;
-    border-radius: 16px !important;
-    transition: border-color .2s, box-shadow .2s !important;
+    border-radius: 16px !important; transition: border-color .2s, box-shadow .2s !important;
 }
 [data-testid="stChatInput"] > div:focus-within {
     border-color: rgba(124,58,237,.65) !important;
     box-shadow: 0 0 0 3px rgba(124,58,237,.12) !important;
 }
 [data-testid="stChatInput"] textarea {
-    color: #EEEEF5 !important;
-    font-size: 15px !important;
-    caret-color: #7C3AED !important;
-    background: transparent !important;
+    color: #EEEEF5 !important; font-size: 15px !important;
+    caret-color: #7C3AED !important; background: transparent !important;
 }
 [data-testid="stChatInput"] textarea::placeholder { color: #3A3A58 !important; }
 [data-testid="stChatInput"] button {
@@ -289,17 +278,17 @@ section[data-testid="stSidebar"] {
     border-radius: 10px !important;
 }
 
-/* ── Error bubble ── */
+/* Error bubble */
 .err {
     background: rgba(239,68,68,.08); border: 1px solid rgba(239,68,68,.22);
     border-radius: 10px; padding: 12px 16px; color: #FCA5A5;
     font-size: 14px; line-height: 1.55;
 }
 
-/* ── Divider ── */
+/* Divider */
 hr { border-color: rgba(255,255,255,.06) !important; margin: 12px 0 !important; }
 
-/* ── Scrollbar ── */
+/* Scrollbar */
 ::-webkit-scrollbar { width: 5px; height: 5px; }
 ::-webkit-scrollbar-track { background: transparent; }
 ::-webkit-scrollbar-thumb { background: rgba(124,58,237,.32); border-radius: 10px; }
@@ -309,12 +298,13 @@ hr { border-color: rgba(255,255,255,.06) !important; margin: 12px 0 !important; 
 
 # -- Session state -------------------------------------------------------------
 _DEFAULTS: dict = {
-    "messages":    [],
-    "db_path":     None,
-    "db_id":       None,
-    "db_label":    None,   # display name shown in UI
-    "indexed_dbs": set(),
-    "indexed_docs": [],
+    "messages":          [],
+    "db_path":           None,
+    "db_id":             None,
+    "db_label":          None,
+    "indexed_dbs":       set(),
+    "indexed_docs":      [],
+    "pending_question":  None,   # set by chip buttons
 }
 for _k, _v in _DEFAULTS.items():
     if _k not in st.session_state:
@@ -340,8 +330,8 @@ def _load_components():
 
 
 # -- Helpers -------------------------------------------------------------------
-def _try_connect(db_path: str, db_id: str) -> str | None:
-    """Validate path is a readable SQLite file. Returns error string or None."""
+def _try_connect(db_path: str) -> str | None:
+    """Validate a SQLite path. Returns error string or None."""
     p = Path(db_path)
     if not p.exists():
         return f"File not found: {db_path}"
@@ -365,6 +355,20 @@ def _index_db(db_path: str, db_id: str) -> str | None:
     return None
 
 
+def _extract_tables(sql: str) -> list[str]:
+    """Best-effort table extraction from SQL using regex."""
+    raw = re.findall(
+        r'\b(?:FROM|JOIN)\s+[`"]?(\w+)[`"]?',
+        sql, re.IGNORECASE,
+    )
+    seen, out = set(), []
+    for t in raw:
+        if t.upper() not in ("SELECT", "WHERE", "ON") and t not in seen:
+            seen.add(t)
+            out.append(t)
+    return out
+
+
 def _route_badge(intent: str, attempts: int) -> str:
     cfg = {
         "database": ("badge-db",  "⬡", "database"),
@@ -378,6 +382,7 @@ def _route_badge(intent: str, attempts: int) -> str:
 
 
 def _render_result(result) -> None:
+    """Render badge + answer + SQL + results + sources + context expanders."""
     st.markdown(_route_badge(result.intent, result.sql_attempts),
                 unsafe_allow_html=True)
     st.markdown(f'<div class="ab">{result.answer}</div>', unsafe_allow_html=True)
@@ -405,201 +410,62 @@ def _render_result(result) -> None:
                 unsafe_allow_html=True,
             )
 
+    # Context used
+    rows = []
+    rows.append(("route", result.intent))
+    rows.append(("confidence", result.route_confidence))
+    if result.route_reasoning:
+        rows.append(("reasoning", result.route_reasoning))
+    if result.sql:
+        tables = _extract_tables(result.sql)
+        if tables:
+            rows.append(("tables used", ", ".join(tables)))
+    if result.sql_attempts > 1:
+        rows.append(("sql attempts", str(result.sql_attempts)))
+    if result.sources:
+        rows.append(("doc sources", ", ".join(result.sources)))
 
-# -- Sidebar -------------------------------------------------------------------
-with st.sidebar:
-    # Brand
-    st.markdown("""
-    <div class="brand">
-      <div class="brand-mark">◈</div>
-      <div>
-        <div class="brand-name">SchemaAgent</div>
-        <div class="brand-tag">Natural Language SQL</div>
-      </div>
-    </div>
-    """, unsafe_allow_html=True)
+    ctx_html = "".join(
+        f'<div class="ctx-row"><span class="ctx-key">{k}</span>'
+        f'<span class="ctx-val">{v}</span></div>'
+        for k, v in rows
+    )
+    with st.expander("◎  Context used"):
+        st.markdown(ctx_html, unsafe_allow_html=True)
 
-    # ── Database connection ──────────────────────────────────────────────────
-    st.markdown('<div class="sl">Connect database</div>', unsafe_allow_html=True)
 
-    tab_upload, tab_path = st.tabs(["Upload file", "Local path"])
+def _contextual_question(prompt: str, messages: list) -> str:
+    """
+    Prepend the last 3 Q&A exchanges to the question so the agent can
+    resolve follow-up references like 'which of them', 'how about X'.
+    """
+    pairs = []
+    history = [m for m in messages if m["role"] in ("user", "assistant")]
+    i = 0
+    while i < len(history) - 1:
+        if history[i]["role"] == "user" and history[i+1]["role"] == "assistant":
+            q = history[i]["content"]
+            a = history[i+1]["content"]
+            a_short = a[:300] + ("…" if len(a) > 300 else "")
+            pairs.append(f"User: {q}\nAssistant: {a_short}")
+            i += 2
+        else:
+            i += 1
 
-    with tab_upload:
-        db_file = st.file_uploader(
-            "SQLite file", type=["sqlite", "db", "sqlite3"],
-            label_visibility="collapsed", key="db_upload",
-        )
-        if db_file:
-            upload_dir = Path("data/uploads")
-            upload_dir.mkdir(parents=True, exist_ok=True)
-            saved = str(upload_dir / db_file.name)
-            with open(saved, "wb") as f:
-                f.write(db_file.getbuffer())
+    if not pairs:
+        return prompt
 
-            db_id = Path(db_file.name).stem
-            if db_id not in st.session_state.indexed_dbs:
-                with st.spinner("Indexing schema…"):
-                    err = _index_db(saved, db_id)
-                if err:
-                    st.error(err)
-                else:
-                    st.session_state.db_path  = saved
-                    st.session_state.db_id    = db_id
-                    st.session_state.db_label = db_file.name
-            else:
-                st.session_state.db_path  = saved
-                st.session_state.db_id    = db_id
-                st.session_state.db_label = db_file.name
-
-    with tab_path:
-        path_input = st.text_input(
-            "Path to .sqlite file",
-            placeholder="/path/to/database.sqlite",
-            key="path_input",
-        )
-        st.markdown('<div class="btn-connect">', unsafe_allow_html=True)
-        connect_clicked = st.button("Connect", key="btn_path", use_container_width=True)
-        st.markdown('</div>', unsafe_allow_html=True)
-
-        if connect_clicked and path_input.strip():
-            p = path_input.strip()
-            err = _try_connect(p, "")
-            if err:
-                st.error(err)
-            else:
-                db_id = Path(p).stem
-                with st.spinner("Indexing schema…"):
-                    idx_err = _index_db(p, db_id)
-                if idx_err:
-                    st.error(idx_err)
-                else:
-                    st.session_state.db_path  = p
-                    st.session_state.db_id    = db_id
-                    st.session_state.db_label = Path(p).name
-                    st.success("Connected!")
-
-    # Status pill
-    if st.session_state.db_path:
-        label = st.session_state.db_label or st.session_state.db_id or "database"
-        st.markdown(
-            f'<div class="pill pill-ok">'
-            f'<div class="dot dot-pulse"></div>{label}</div>',
-            unsafe_allow_html=True,
-        )
-    else:
-        st.markdown(
-            '<div class="pill pill-off"><div class="dot"></div>No database connected</div>',
-            unsafe_allow_html=True,
-        )
-
-    st.markdown("<br>", unsafe_allow_html=True)
-
-    # ── Documents ─────────────────────────────────────────────────────────────
-    st.markdown('<div class="sl">Documents</div>', unsafe_allow_html=True)
-    doc_files = st.file_uploader(
-        "PDF / DOCX / TXT", type=["pdf", "docx", "txt"],
-        accept_multiple_files=True,
-        label_visibility="collapsed", key="doc_upload",
+    recent = pairs[-3:]  # last 3 exchanges
+    context = "\n\n".join(recent)
+    return (
+        f"Conversation history (for context only — answer the current question):\n"
+        f"{context}\n\n"
+        f"Current question: {prompt}"
     )
 
-    if doc_files:
-        doc_dir = Path("data/uploads/docs")
-        doc_dir.mkdir(parents=True, exist_ok=True)
-        _, _, doc_rag, _ = _load_components()
 
-        for f in doc_files:
-            if f.name not in st.session_state.indexed_docs:
-                with open(doc_dir / f.name, "wb") as fh:
-                    fh.write(f.getbuffer())
-                with st.spinner(f"Indexing {f.name}…"):
-                    try:
-                        doc_rag.index_documents(str(doc_dir))
-                        st.session_state.indexed_docs.append(f.name)
-                    except Exception as exc:
-                        st.error(f"{f.name}: {exc}")
-
-    if st.session_state.indexed_docs:
-        for name in st.session_state.indexed_docs:
-            st.markdown(
-                f'<div style="font-size:12px;color:#34D399;padding:2px 0">✓ {name}</div>',
-                unsafe_allow_html=True,
-            )
-
-    st.markdown("<br>", unsafe_allow_html=True)
-
-    # ── Settings ──────────────────────────────────────────────────────────────
-    with st.expander("Settings"):
-        top_k_schema = st.slider("Schema tables (top-k)", 1, 10, 5)
-        top_k_docs   = st.slider("Doc passages (top-k)",  1, 10, 3)
-        max_attempts = st.slider("SQL retries",            1,  3, 3)
-        use_hyde     = st.checkbox(
-            "HyDE retrieval",
-            value=False,
-            help="Generates a hypothetical answer to improve doc recall. Costs one extra API call.",
-        )
-
-    st.markdown("<br>", unsafe_allow_html=True)
-
-    if st.button("Clear conversation", use_container_width=True):
-        st.session_state.messages = []
-        st.rerun()
-
-    # ── Disconnect ─────────────────────────────────────────────────────────────
-    if st.session_state.db_path:
-        if st.button("Disconnect database", use_container_width=True):
-            st.session_state.db_path  = None
-            st.session_state.db_id    = None
-            st.session_state.db_label = None
-            st.session_state.messages = []
-            st.rerun()
-
-
-# -- Main chat area ------------------------------------------------------------
-no_db = st.session_state.db_path is None
-
-# Welcome / empty state
-if not st.session_state.messages:
-    st.markdown("""
-    <div class="welcome">
-      <div class="wmark">◈</div>
-      <div class="wtitle">Ask your database anything</div>
-      <div class="wsub">
-        Connect a SQLite database in the sidebar, then ask questions
-        in plain English. SchemaAgent generates SQL, executes it, and
-        explains the results with optional document awareness.
-      </div>
-      <div class="chips">
-        <div class="chip">How many records are in each table?</div>
-        <div class="chip">Show the top 10 entries by date</div>
-        <div class="chip">What's the distribution by category?</div>
-        <div class="chip">Find any duplicate values</div>
-        <div class="chip">Summarise the key statistics</div>
-      </div>
-    </div>
-    """, unsafe_allow_html=True)
-
-# Render history
-for msg in st.session_state.messages:
-    if msg["role"] == "user":
-        with st.chat_message("user", avatar="◯"):
-            st.markdown(f'<div class="ub">{msg["content"]}</div>',
-                        unsafe_allow_html=True)
-    else:
-        with st.chat_message("assistant", avatar="◈"):
-            if msg.get("result"):
-                _render_result(msg["result"])
-            else:
-                st.markdown(f'<div class="err">⚠ {msg["content"]}</div>',
-                            unsafe_allow_html=True)
-
-# Chat input
-placeholder = (
-    "Ask a question about your database…"
-    if not no_db else
-    "Connect a database in the sidebar to get started…"
-)
-
-if prompt := st.chat_input(placeholder, disabled=no_db):
+def _process_question(prompt: str) -> None:
+    """Append user message, call fusion, append assistant result."""
     st.session_state.messages.append({"role": "user", "content": prompt})
 
     with st.chat_message("user", avatar="◯"):
@@ -609,14 +475,18 @@ if prompt := st.chat_input(placeholder, disabled=no_db):
         with st.spinner("Thinking…"):
             try:
                 _, schema_rag, _, fusion = _load_components()
-                schema_rag.top_k = top_k_schema
+                schema_rag.top_k = st.session_state.get("_top_k_schema", 5)
+
+                full_q = _contextual_question(
+                    prompt, st.session_state.messages[:-1]  # exclude just-appended user msg
+                )
 
                 result = fusion.answer(
-                    question=prompt,
+                    question=full_q,
                     db_id=st.session_state.db_id or "",
                     db_path=st.session_state.db_path or "",
-                    use_hyde=use_hyde,
-                    top_k_docs=top_k_docs,
+                    use_hyde=st.session_state.get("_use_hyde", False),
+                    top_k_docs=st.session_state.get("_top_k_docs", 3),
                 )
 
                 _render_result(result)
@@ -635,3 +505,217 @@ if prompt := st.chat_input(placeholder, disabled=no_db):
                     "content": err_msg,
                     "result": None,
                 })
+
+
+# -- Sidebar -------------------------------------------------------------------
+with st.sidebar:
+    st.markdown("""
+    <div class="brand">
+      <div class="brand-mark">◈</div>
+      <div>
+        <div class="brand-name">SchemaAgent</div>
+        <div class="brand-tag">Natural Language SQL</div>
+      </div>
+    </div>
+    """, unsafe_allow_html=True)
+
+    # Database connection
+    st.markdown('<div class="sl">Connect database</div>', unsafe_allow_html=True)
+    tab_upload, tab_path = st.tabs(["Upload file", "Local path"])
+
+    with tab_upload:
+        db_file = st.file_uploader(
+            "SQLite file", type=["sqlite", "db", "sqlite3"],
+            label_visibility="collapsed", key="db_upload",
+        )
+        if db_file:
+            upload_dir = Path("data/uploads")
+            upload_dir.mkdir(parents=True, exist_ok=True)
+            saved = str(upload_dir / db_file.name)
+            with open(saved, "wb") as f:
+                f.write(db_file.getbuffer())
+            db_id = Path(db_file.name).stem
+            if db_id not in st.session_state.indexed_dbs:
+                with st.spinner("Indexing schema…"):
+                    err = _index_db(saved, db_id)
+                if err:
+                    st.error(err)
+                else:
+                    st.session_state.db_path  = saved
+                    st.session_state.db_id    = db_id
+                    st.session_state.db_label = db_file.name
+            else:
+                st.session_state.db_path  = saved
+                st.session_state.db_id    = db_id
+                st.session_state.db_label = db_file.name
+
+    with tab_path:
+        path_input = st.text_input(
+            "Path to .sqlite file",
+            placeholder="data/bird/dev_databases/formula_1/formula_1.sqlite",
+            key="path_input",
+        )
+        st.markdown('<div class="btn-connect">', unsafe_allow_html=True)
+        connect_clicked = st.button("Connect", key="btn_path", use_container_width=True)
+        st.markdown('</div>', unsafe_allow_html=True)
+
+        if connect_clicked and path_input.strip():
+            p = path_input.strip()
+            err = _try_connect(p)
+            if err:
+                st.error(err)
+            else:
+                db_id = Path(p).stem
+                with st.spinner("Indexing schema…"):
+                    idx_err = _index_db(p, db_id)
+                if idx_err:
+                    st.error(idx_err)
+                else:
+                    st.session_state.db_path  = p
+                    st.session_state.db_id    = db_id
+                    st.session_state.db_label = Path(p).name
+                    st.success("Connected!")
+
+    # Status pill
+    if st.session_state.db_path:
+        label = st.session_state.db_label or st.session_state.db_id or "database"
+        st.markdown(
+            f'<div class="pill pill-ok"><div class="dot dot-pulse"></div>{label}</div>',
+            unsafe_allow_html=True,
+        )
+    else:
+        st.markdown(
+            '<div class="pill pill-off"><div class="dot"></div>No database connected</div>',
+            unsafe_allow_html=True,
+        )
+
+    st.markdown("<br>", unsafe_allow_html=True)
+
+    # Documents
+    st.markdown('<div class="sl">Documents</div>', unsafe_allow_html=True)
+    doc_files = st.file_uploader(
+        "PDF / DOCX / TXT", type=["pdf", "docx", "txt"],
+        accept_multiple_files=True,
+        label_visibility="collapsed", key="doc_upload",
+    )
+    if doc_files:
+        doc_dir = Path("data/uploads/docs")
+        doc_dir.mkdir(parents=True, exist_ok=True)
+        _, _, doc_rag, _ = _load_components()
+        for f in doc_files:
+            if f.name not in st.session_state.indexed_docs:
+                with open(doc_dir / f.name, "wb") as fh:
+                    fh.write(f.getbuffer())
+                with st.spinner(f"Indexing {f.name}…"):
+                    try:
+                        doc_rag.index_documents(str(doc_dir))
+                        st.session_state.indexed_docs.append(f.name)
+                    except Exception as exc:
+                        st.error(f"{f.name}: {exc}")
+    for name in st.session_state.indexed_docs:
+        st.markdown(
+            f'<div style="font-size:12px;color:#34D399;padding:2px 0">✓ {name}</div>',
+            unsafe_allow_html=True,
+        )
+
+    st.markdown("<br>", unsafe_allow_html=True)
+
+    # Settings — store in session_state so _process_question can read them
+    with st.expander("Settings"):
+        st.session_state["_top_k_schema"] = st.slider("Schema tables (top-k)", 1, 10, 5)
+        st.session_state["_top_k_docs"]   = st.slider("Doc passages (top-k)",  1, 10, 3)
+        st.session_state["_use_hyde"]     = st.checkbox(
+            "HyDE retrieval", value=False,
+            help="Generates a hypothetical answer to improve doc recall.",
+        )
+
+    st.markdown("<br>", unsafe_allow_html=True)
+
+    if st.button("Clear conversation", use_container_width=True):
+        st.session_state.messages = []
+        st.rerun()
+
+    if st.session_state.db_path:
+        if st.button("Disconnect database", use_container_width=True):
+            st.session_state.db_path  = None
+            st.session_state.db_id    = None
+            st.session_state.db_label = None
+            st.session_state.messages = []
+            st.rerun()
+
+
+# -- Main chat area ------------------------------------------------------------
+no_db = st.session_state.db_path is None
+
+_EXAMPLE_QUESTIONS = [
+    "How many drivers are in the database?",
+    "Who has the most race wins?",
+    "Which constructor won the most races?",
+    "List the top 5 circuits by races held",
+    "How many races were held each year?",
+    "Which drivers meet the FIA Hall of Merit criteria?",
+]
+
+# Welcome screen
+if not st.session_state.messages:
+    st.markdown("""
+    <div class="welcome">
+      <div class="wmark">◈</div>
+      <div class="wtitle">Ask your database anything</div>
+      <div class="wsub">
+        Connect a SQLite database in the sidebar, then ask questions
+        in plain English. SchemaAgent generates SQL, executes it, and
+        explains the results with optional document awareness.
+      </div>
+    </div>
+    """, unsafe_allow_html=True)
+
+    st.markdown('<div class="chips-label" style="text-align:center">Try an example</div>',
+                unsafe_allow_html=True)
+    col_a, col_b = st.columns(2)
+    for i, q in enumerate(_EXAMPLE_QUESTIONS):
+        with (col_a if i % 2 == 0 else col_b):
+            if st.button(q, key=f"chip_{i}", disabled=no_db):
+                st.session_state.pending_question = q
+                st.rerun()
+
+    if no_db:
+        st.markdown(
+            '<p style="text-align:center;font-size:12px;color:#44446A;margin-top:12px">'
+            'Connect a database in the sidebar to enable example questions</p>',
+            unsafe_allow_html=True,
+        )
+
+# Render chat history
+for msg in st.session_state.messages:
+    if msg["role"] == "user":
+        with st.chat_message("user", avatar="◯"):
+            st.markdown(f'<div class="ub">{msg["content"]}</div>',
+                        unsafe_allow_html=True)
+    else:
+        with st.chat_message("assistant", avatar="◈"):
+            if msg.get("result"):
+                _render_result(msg["result"])
+            else:
+                st.markdown(f'<div class="err">⚠ {msg["content"]}</div>',
+                            unsafe_allow_html=True)
+
+# Handle pending question from chip click
+if st.session_state.pending_question and not no_db:
+    q = st.session_state.pending_question
+    st.session_state.pending_question = None
+    _process_question(q)
+    st.rerun()
+
+# Chat input
+placeholder = (
+    "Ask a follow-up or a new question…"
+    if st.session_state.messages else
+    "Ask a question about your database…"
+    if not no_db else
+    "Connect a database in the sidebar to get started…"
+)
+
+if prompt := st.chat_input(placeholder, disabled=no_db):
+    _process_question(prompt)
+    st.rerun()
