@@ -468,10 +468,10 @@ def _process_question(prompt: str) -> None:
     """Append user message, call fusion, append assistant result."""
     st.session_state.messages.append({"role": "user", "content": prompt})
 
-    with st.chat_message("user", avatar="◯"):
+    with st.chat_message("user", avatar="user"):
         st.markdown(f'<div class="ub">{prompt}</div>', unsafe_allow_html=True)
 
-    with st.chat_message("assistant", avatar="◈"):
+    with st.chat_message("assistant", avatar="assistant"):
         with st.spinner("Thinking…"):
             try:
                 _, schema_rag, _, fusion = _load_components()
@@ -689,11 +689,11 @@ if not st.session_state.messages:
 # Render chat history
 for msg in st.session_state.messages:
     if msg["role"] == "user":
-        with st.chat_message("user", avatar="◯"):
+        with st.chat_message("user", avatar="user"):
             st.markdown(f'<div class="ub">{msg["content"]}</div>',
                         unsafe_allow_html=True)
     else:
-        with st.chat_message("assistant", avatar="◈"):
+        with st.chat_message("assistant", avatar="assistant"):
             if msg.get("result"):
                 _render_result(msg["result"])
             else:
