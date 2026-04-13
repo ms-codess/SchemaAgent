@@ -131,9 +131,7 @@ def call_claude_with_correction(
             return sql, attempt
 
         messages.append({"role": "assistant", "content": reply})
-        return sql, attempt  # baseline_c caller handles the retry loop
-
-    return "", max_attempts
+        return sql, attempt
 
 
 # ── Results I/O ───────────────────────────────────────────────────────────────
