@@ -650,23 +650,61 @@ with st.sidebar:
 # -- Main chat area ------------------------------------------------------------
 no_db = st.session_state.db_path is None
 
-# Generic DB questions — work for any SQLite database
-_DB_QUESTIONS = [
-    "How many records are in each table?",
-    "Show me the first 10 rows of the main table",
-    "What are the column names in each table?",
-    "Which table has the most rows?",
-]
+@st.cache_data(show_spinner=False)
+def _schema_questions(db_path: str, db_id: str) -> list[str]:
+    """Generate chip questions from the actual table/column names in the DB."""
+    try:
+        con = sqlite3.connect(db_path)
+        tables = [r[0] for r in con.execute(
+            "SELECT name FROM sqlite_master WHERE type='table' "
+            "AND name NOT LIKE 'sqlite_%'"
+        ).fetchall()]
+        if not tables:
+            return ["How many records are in each table?"]
 
-# DOC / HYBRID questions — only shown once documents are indexed
-_DOC_QUESTIONS  = [
-    "Summarise the key rules from the documents",
-    "What are the main criteria described?",
-]
-_HYBRID_QUESTIONS = [
-    "Which records in the database match the criteria in the documents?",
-    "Does the data meet the requirements described in the documents?",
-]
+        counts: dict = {}
+        for t in tables[:8]:
+            try:
+                counts[t] = con.execute(f'SELECT COUNT(*) FROM "{t}"').fetchone()[0]
+            except Exception:
+                counts[t] = 0
+
+        ranked = sorted(counts, key=counts.get, reverse=True)
+        main   = ranked[0]
+        cols   = [r[1] for r in con.execute(f'PRAGMA table_info("{main}")').fetchall()]
+        con.close()
+
+        qs = [f"How many {main} are in the database?",
+              f"Show me the top 10 {main} records"]
+
+        if len(ranked) > 1:
+            second = ranked[1]
+            qs.append(f"How many {second} are there?")
+
+        num_cols  = [c for c in cols if any(k in c.lower()
+                     for k in ("points","score","wins","total","count",
+                                "salary","price","amount","rank","rating"))]
+        date_cols = [c for c in cols if any(k in c.lower()
+                     for k in ("date","year","time","season","month"))]
+        name_cols = [c for c in cols if any(k in c.lower()
+                     for k in ("name","title","label","forename","surname"))]
+
+        if num_cols:
+            qs.append(f"What is the highest {num_cols[0]} in {main}?")
+        if date_cols:
+            qs.append(f"How many {main} per {date_cols[0]}?")
+        if name_cols and len(ranked) > 1:
+            qs.append(f"Which {ranked[1]} has the most {main}?")
+        if len(ranked) > 2:
+            qs.append("How many records are in each table?")
+
+        return qs[:6]
+    except Exception:
+        return [
+            "How many records are in each table?",
+            "Show me the first 10 rows",
+            "What columns does each table have?",
+        ]
 
 # Welcome screen
 if not st.session_state.messages:
@@ -682,40 +720,36 @@ if not st.session_state.messages:
     </div>
     """, unsafe_allow_html=True)
 
-    has_docs = bool(st.session_state.indexed_docs)
-
-    # Legend — only show relevant types
-    legend_parts = ['<div style="display:flex;justify-content:center;gap:20px;'
-                    'flex-wrap:wrap;margin-bottom:18px;font-size:12px;color:#6B6B9A">',
-                    '<span>⬡ &nbsp;Database query</span>']
-    if has_docs:
-        legend_parts += ['<span>◻ &nbsp;Document search</span>',
-                         '<span>⬢ &nbsp;Both together</span>']
-    legend_parts.append('</div>')
-    st.markdown("".join(legend_parts), unsafe_allow_html=True)
-
-    # Build question list
-    questions = [("⬡  " + q) for q in _DB_QUESTIONS]
-    if has_docs:
-        questions += [("◻  " + q) for q in _DOC_QUESTIONS]
-        questions += [("⬢  " + q) for q in _HYBRID_QUESTIONS]
-
-    col_a, col_b = st.columns(2)
-    for i, label in enumerate(questions):
-        # Strip the prefix to get the clean question to send
-        clean_q = label[3:].strip()
-        with (col_a if i % 2 == 0 else col_b):
-            if st.button(label, key=f"chip_{i}", disabled=no_db,
-                         use_container_width=True):
-                st.session_state.pending_question = clean_q
-                st.rerun()
-
     if no_db:
         st.markdown(
-            '<p style="text-align:center;font-size:12px;color:#44446A;margin-top:10px">'
-            'Connect a database in the sidebar to enable these questions</p>',
+            '<p style="text-align:center;font-size:12px;color:#44446A;margin-top:4px">'
+            'Connect a database in the sidebar to see suggested questions</p>',
             unsafe_allow_html=True,
         )
+    else:
+        # Generate questions from the actual schema
+        questions = _schema_questions(
+            st.session_state.db_path, st.session_state.db_id
+        )
+        # Add doc questions if documents are indexed
+        if st.session_state.indexed_docs:
+            questions += [
+                "Summarise the key rules from the uploaded documents",
+                "Which records match the criteria described in the documents?",
+            ]
+
+        st.markdown(
+            '<p style="text-align:center;font-size:11px;color:#44446A;'
+            'letter-spacing:1px;text-transform:uppercase;margin-bottom:14px">'
+            'Suggested questions</p>',
+            unsafe_allow_html=True,
+        )
+        col_a, col_b = st.columns(2)
+        for i, q in enumerate(questions):
+            with (col_a if i % 2 == 0 else col_b):
+                if st.button(q, key=f"chip_{i}", use_container_width=True):
+                    st.session_state.pending_question = q
+                    st.rerun()
 
 # Render chat history
 for msg in st.session_state.messages:

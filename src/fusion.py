@@ -44,18 +44,44 @@ from src.schema import SchemaRAG
 
 logger = logging.getLogger(__name__)
 
-# ── Fusion prompt ─────────────────────────────────────────────────────────────
+# ── Database-only synthesis prompt ───────────────────────────────────────────
+
+_DB_SYSTEM = """\
+You are a conversational data analyst assistant. A SQL query has been run on a
+database and you have the results. Your job is to answer the user's question in
+natural, clear sentences using the specific data returned.
+
+Guidelines:
+- Always write at least one complete sentence — never return a bare number or name.
+- Include the specific values, counts, or names from the results.
+- If there are multiple rows, summarise the key findings (top entries, totals, trends).
+- Match the depth of your answer to the complexity of the question: a simple count
+  warrants one sentence; a ranking or comparison deserves more detail.
+- If the query returned no rows, say so clearly and suggest why that might be.
+"""
+
+_DB_USER = """\
+Question: {question}
+
+DATABASE RESULT:
+{db_result}
+
+Answer the question in natural, conversational sentences using the data above.
+"""
+
+# ── Hybrid fusion prompt ──────────────────────────────────────────────────────
 
 _FUSION_SYSTEM = """\
-You are a helpful assistant that answers questions by combining evidence from
-two sources: a SQL database result and policy/document passages.
+You are a conversational assistant that answers questions by combining evidence
+from two sources: a SQL database result and policy/document passages.
 
-Your job is to synthesise both pieces of evidence into a single, direct answer.
-- Be concise — one to three sentences.
-- Cite the specific numbers from the database result where relevant.
-- Reference the policy/document where relevant.
-- If the sources contradict each other, say so clearly.
-- Do not add information that is not present in the provided evidence.
+Guidelines:
+- Write clear, complete sentences that directly address the question.
+- Cite specific numbers or names from the database result.
+- Reference the relevant policy or document criteria where applicable.
+- If the data and document together allow a definitive conclusion, state it clearly.
+- If the sources contradict each other, say so explicitly.
+- Do not add information not present in the provided evidence.
 """
 
 _FUSION_USER = """\
@@ -67,15 +93,15 @@ DATABASE RESULT (SQL query output):
 DOCUMENT PASSAGES:
 {doc_passages}
 
-Using ONLY the evidence above, answer the question concisely.
+Using the evidence above, answer the question in natural, conversational sentences.
 """
 
 # ── Document-only synthesis prompt ───────────────────────────────────────────
 
 _DOC_SYSTEM = """\
-You are a helpful assistant that answers questions from policy and document passages.
-Be concise — one to three sentences. Only use the provided passages; do not add
-information that is not present.
+You are a conversational assistant that answers questions from document passages.
+Write clear, complete sentences. Only use information present in the provided
+passages — do not add outside knowledge.
 """
 
 _DOC_USER = """\
@@ -84,7 +110,7 @@ Question: {question}
 DOCUMENT PASSAGES:
 {doc_passages}
 
-Answer concisely using only the passages above.
+Answer the question in natural, conversational sentences using only the passages above.
 """
 
 
@@ -253,22 +279,25 @@ class HybridFusion:
         """Call Claude to produce the final answer given intent and available evidence."""
 
         if intent == "database":
-            return self._answer_from_db(agent_result)
+            return self._answer_from_db(question, agent_result)
 
         if intent == "document":
             if not doc_passages:
-                return "No relevant document passages were found to answer this question."
+                # No docs indexed — fall back to database if possible
+                if agent_result and agent_result.success:
+                    return self._answer_from_db(question, agent_result)
+                return (
+                    "No documents have been uploaded yet to answer this question. "
+                    "Upload a document in the sidebar and ask again."
+                )
             return self._call_claude(
                 system=_DOC_SYSTEM,
-                user=_DOC_USER.format(
-                    question=question,
-                    doc_passages=doc_passages,
-                ),
+                user=_DOC_USER.format(question=question, doc_passages=doc_passages),
             )
 
         # hybrid
         db_result_str = self._format_db_result(agent_result)
-        doc_str = doc_passages or "No document passages retrieved."
+        doc_str = doc_passages or "No document passages were retrieved."
         return self._call_claude(
             system=_FUSION_SYSTEM,
             user=_FUSION_USER.format(
@@ -278,21 +307,29 @@ class HybridFusion:
             ),
         )
 
-    @staticmethod
-    def _answer_from_db(agent_result: Optional[AgentResult]) -> str:
-        """Format a plain-text answer from raw SQL rows (no extra LLM call needed)."""
+    def _answer_from_db(
+        self, question: str, agent_result: Optional[AgentResult]
+    ) -> str:
+        """Call Claude to produce a natural-language answer from SQL results."""
         if agent_result is None or not agent_result.success:
             error = agent_result.error if agent_result else "no result"
-            return f"The database query did not return a result. ({error})"
+            return (
+                f"I wasn't able to retrieve an answer from the database. "
+                f"The query failed with: {error}"
+            )
         rows = agent_result.result_rows or []
         if not rows:
-            return "The query returned no rows."
-        # Return a compact representation; the UI layer can format further
-        if len(rows) == 1 and len(rows[0]) == 1:
-            return str(rows[0][0])
-        lines = [", ".join(str(v) for v in row) for row in rows[:20]]
-        suffix = f"\n(... {len(rows) - 20} more rows)" if len(rows) > 20 else ""
-        return "\n".join(lines) + suffix
+            return (
+                "The query ran successfully but returned no matching rows. "
+                "The database may not contain records that match your question."
+            )
+        return self._call_claude(
+            system=_DB_SYSTEM,
+            user=_DB_USER.format(
+                question=question,
+                db_result=self._format_db_result(agent_result),
+            ),
+        )
 
     @staticmethod
     def _format_db_result(agent_result: Optional[AgentResult]) -> str:
@@ -312,7 +349,7 @@ class HybridFusion:
         """Single Claude API call for synthesis."""
         response = self.client.messages.create(
             model=self.model,
-            max_tokens=512,
+            max_tokens=1024,
             system=system,
             messages=[{"role": "user", "content": user}],
         )
