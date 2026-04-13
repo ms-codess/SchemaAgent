@@ -1,0 +1,47 @@
+[
+  {
+    "question_id": null,
+    "db_id": "debit_card_specializing",
+    "question": "What is the ratio of customers who pay in EUR against customers who pay in CZK?",
+    "gold_sql": "SELECT CAST(SUM(IIF(Currency = 'EUR', 1, 0)) AS FLOAT) / SUM(IIF(Currency = 'CZK', 1, 0)) AS ratio FROM customers",
+    "pred_sql": "SELECT \n    CAST(SUM(CASE WHEN Currency = 'EUR' THEN 1 ELSE 0 END) AS REAL) / \n    SUM(CASE WHEN Currency = 'CZK' THEN 1 ELSE 0 END) AS ratio\nFROM customers",
+    "match": true,
+    "error": null
+  },
+  {
+    "question_id": null,
+    "db_id": "debit_card_specializing",
+    "question": "In 2012, who had the least consumption in LAM?",
+    "gold_sql": "SELECT T1.CustomerID FROM customers AS T1 INNER JOIN yearmonth AS T2 ON T1.CustomerID = T2.CustomerID WHERE T1.Segment = 'LAM' AND SUBSTR(T2.Date, 1, 4) = '2012' GROUP BY T1.CustomerID ORDER BY SUM(T2.Consumption) ASC LIMIT 1",
+    "pred_sql": "SELECT y.CustomerID\nFROM yearmonth y\nJOIN customers c ON y.CustomerID = c.CustomerID\nWHERE c.Segment = 'LAM' \n  AND y.Date BETWEEN '201201' AND '201212'\nGROUP BY y.CustomerID\nORDER BY SUM(y.Consumption) ASC\nLIMIT 1",
+    "match": true,
+    "error": null
+  },
+  {
+    "question_id": null,
+    "db_id": "debit_card_specializing",
+    "question": "What was the average monthly consumption of customers in SME for the year 2013?",
+    "gold_sql": "SELECT AVG(T2.Consumption) / 12 FROM customers AS T1 INNER JOIN yearmonth AS T2 ON T1.CustomerID = T2.CustomerID WHERE SUBSTR(T2.Date, 1, 4) = '2013' AND T1.Segment = 'SME'",
+    "pred_sql": "SELECT AVG(y.Consumption) / 12 AS average_monthly_consumption\nFROM yearmonth y\nJOIN customers c ON y.CustomerID = c.CustomerID\nWHERE c.Segment = 'SME'\nAND y.Date BETWEEN '201301' AND '201312'",
+    "match": true,
+    "error": null
+  },
+  {
+    "question_id": null,
+    "db_id": "debit_card_specializing",
+    "question": "What was the difference in gas consumption between CZK-paying customers and EUR-paying customers in 2012?",
+    "gold_sql": "SELECT SUM(IIF(T1.Currency = 'CZK', T2.Consumption, 0)) - SUM(IIF(T1.Currency = 'EUR', T2.Consumption, 0)) FROM customers AS T1 INNER JOIN yearmonth AS T2 ON T1.CustomerID = T2.CustomerID WHERE SUBSTR(T2.Date, 1, 4) = '2012'",
+    "pred_sql": "SELECT \n    SUM(CASE WHEN c.Currency = 'CZK' THEN ym.Consumption ELSE 0 END) - \n    SUM(CASE WHEN c.Currency = 'EUR' THEN ym.Consumption ELSE 0 END) AS difference\nFROM yearmonth ym\nJOIN customers c ON ym.CustomerID = c.CustomerID\nWHERE ym.Date BETWEEN '201201' AND '201212'",
+    "match": true,
+    "error": null
+  },
+  {
+    "question_id": null,
+    "db_id": "debit_card_specializing",
+    "question": "Which year recorded the most consumption of gas paid in CZK?",
+    "gold_sql": "SELECT SUBSTR(T2.Date, 1, 4) FROM customers AS T1 INNER JOIN yearmonth AS T2 ON T1.CustomerID = T2.CustomerID WHERE T1.Currency = 'CZK' GROUP BY SUBSTR(T2.Date, 1, 4) ORDER BY SUM(T2.Consumption) DESC LIMIT 1",
+    "pred_sql": "SELECT SUBSTR(ym.Date, 1, 4) AS Year\nFROM yearmonth ym\nJOIN customers c ON ym.CustomerID = c.CustomerID\nWHERE c.Currency = 'CZK'\nGROUP BY SUBSTR(ym.Date, 1, 4)\nORDER BY SUM(ym.Consumption) DESC\nLIMIT 1",
+    "match": true,
+    "error": null
+  }
+]
