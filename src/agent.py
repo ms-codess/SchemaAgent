@@ -32,7 +32,6 @@ import sqlglot.errors
 
 from src.schema import SchemaRAG
 from src.utils import get_db_connection, execute_sql, extract_sql_from_response
-from src.config import SAMPLE_ROWS, MAX_COLUMNS
 from baselines.runner import (
     SYSTEM_PROMPT,
     build_user_message,

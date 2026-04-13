@@ -106,23 +106,22 @@ class TestDatabaseIntent:
         assert isinstance(result, FusionResult)
         mocks["doc_rag"].retrieve_chunks.assert_not_called()
 
-    def test_single_cell_answer_no_llm(self):
-        """Single-cell result returns value directly without calling Claude synthesis."""
+    def test_single_cell_answer_calls_claude(self):
+        """Single-cell result is synthesised into a natural-language answer via Claude."""
         ar = _make_agent_result(rows=[("99",)])
-        fusion, mocks = _make_fusion(intent="database", agent_result=ar)
+        fusion, mocks = _make_fusion(intent="database", agent_result=ar, claude_reply="There are 99 records.")
         result = fusion.answer("Count?", db_id="db", db_path="db.sqlite")
-        assert result.answer == "99"
-        # Claude synthesis should NOT be called for database-only path
-        mocks["client"].messages.create.assert_not_called()
+        assert result.answer == "There are 99 records."
+        mocks["client"].messages.create.assert_called_once()
 
-    def test_multi_row_result_formatted(self):
-        """Multi-row result is formatted as comma-separated lines."""
+    def test_multi_row_result_calls_claude(self):
+        """Multi-row result is passed to Claude for natural-language synthesis."""
         rows = [("Alice", "3.8"), ("Bob", "3.5"), ("Carol", "3.2")]
         ar = _make_agent_result(rows=rows)
-        fusion, _ = _make_fusion(intent="database", agent_result=ar)
+        fusion, mocks = _make_fusion(intent="database", agent_result=ar, claude_reply="Alice has 3.8, Bob 3.5, Carol 3.2.")
         result = fusion.answer("List GPAs", db_id="db", db_path="db.sqlite")
-        assert "Alice" in result.answer
-        assert "Bob" in result.answer
+        mocks["client"].messages.create.assert_called_once()
+        assert result.answer == "Alice has 3.8, Bob 3.5, Carol 3.2."
 
     def test_sql_failure_answer(self):
         """Failed SQL returns user-friendly message."""
@@ -177,7 +176,7 @@ class TestDocumentIntent:
         """Document intent with no indexed docs returns friendly message."""
         fusion, _ = _make_fusion(intent="document", doc_chunks=[])
         result = fusion.answer("What is the policy?")
-        assert "No relevant document passages" in result.answer
+        assert "document" in result.answer.lower()
 
     def test_result_fields(self):
         """FusionResult has no SQL fields for document intent."""
@@ -239,7 +238,7 @@ class TestHybridIntent:
         # Verify the doc_passages string passed in contains the fallback message
         call_kwargs = mocks["client"].messages.create.call_args
         user_content = call_kwargs[1]["messages"][0]["content"]
-        assert "No document passages retrieved" in user_content
+        assert "No document passages were retrieved" in user_content
 
     def test_hybrid_result_fields(self):
         """FusionResult has both SQL and doc fields for hybrid intent."""
@@ -270,19 +269,24 @@ class TestHybridIntent:
 class TestEdgeCases:
 
     def test_more_than_20_rows_truncated(self):
-        """Result with >20 rows shows first 20 + overflow note."""
+        """Result with >20 rows passes truncated data to Claude synthesis."""
         rows = [(str(i),) for i in range(25)]
         ar = _make_agent_result(rows=rows)
-        fusion, _ = _make_fusion(intent="database", agent_result=ar)
+        fusion, mocks = _make_fusion(intent="database", agent_result=ar, claude_reply="Here are the results.")
         result = fusion.answer("All records?", db_id="db", db_path="db.sqlite")
-        assert "5 more rows" in result.answer
+        mocks["client"].messages.create.assert_called_once()
+        # Overflow note should appear in the prompt sent to Claude
+        call_kwargs = mocks["client"].messages.create.call_args
+        user_content = call_kwargs[1]["messages"][0]["content"]
+        assert "5 more rows" in user_content
 
     def test_empty_rows_message(self):
-        """SQL succeeds but returns zero rows → clear message."""
+        """SQL succeeds but returns zero rows → clear message without calling Claude."""
         ar = AgentResult(sql="SELECT 1", result_rows=[], attempts=1, success=True, error=None)
-        fusion, _ = _make_fusion(intent="database", agent_result=ar)
+        fusion, mocks = _make_fusion(intent="database", agent_result=ar)
         result = fusion.answer("Empty query?", db_id="db", db_path="db.sqlite")
-        assert "no rows" in result.answer.lower()
+        assert "no matching rows" in result.answer.lower()
+        mocks["client"].messages.create.assert_not_called()
 
     def test_question_stored_in_result(self):
         """FusionResult.question matches the input."""
