@@ -122,6 +122,7 @@ class SQLAgent:
         number of attempts used, success flag, and last error message.
         """
         schema_context = self._get_schema(question, db_id, db_path)
+        used_full_schema = not self.schema_rag.is_indexed(db_id)
         messages = [
             {"role": "user", "content": build_user_message(question, schema_context, evidence)}
         ]
@@ -160,10 +161,25 @@ class SQLAgent:
                 last_error = exec_err
                 logger.debug("Attempt %d — execution error: %s", attempt, exec_err)
                 if attempt < self.max_attempts:
-                    messages = self._append_correction(
-                        messages, reply_text,
-                        _EXECUTION_CORRECTION.format(error=exec_err),
-                    )
+                    # If RAG was used and we hit an execution error, the narrow
+                    # schema context may be missing the required table. Escalate
+                    # to the full schema and start a fresh prompt so Claude has
+                    # complete visibility before the next attempt.
+                    if not used_full_schema:
+                        logger.info(
+                            "Attempt %d — execution error with RAG context; "
+                            "escalating to full schema for db=%s", attempt, db_id
+                        )
+                        full_schema = get_full_schema(db_path)
+                        messages = [
+                            {"role": "user", "content": build_user_message(question, full_schema, evidence)}
+                        ]
+                        used_full_schema = True
+                    else:
+                        messages = self._append_correction(
+                            messages, reply_text,
+                            _EXECUTION_CORRECTION.format(error=exec_err),
+                        )
                 continue
 
             if not rows:

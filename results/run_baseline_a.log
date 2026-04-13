@@ -1,0 +1,723 @@
+<frozen runpy>:128: RuntimeWarning: 'baselines.baseline_a' found in sys.modules after import of package 'baselines', but prior to execution of 'baselines.baseline_a'; this may result in unpredictable behaviour
+Baseline A:   0%|          | 0/500 [00:00<?, ?it/s]2026-04-12 13:39:35,250 INFO HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+Baseline A:   0%|          | 1/500 [00:01<12:10,  1.46s/it]2026-04-12 13:39:36,797 INFO HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+Baseline A:   0%|          | 2/500 [00:03<14:18,  1.72s/it]2026-04-12 13:39:38,826 INFO HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+Baseline A:   1%|          | 3/500 [00:05<14:22,  1.74s/it]2026-04-12 13:39:39,105 INFO HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 429 Too Many Requests"
+2026-04-12 13:39:39,105 INFO Retrying request to /v1/messages in 2.000000 seconds
+2026-04-12 13:39:41,203 INFO HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 429 Too Many Requests"
+2026-04-12 13:39:41,204 INFO Retrying request to /v1/messages in 2.000000 seconds
+2026-04-12 13:39:43,335 INFO HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 429 Too Many Requests"
+2026-04-12 13:39:43,335 WARNING Rate limit hit — retrying in 5s (attempt 1/6)
+2026-04-12 13:39:48,411 INFO HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 429 Too Many Requests"
+2026-04-12 13:39:48,427 INFO Retrying request to /v1/messages in 1.000000 seconds
+2026-04-12 13:39:51,322 INFO HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+Baseline A:   1%|          | 4/500 [00:17<50:02,  6.05s/it]2026-04-12 13:39:51,743 INFO HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 429 Too Many Requests"
+2026-04-12 13:39:51,743 INFO Retrying request to /v1/messages in 1.000000 seconds
+2026-04-12 13:39:55,459 INFO HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+Baseline A:   1%|1         | 5/500 [00:21<44:21,  5.38s/it]2026-04-12 13:39:58,469 INFO HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+Baseline A:   1%|1         | 6/500 [00:25<37:48,  4.59s/it]2026-04-12 13:39:58,959 INFO HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 429 Too Many Requests"
+2026-04-12 13:39:58,959 INFO Retrying request to /v1/messages in 2.000000 seconds
+2026-04-12 13:40:08,092 INFO HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+Baseline A:   1%|1         | 7/500 [00:34<50:42,  6.17s/it]2026-04-12 13:40:14,196 INFO HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+Baseline A:   2%|1         | 8/500 [00:40<50:26,  6.15s/it]2026-04-12 13:40:15,422 INFO HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+Baseline A:   2%|1         | 9/500 [00:41<37:15,  4.55s/it]2026-04-12 13:40:17,067 INFO HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+Baseline A:   2%|2         | 10/500 [00:43<29:53,  3.66s/it]2026-04-12 13:40:18,606 INFO HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+Baseline A:   2%|2         | 11/500 [00:44<24:29,  3.00s/it]2026-04-12 13:40:18,738 INFO HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 429 Too Many Requests"
+2026-04-12 13:40:18,738 INFO Retrying request to /v1/messages in 1.000000 seconds
+2026-04-12 13:40:19,872 INFO HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 429 Too Many Requests"
+2026-04-12 13:40:19,872 INFO Retrying request to /v1/messages in 1.000000 seconds
+2026-04-12 13:40:22,663 INFO HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+Baseline A:   2%|2         | 12/500 [00:48<27:11,  3.34s/it]2026-04-12 13:40:22,816 INFO HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 429 Too Many Requests"
+2026-04-12 13:40:22,816 INFO Retrying request to /v1/messages in 1.000000 seconds
+2026-04-12 13:40:25,117 INFO HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+Baseline A:   3%|2         | 13/500 [00:51<24:51,  3.06s/it]2026-04-12 13:40:26,587 INFO HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+Baseline A:   3%|2         | 14/500 [00:52<21:04,  2.60s/it]2026-04-12 13:40:28,245 INFO HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+Baseline A:   3%|3         | 15/500 [00:54<18:33,  2.30s/it]2026-04-12 13:40:29,496 INFO HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+Baseline A:   3%|3         | 16/500 [00:55<15:54,  1.97s/it]2026-04-12 13:40:31,043 INFO HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+Baseline A:   3%|3         | 17/500 [00:57<15:01,  1.87s/it]2026-04-12 13:40:32,349 INFO HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+Baseline A:   4%|3         | 18/500 [00:58<13:30,  1.68s/it]2026-04-12 13:40:33,952 INFO HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+Baseline A:   4%|3         | 19/500 [01:00<13:14,  1.65s/it]2026-04-12 13:40:35,249 INFO HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+Baseline A:   4%|4         | 20/500 [01:01<12:22,  1.55s/it]2026-04-12 13:40:36,529 INFO HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+Baseline A:   4%|4         | 21/500 [01:02<11:43,  1.47s/it]2026-04-12 13:40:37,763 INFO HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+Baseline A:   4%|4         | 22/500 [01:03<11:06,  1.40s/it]2026-04-12 13:40:39,307 INFO HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+Baseline A:   5%|4         | 23/500 [01:05<11:27,  1.44s/it]2026-04-12 13:40:39,394 INFO HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 429 Too Many Requests"
+2026-04-12 13:40:39,394 INFO Retrying request to /v1/messages in 1.000000 seconds
+2026-04-12 13:40:40,476 INFO HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 429 Too Many Requests"
+2026-04-12 13:40:40,476 INFO Retrying request to /v1/messages in 2.000000 seconds
+2026-04-12 13:40:44,293 INFO HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+Baseline A:   5%|4         | 24/500 [01:10<19:52,  2.50s/it]2026-04-12 13:40:46,059 INFO HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+Baseline A:   5%|5         | 25/500 [01:12<18:06,  2.29s/it]2026-04-12 13:40:46,160 INFO HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 429 Too Many Requests"
+2026-04-12 13:40:46,160 INFO Retrying request to /v1/messages in 1.000000 seconds
+2026-04-12 13:40:50,992 INFO HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+Baseline A:   5%|5         | 26/500 [01:17<24:29,  3.10s/it]2026-04-12 13:40:52,756 INFO HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+Baseline A:   5%|5         | 27/500 [01:18<21:05,  2.68s/it]2026-04-12 13:40:54,776 INFO HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+Baseline A:   6%|5         | 28/500 [01:20<19:33,  2.49s/it]2026-04-12 13:40:54,944 INFO HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 429 Too Many Requests"
+2026-04-12 13:40:54,944 INFO Retrying request to /v1/messages in 1.000000 seconds
+2026-04-12 13:40:56,021 INFO HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 429 Too Many Requests"
+2026-04-12 13:40:56,021 INFO Retrying request to /v1/messages in 1.000000 seconds
+2026-04-12 13:40:57,196 INFO HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 429 Too Many Requests"
+2026-04-12 13:40:57,196 WARNING Rate limit hit — retrying in 5s (attempt 1/6)
+2026-04-12 13:41:04,298 INFO HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+Baseline A:   6%|5         | 29/500 [01:30<36:07,  4.60s/it]2026-04-12 13:41:04,442 INFO HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 429 Too Many Requests"
+2026-04-12 13:41:04,443 INFO Retrying request to /v1/messages in 3.000000 seconds
+2026-04-12 13:41:07,522 INFO HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 429 Too Many Requests"
+2026-04-12 13:41:07,522 INFO Retrying request to /v1/messages in 4.000000 seconds
+2026-04-12 13:41:13,309 INFO HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+Baseline A:   6%|6         | 30/500 [01:39<46:18,  5.91s/it]2026-04-12 13:41:13,416 INFO HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 429 Too Many Requests"
+2026-04-12 13:41:13,416 INFO Retrying request to /v1/messages in 1.000000 seconds
+2026-04-12 13:41:14,495 INFO HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 429 Too Many Requests"
+2026-04-12 13:41:14,495 INFO Retrying request to /v1/messages in 1.000000 seconds
+2026-04-12 13:41:15,574 INFO HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 429 Too Many Requests"
+2026-04-12 13:41:15,574 WARNING Rate limit hit — retrying in 5s (attempt 1/6)
+2026-04-12 13:41:20,702 INFO HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 429 Too Many Requests"
+2026-04-12 13:41:20,703 INFO Retrying request to /v1/messages in 2.000000 seconds
+2026-04-12 13:41:22,770 INFO HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 429 Too Many Requests"
+2026-04-12 13:41:22,780 INFO Retrying request to /v1/messages in 2.000000 seconds
+2026-04-12 13:41:26,120 INFO HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+Baseline A:   6%|6         | 31/500 [01:52<1:02:23,  7.98s/it]2026-04-12 13:41:28,173 INFO HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+Baseline A:   6%|6         | 32/500 [01:54<48:24,  6.21s/it]  2026-04-12 13:41:29,865 INFO HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+Baseline A:   7%|6         | 33/500 [01:56<37:43,  4.85s/it]2026-04-12 13:41:31,634 INFO HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+Baseline A:   7%|6         | 34/500 [01:57<30:28,  3.92s/it]2026-04-12 13:41:33,171 INFO HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+Baseline A:   7%|7         | 35/500 [01:59<24:51,  3.21s/it]2026-04-12 13:41:33,304 INFO HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 429 Too Many Requests"
+2026-04-12 13:41:33,304 INFO Retrying request to /v1/messages in 1.000000 seconds
+2026-04-12 13:41:35,644 INFO HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+Baseline A:   7%|7         | 36/500 [02:01<23:08,  2.99s/it]2026-04-12 13:41:35,746 INFO HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 429 Too Many Requests"
+2026-04-12 13:41:35,746 INFO Retrying request to /v1/messages in 1.000000 seconds
+2026-04-12 13:41:36,820 INFO HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 429 Too Many Requests"
+2026-04-12 13:41:36,820 INFO Retrying request to /v1/messages in 3.000000 seconds
+2026-04-12 13:41:41,893 INFO HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+Baseline A:   7%|7         | 37/500 [02:08<30:35,  3.96s/it]2026-04-12 13:41:42,024 INFO HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 429 Too Many Requests"
+2026-04-12 13:41:42,024 INFO Retrying request to /v1/messages in 1.000000 seconds
+2026-04-12 13:41:43,109 INFO HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 429 Too Many Requests"
+2026-04-12 13:41:43,110 INFO Retrying request to /v1/messages in 2.000000 seconds
+2026-04-12 13:41:45,242 INFO HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 429 Too Many Requests"
+2026-04-12 13:41:45,243 WARNING Rate limit hit — retrying in 5s (attempt 1/6)
+2026-04-12 13:41:52,787 INFO HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+Baseline A:   8%|7         | 38/500 [02:18<46:34,  6.05s/it]2026-04-12 13:41:55,209 INFO HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+Baseline A:   8%|7         | 39/500 [02:21<38:04,  4.96s/it]2026-04-12 13:41:56,275 INFO HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+Baseline A:   8%|8         | 40/500 [02:22<29:02,  3.79s/it]2026-04-12 13:41:57,754 INFO HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+Baseline A:   8%|8         | 41/500 [02:23<23:41,  3.10s/it]2026-04-12 13:41:57,833 INFO HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 429 Too Many Requests"
+2026-04-12 13:41:57,833 INFO Retrying request to /v1/messages in 2.000000 seconds
+2026-04-12 13:42:01,554 INFO HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+Baseline A:   8%|8         | 42/500 [02:27<25:14,  3.31s/it]2026-04-12 13:42:03,031 INFO HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+Baseline A:   9%|8         | 43/500 [02:29<21:00,  2.76s/it]2026-04-12 13:42:03,158 INFO HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 429 Too Many Requests"
+2026-04-12 13:42:03,158 INFO Retrying request to /v1/messages in 2.000000 seconds
+2026-04-12 13:42:06,754 INFO HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+Baseline A:   9%|8         | 44/500 [02:32<23:09,  3.05s/it]2026-04-12 13:42:06,824 INFO HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 429 Too Many Requests"
+2026-04-12 13:42:06,824 INFO Retrying request to /v1/messages in 1.000000 seconds
+2026-04-12 13:42:07,973 INFO HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 429 Too Many Requests"
+2026-04-12 13:42:07,973 INFO Retrying request to /v1/messages in 2.000000 seconds
+2026-04-12 13:42:11,229 INFO HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+Baseline A:   9%|9         | 45/500 [02:37<26:21,  3.48s/it]2026-04-12 13:42:12,732 INFO HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+Baseline A:   9%|9         | 46/500 [02:38<21:49,  2.88s/it]2026-04-12 13:42:13,270 INFO HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 429 Too Many Requests"
+2026-04-12 13:42:13,270 INFO Retrying request to /v1/messages in 2.000000 seconds
+2026-04-12 13:42:17,497 INFO HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+Baseline A:   9%|9         | 47/500 [02:43<26:02,  3.45s/it]2026-04-12 13:42:17,591 INFO HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 429 Too Many Requests"
+2026-04-12 13:42:17,591 INFO Retrying request to /v1/messages in 2.000000 seconds
+2026-04-12 13:42:20,874 INFO HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+Baseline A:  10%|9         | 48/500 [02:47<25:48,  3.43s/it]2026-04-12 13:42:22,261 INFO HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+Baseline A:  10%|9         | 49/500 [02:48<21:11,  2.82s/it]2026-04-12 13:42:22,369 INFO HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 429 Too Many Requests"
+2026-04-12 13:42:22,369 INFO Retrying request to /v1/messages in 3.000000 seconds
+2026-04-12 13:42:25,458 INFO HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 429 Too Many Requests"
+2026-04-12 13:42:25,458 INFO Retrying request to /v1/messages in 3.000000 seconds
+2026-04-12 13:42:29,840 INFO HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+Baseline A:  10%|#         | 50/500 [02:56<31:49,  4.24s/it]2026-04-12 13:42:29,977 INFO HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 429 Too Many Requests"
+2026-04-12 13:42:29,977 INFO Retrying request to /v1/messages in 3.000000 seconds
+2026-04-12 13:42:34,341 INFO HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+Baseline A:  10%|#         | 51/500 [03:00<32:19,  4.32s/it]2026-04-12 13:42:34,556 INFO HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 429 Too Many Requests"
+2026-04-12 13:42:34,557 INFO Retrying request to /v1/messages in 3.000000 seconds
+2026-04-12 13:42:38,749 INFO HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+Baseline A:  10%|#         | 52/500 [03:04<32:27,  4.35s/it]2026-04-12 13:42:40,454 INFO HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+Baseline A:  11%|#         | 53/500 [03:06<26:28,  3.55s/it]2026-04-12 13:42:40,590 INFO HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 429 Too Many Requests"
+2026-04-12 13:42:40,590 INFO Retrying request to /v1/messages in 2.000000 seconds
+2026-04-12 13:42:43,371 INFO HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+Baseline A:  11%|#         | 54/500 [03:09<24:59,  3.36s/it]2026-04-12 13:42:44,738 INFO HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+Baseline A:  11%|#1        | 55/500 [03:10<20:29,  2.76s/it]2026-04-12 13:42:44,831 INFO HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 429 Too Many Requests"
+2026-04-12 13:42:44,831 INFO Retrying request to /v1/messages in 2.000000 seconds
+2026-04-12 13:42:48,414 INFO HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+Baseline A:  11%|#1        | 56/500 [03:14<22:28,  3.04s/it]2026-04-12 13:42:50,915 INFO HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+Baseline A:  11%|#1        | 57/500 [03:17<21:14,  2.88s/it]2026-04-12 13:42:50,995 INFO HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 429 Too Many Requests"
+2026-04-12 13:42:50,995 INFO Retrying request to /v1/messages in 1.000000 seconds
+2026-04-12 13:42:53,693 INFO HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+Baseline A:  12%|#1        | 58/500 [03:19<20:58,  2.85s/it]2026-04-12 13:42:55,603 INFO HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+Baseline A:  12%|#1        | 59/500 [03:21<18:51,  2.57s/it]2026-04-12 13:42:55,726 INFO HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 429 Too Many Requests"
+2026-04-12 13:42:55,726 INFO Retrying request to /v1/messages in 2.000000 seconds
+2026-04-12 13:42:58,708 INFO HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+Baseline A:  12%|#2        | 60/500 [03:24<20:00,  2.73s/it]2026-04-12 13:42:58,923 INFO HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 429 Too Many Requests"
+2026-04-12 13:42:58,923 INFO Retrying request to /v1/messages in 3.000000 seconds
+2026-04-12 13:43:03,465 INFO HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+Baseline A:  12%|#2        | 61/500 [03:29<24:24,  3.34s/it]2026-04-12 13:43:04,710 INFO HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+Baseline A:  12%|#2        | 62/500 [03:30<19:46,  2.71s/it]2026-04-12 13:43:05,623 INFO HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 429 Too Many Requests"
+2026-04-12 13:43:05,623 INFO Retrying request to /v1/messages in 2.000000 seconds
+2026-04-12 13:43:09,851 INFO HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+Baseline A:  13%|#2        | 63/500 [03:36<25:02,  3.44s/it]2026-04-12 13:43:09,926 INFO HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 429 Too Many Requests"
+2026-04-12 13:43:09,926 INFO Retrying request to /v1/messages in 2.000000 seconds
+2026-04-12 13:43:13,553 INFO HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+Baseline A:  13%|#2        | 64/500 [03:39<25:33,  3.52s/it]2026-04-12 13:43:13,645 INFO HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 429 Too Many Requests"
+2026-04-12 13:43:13,645 INFO Retrying request to /v1/messages in 1.000000 seconds
+2026-04-12 13:43:16,154 INFO HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+Baseline A:  13%|#3        | 65/500 [03:42<23:30,  3.24s/it]2026-04-12 13:43:16,220 INFO HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 429 Too Many Requests"
+2026-04-12 13:43:16,220 INFO Retrying request to /v1/messages in 2.000000 seconds
+2026-04-12 13:43:20,028 INFO HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+Baseline A:  13%|#3        | 66/500 [03:46<24:49,  3.43s/it]2026-04-12 13:43:23,052 INFO HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+Baseline A:  13%|#3        | 67/500 [03:49<23:53,  3.31s/it]2026-04-12 13:43:24,011 INFO HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+Baseline A:  14%|#3        | 68/500 [03:50<18:45,  2.60s/it]2026-04-12 13:43:26,017 INFO HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+Baseline A:  14%|#3        | 69/500 [03:52<17:25,  2.42s/it]2026-04-12 13:43:26,109 INFO HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 429 Too Many Requests"
+2026-04-12 13:43:26,109 INFO Retrying request to /v1/messages in 3.000000 seconds
+2026-04-12 13:43:30,505 INFO HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+Baseline A:  14%|#4        | 70/500 [03:56<21:48,  3.04s/it]2026-04-12 13:43:31,986 INFO HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+Baseline A:  14%|#4        | 71/500 [03:58<18:24,  2.57s/it]2026-04-12 13:43:32,118 INFO HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 429 Too Many Requests"
+2026-04-12 13:43:32,118 INFO Retrying request to /v1/messages in 2.000000 seconds
+2026-04-12 13:43:34,207 INFO HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 429 Too Many Requests"
+2026-04-12 13:43:34,207 INFO Retrying request to /v1/messages in 2.000000 seconds
+2026-04-12 13:43:37,866 INFO HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+Baseline A:  14%|#4        | 72/500 [04:04<25:26,  3.57s/it]2026-04-12 13:43:37,960 INFO HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 429 Too Many Requests"
+2026-04-12 13:43:37,960 INFO Retrying request to /v1/messages in 3.000000 seconds
+2026-04-12 13:43:42,914 INFO HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+Baseline A:  15%|#4        | 73/500 [04:09<28:32,  4.01s/it]2026-04-12 13:43:44,896 INFO HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+Baseline A:  15%|#4        | 74/500 [04:11<24:09,  3.40s/it]2026-04-12 13:43:44,982 INFO HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 429 Too Many Requests"
+2026-04-12 13:43:44,983 INFO Retrying request to /v1/messages in 1.000000 seconds
+2026-04-12 13:43:46,070 INFO HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 429 Too Many Requests"
+2026-04-12 13:43:46,071 INFO Retrying request to /v1/messages in 4.000000 seconds
+2026-04-12 13:43:51,396 INFO HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+Baseline A:  15%|#5        | 75/500 [04:17<30:40,  4.33s/it]2026-04-12 13:43:51,470 INFO HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 429 Too Many Requests"
+2026-04-12 13:43:51,470 INFO Retrying request to /v1/messages in 1.000000 seconds
+2026-04-12 13:43:52,546 INFO HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 429 Too Many Requests"
+2026-04-12 13:43:52,546 INFO Retrying request to /v1/messages in 2.000000 seconds
+2026-04-12 13:43:56,225 INFO HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+Baseline A:  15%|#5        | 76/500 [04:22<31:39,  4.48s/it]2026-04-12 13:43:56,691 INFO HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 429 Too Many Requests"
+2026-04-12 13:43:56,693 INFO Retrying request to /v1/messages in 2.000000 seconds
+2026-04-12 13:44:00,134 INFO HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+Baseline A:  15%|#5        | 77/500 [04:26<30:22,  4.31s/it]2026-04-12 13:44:01,447 INFO HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+Baseline A:  16%|#5        | 78/500 [04:27<23:59,  3.41s/it]2026-04-12 13:44:01,516 INFO HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 429 Too Many Requests"
+2026-04-12 13:44:01,516 INFO Retrying request to /v1/messages in 2.000000 seconds
+2026-04-12 13:44:06,556 INFO HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+Baseline A:  16%|#5        | 79/500 [04:32<27:30,  3.92s/it]2026-04-12 13:44:08,253 INFO HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+Baseline A:  16%|#6        | 80/500 [04:34<22:48,  3.26s/it]2026-04-12 13:44:09,856 INFO HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+Baseline A:  16%|#6        | 81/500 [04:36<19:14,  2.76s/it]2026-04-12 13:44:09,965 INFO HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 429 Too Many Requests"
+2026-04-12 13:44:09,965 INFO Retrying request to /v1/messages in 2.000000 seconds
+2026-04-12 13:44:13,509 INFO HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+Baseline A:  16%|#6        | 82/500 [04:39<21:04,  3.03s/it]2026-04-12 13:44:15,104 INFO HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+Baseline A:  17%|#6        | 83/500 [04:41<18:02,  2.60s/it]2026-04-12 13:44:15,180 INFO HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 429 Too Many Requests"
+2026-04-12 13:44:15,180 INFO Retrying request to /v1/messages in 2.000000 seconds
+2026-04-12 13:44:19,114 INFO HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+Baseline A:  17%|#6        | 84/500 [04:45<20:56,  3.02s/it]2026-04-12 13:44:20,658 INFO HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+Baseline A:  17%|#7        | 85/500 [04:46<17:49,  2.58s/it]2026-04-12 13:44:20,768 INFO HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 429 Too Many Requests"
+2026-04-12 13:44:20,768 INFO Retrying request to /v1/messages in 2.000000 seconds
+2026-04-12 13:44:22,887 INFO HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 429 Too Many Requests"
+2026-04-12 13:44:22,887 INFO Retrying request to /v1/messages in 1.000000 seconds
+2026-04-12 13:44:24,004 INFO HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 429 Too Many Requests"
+2026-04-12 13:44:24,004 WARNING Rate limit hit — retrying in 5s (attempt 1/6)
+2026-04-12 13:44:30,097 INFO HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+Baseline A:  17%|#7        | 86/500 [04:56<31:59,  4.64s/it]2026-04-12 13:44:34,394 INFO HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+Baseline A:  17%|#7        | 87/500 [05:00<31:14,  4.54s/it]2026-04-12 13:44:34,531 INFO HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 429 Too Many Requests"
+2026-04-12 13:44:34,531 INFO Retrying request to /v1/messages in 2.000000 seconds
+2026-04-12 13:44:36,970 INFO HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 429 Too Many Requests"
+2026-04-12 13:44:36,970 INFO Retrying request to /v1/messages in 2.000000 seconds
+2026-04-12 13:44:40,433 INFO HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+Baseline A:  18%|#7        | 88/500 [05:06<34:15,  4.99s/it]2026-04-12 13:44:40,579 INFO HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 429 Too Many Requests"
+2026-04-12 13:44:40,579 INFO Retrying request to /v1/messages in 2.000000 seconds
+2026-04-12 13:44:42,655 INFO HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 429 Too Many Requests"
+2026-04-12 13:44:42,655 INFO Retrying request to /v1/messages in 2.000000 seconds
+2026-04-12 13:44:46,640 INFO HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+Baseline A:  18%|#7        | 89/500 [05:12<36:38,  5.35s/it]2026-04-12 13:44:46,719 INFO HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 429 Too Many Requests"
+2026-04-12 13:44:46,719 INFO Retrying request to /v1/messages in 2.000000 seconds
+2026-04-12 13:44:50,901 INFO HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+Baseline A:  18%|#8        | 90/500 [05:17<34:23,  5.03s/it]2026-04-12 13:44:51,015 INFO HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 429 Too Many Requests"
+2026-04-12 13:44:51,015 INFO Retrying request to /v1/messages in 1.000000 seconds
+2026-04-12 13:44:54,794 INFO HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+Baseline A:  18%|#8        | 91/500 [05:20<31:54,  4.68s/it]2026-04-12 13:44:57,413 INFO HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+Baseline A:  18%|#8        | 92/500 [05:23<27:39,  4.07s/it]2026-04-12 13:44:57,563 INFO HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 429 Too Many Requests"
+2026-04-12 13:44:57,564 INFO Retrying request to /v1/messages in 1.000000 seconds
+2026-04-12 13:45:00,852 INFO HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+Baseline A:  19%|#8        | 93/500 [05:27<26:16,  3.87s/it]2026-04-12 13:45:03,363 INFO HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+Baseline A:  19%|#8        | 94/500 [05:29<23:27,  3.47s/it]2026-04-12 13:45:05,515 INFO HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+Baseline A:  19%|#9        | 95/500 [05:31<20:47,  3.08s/it]2026-04-12 13:45:07,065 INFO HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+Baseline A:  19%|#9        | 96/500 [05:33<17:35,  2.61s/it]2026-04-12 13:45:08,429 INFO HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+Baseline A:  19%|#9        | 97/500 [05:34<15:02,  2.24s/it]2026-04-12 13:45:10,051 INFO HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+Baseline A:  20%|#9        | 98/500 [05:36<13:44,  2.05s/it]2026-04-12 13:45:10,378 INFO HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 429 Too Many Requests"
+2026-04-12 13:45:10,378 INFO Retrying request to /v1/messages in 1.000000 seconds
+2026-04-12 13:45:12,589 INFO HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+Baseline A:  20%|#9        | 99/500 [05:38<14:41,  2.20s/it]2026-04-12 13:45:14,586 INFO HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+Baseline A:  20%|##        | 100/500 [05:40<14:16,  2.14s/it]2026-04-12 13:45:14,696 INFO HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 429 Too Many Requests"
+2026-04-12 13:45:14,696 INFO Retrying request to /v1/messages in 2.000000 seconds
+2026-04-12 13:45:18,601 INFO HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+Baseline A:  20%|##        | 101/500 [05:44<17:57,  2.70s/it]2026-04-12 13:45:18,789 INFO HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 429 Too Many Requests"
+2026-04-12 13:45:18,790 INFO Retrying request to /v1/messages in 1.000000 seconds
+2026-04-12 13:45:21,102 INFO HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+Baseline A:  20%|##        | 102/500 [05:47<17:30,  2.64s/it]2026-04-12 13:45:22,257 INFO HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+Baseline A:  21%|##        | 103/500 [05:48<14:32,  2.20s/it]2026-04-12 13:45:22,407 INFO HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 429 Too Many Requests"
+2026-04-12 13:45:22,407 INFO Retrying request to /v1/messages in 1.000000 seconds
+2026-04-12 13:45:24,567 INFO HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+Baseline A:  21%|##        | 104/500 [05:50<14:41,  2.23s/it]2026-04-12 13:45:24,732 INFO HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 429 Too Many Requests"
+2026-04-12 13:45:24,732 INFO Retrying request to /v1/messages in 1.000000 seconds
+2026-04-12 13:45:25,844 INFO HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 429 Too Many Requests"
+2026-04-12 13:45:25,844 INFO Retrying request to /v1/messages in 1.000000 seconds
+2026-04-12 13:45:28,573 INFO HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+Baseline A:  21%|##1       | 105/500 [05:54<18:13,  2.77s/it]2026-04-12 13:45:28,697 INFO HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 429 Too Many Requests"
+2026-04-12 13:45:28,698 INFO Retrying request to /v1/messages in 1.000000 seconds
+2026-04-12 13:45:31,650 INFO HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+Baseline A:  21%|##1       | 106/500 [05:57<18:46,  2.86s/it]2026-04-12 13:45:33,616 INFO HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+Baseline A:  21%|##1       | 107/500 [05:59<16:56,  2.59s/it]2026-04-12 13:45:33,696 INFO HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 429 Too Many Requests"
+2026-04-12 13:45:33,696 INFO Retrying request to /v1/messages in 2.000000 seconds
+2026-04-12 13:45:37,328 INFO HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+Baseline A:  22%|##1       | 108/500 [06:03<19:06,  2.93s/it]2026-04-12 13:45:39,361 INFO HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+Baseline A:  22%|##1       | 109/500 [06:05<17:20,  2.66s/it]2026-04-12 13:45:39,476 INFO HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 429 Too Many Requests"
+2026-04-12 13:45:39,492 INFO Retrying request to /v1/messages in 1.000000 seconds
+2026-04-12 13:45:40,648 INFO HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 429 Too Many Requests"
+2026-04-12 13:45:40,649 INFO Retrying request to /v1/messages in 1.000000 seconds
+2026-04-12 13:45:43,366 INFO HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+Baseline A:  22%|##2       | 110/500 [06:09<19:54,  3.06s/it]2026-04-12 13:45:43,954 INFO HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 429 Too Many Requests"
+2026-04-12 13:45:43,954 INFO Retrying request to /v1/messages in 1.000000 seconds
+2026-04-12 13:45:46,910 INFO HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+Baseline A:  22%|##2       | 111/500 [06:13<20:46,  3.20s/it]2026-04-12 13:45:48,780 INFO HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+Baseline A:  22%|##2       | 112/500 [06:14<18:09,  2.81s/it]2026-04-12 13:45:48,874 INFO HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 429 Too Many Requests"
+2026-04-12 13:45:48,874 INFO Retrying request to /v1/messages in 1.000000 seconds
+2026-04-12 13:45:52,408 INFO HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+Baseline A:  23%|##2       | 113/500 [06:18<19:41,  3.05s/it]2026-04-12 13:45:52,544 INFO HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 429 Too Many Requests"
+2026-04-12 13:45:52,544 INFO Retrying request to /v1/messages in 1.000000 seconds
+2026-04-12 13:45:55,632 INFO HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+Baseline A:  23%|##2       | 114/500 [06:21<19:59,  3.11s/it]2026-04-12 13:45:55,738 INFO HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 429 Too Many Requests"
+2026-04-12 13:45:55,738 INFO Retrying request to /v1/messages in 1.000000 seconds
+2026-04-12 13:45:59,150 INFO HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+Baseline A:  23%|##3       | 115/500 [06:25<20:42,  3.23s/it]2026-04-12 13:45:59,256 INFO HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 429 Too Many Requests"
+2026-04-12 13:45:59,258 INFO Retrying request to /v1/messages in 2.000000 seconds
+2026-04-12 13:46:01,391 INFO HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 429 Too Many Requests"
+2026-04-12 13:46:01,391 INFO Retrying request to /v1/messages in 2.000000 seconds
+2026-04-12 13:46:04,975 INFO HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+Baseline A:  23%|##3       | 116/500 [06:31<25:39,  4.01s/it]2026-04-12 13:46:06,405 INFO HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+Baseline A:  23%|##3       | 117/500 [06:32<20:37,  3.23s/it]2026-04-12 13:46:07,860 INFO HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+Baseline A:  24%|##3       | 118/500 [06:34<17:10,  2.70s/it]2026-04-12 13:46:08,229 INFO HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 429 Too Many Requests"
+2026-04-12 13:46:08,230 INFO Retrying request to /v1/messages in 1.000000 seconds
+2026-04-12 13:46:09,466 INFO HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 429 Too Many Requests"
+2026-04-12 13:46:09,466 INFO Retrying request to /v1/messages in 1.000000 seconds
+2026-04-12 13:46:12,018 INFO HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+Baseline A:  24%|##3       | 119/500 [06:38<19:55,  3.14s/it]2026-04-12 13:46:12,116 INFO HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 429 Too Many Requests"
+2026-04-12 13:46:12,116 INFO Retrying request to /v1/messages in 1.000000 seconds
+2026-04-12 13:46:13,262 INFO HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 429 Too Many Requests"
+2026-04-12 13:46:13,264 INFO Retrying request to /v1/messages in 1.000000 seconds
+2026-04-12 13:46:14,338 INFO HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 429 Too Many Requests"
+2026-04-12 13:46:14,338 WARNING Rate limit hit — retrying in 5s (attempt 1/6)
+2026-04-12 13:46:19,487 INFO HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 429 Too Many Requests"
+2026-04-12 13:46:19,488 INFO Retrying request to /v1/messages in 2.000000 seconds
+2026-04-12 13:46:22,853 INFO HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+Baseline A:  24%|##4       | 120/500 [06:49<34:29,  5.45s/it]2026-04-12 13:46:22,979 INFO HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 429 Too Many Requests"
+2026-04-12 13:46:22,981 INFO Retrying request to /v1/messages in 2.000000 seconds
+2026-04-12 13:46:26,543 INFO HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+Baseline A:  24%|##4       | 121/500 [06:52<31:04,  4.92s/it]2026-04-12 13:46:28,246 INFO HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+Baseline A:  24%|##4       | 122/500 [06:54<24:54,  3.95s/it]2026-04-12 13:46:28,339 INFO HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 429 Too Many Requests"
+2026-04-12 13:46:28,339 INFO Retrying request to /v1/messages in 1.000000 seconds
+2026-04-12 13:46:30,842 INFO HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+Baseline A:  25%|##4       | 123/500 [06:57<22:17,  3.55s/it]2026-04-12 13:46:32,895 INFO HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+Baseline A:  25%|##4       | 124/500 [06:59<19:24,  3.10s/it]2026-04-12 13:46:34,469 INFO HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+Baseline A:  25%|##5       | 125/500 [07:00<16:31,  2.64s/it]2026-04-12 13:46:35,953 INFO HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+Baseline A:  25%|##5       | 126/500 [07:02<14:17,  2.29s/it]2026-04-12 13:46:37,136 INFO HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+Baseline A:  25%|##5       | 127/500 [07:03<12:11,  1.96s/it]2026-04-12 13:46:38,647 INFO HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+Baseline A:  26%|##5       | 128/500 [07:04<11:18,  1.82s/it]2026-04-12 13:46:40,174 INFO HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+Baseline A:  26%|##5       | 129/500 [07:06<10:52,  1.76s/it]2026-04-12 13:46:40,344 INFO HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 429 Too Many Requests"
+2026-04-12 13:46:40,344 INFO Retrying request to /v1/messages in 1.000000 seconds
+2026-04-12 13:46:44,170 INFO HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+Baseline A:  26%|##6       | 130/500 [07:10<14:57,  2.43s/it]2026-04-12 13:46:46,717 INFO HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+Baseline A:  26%|##6       | 131/500 [07:12<15:01,  2.44s/it]2026-04-12 13:46:48,500 INFO HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+Baseline A:  26%|##6       | 132/500 [07:14<13:56,  2.27s/it]2026-04-12 13:46:51,187 INFO HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+Baseline A:  27%|##6       | 133/500 [07:17<14:48,  2.42s/it]2026-04-12 13:46:53,085 INFO HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+Baseline A:  27%|##6       | 134/500 [07:19<13:39,  2.24s/it]2026-04-12 13:46:53,262 INFO HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 429 Too Many Requests"
+2026-04-12 13:46:53,262 INFO Retrying request to /v1/messages in 3.000000 seconds
+2026-04-12 13:46:57,875 INFO HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+Baseline A:  27%|##7       | 135/500 [07:24<18:06,  2.98s/it]2026-04-12 13:46:57,963 INFO HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 429 Too Many Requests"
+2026-04-12 13:46:57,963 INFO Retrying request to /v1/messages in 2.000000 seconds
+2026-04-12 13:47:02,630 INFO HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+Baseline A:  27%|##7       | 136/500 [07:28<21:19,  3.51s/it]2026-04-12 13:47:05,240 INFO HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+Baseline A:  27%|##7       | 137/500 [07:31<20:00,  3.31s/it]2026-04-12 13:47:07,617 INFO HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+Baseline A:  28%|##7       | 138/500 [07:33<18:10,  3.01s/it]2026-04-12 13:47:09,790 INFO HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+Baseline A:  28%|##7       | 139/500 [07:36<16:49,  2.80s/it]2026-04-12 13:47:10,169 INFO HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 429 Too Many Requests"
+2026-04-12 13:47:10,169 INFO Retrying request to /v1/messages in 2.000000 seconds
+2026-04-12 13:47:13,721 INFO HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+Baseline A:  28%|##8       | 140/500 [07:40<18:31,  3.09s/it]2026-04-12 13:47:15,205 INFO HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+Baseline A:  28%|##8       | 141/500 [07:41<15:22,  2.57s/it]2026-04-12 13:47:15,302 INFO HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 429 Too Many Requests"
+2026-04-12 13:47:15,302 INFO Retrying request to /v1/messages in 3.000000 seconds
+2026-04-12 13:47:20,677 INFO HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+Baseline A:  28%|##8       | 142/500 [07:47<20:53,  3.50s/it]2026-04-12 13:47:22,678 INFO HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+Baseline A:  29%|##8       | 143/500 [07:48<17:54,  3.01s/it]2026-04-12 13:47:27,020 INFO HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+Baseline A:  29%|##8       | 144/500 [07:53<20:25,  3.44s/it]2026-04-12 13:47:29,287 INFO HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+Baseline A:  29%|##9       | 145/500 [07:55<18:30,  3.13s/it]2026-04-12 13:47:31,930 INFO HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+Baseline A:  29%|##9       | 146/500 [07:58<17:24,  2.95s/it]2026-04-12 13:47:33,955 INFO HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+Baseline A:  29%|##9       | 147/500 [08:00<15:22,  2.61s/it]2026-04-12 13:47:35,692 INFO HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+Baseline A:  30%|##9       | 148/500 [08:01<13:46,  2.35s/it]2026-04-12 13:47:35,782 INFO HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 429 Too Many Requests"
+2026-04-12 13:47:35,782 INFO Retrying request to /v1/messages in 3.000000 seconds
+2026-04-12 13:47:40,426 INFO HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+Baseline A:  30%|##9       | 149/500 [08:06<18:06,  3.10s/it]2026-04-12 13:47:42,976 INFO HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+Baseline A:  30%|###       | 150/500 [08:09<17:10,  2.94s/it]2026-04-12 13:47:45,023 INFO HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+Baseline A:  30%|###       | 151/500 [08:11<15:31,  2.67s/it]2026-04-12 13:47:45,294 INFO HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 429 Too Many Requests"
+2026-04-12 13:47:45,294 INFO Retrying request to /v1/messages in 2.000000 seconds
+2026-04-12 13:47:48,644 INFO HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+Baseline A:  30%|###       | 152/500 [08:14<17:04,  2.94s/it]2026-04-12 13:47:50,473 INFO HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+Baseline A:  31%|###       | 153/500 [08:16<15:11,  2.63s/it]2026-04-12 13:47:50,707 INFO HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 429 Too Many Requests"
+2026-04-12 13:47:50,707 INFO Retrying request to /v1/messages in 3.000000 seconds
+2026-04-12 13:47:57,000 INFO HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+Baseline A:  31%|###       | 154/500 [08:23<22:03,  3.83s/it]2026-04-12 13:47:58,716 INFO HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+Baseline A:  31%|###1      | 155/500 [08:25<18:13,  3.17s/it]2026-04-12 13:48:00,313 INFO HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+Baseline A:  31%|###1      | 156/500 [08:26<15:10,  2.65s/it]2026-04-12 13:48:02,412 INFO HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+Baseline A:  31%|###1      | 157/500 [08:28<14:21,  2.51s/it]2026-04-12 13:48:04,932 INFO HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+Baseline A:  32%|###1      | 158/500 [08:31<14:22,  2.52s/it]2026-04-12 13:48:05,180 INFO HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 429 Too Many Requests"
+2026-04-12 13:48:05,180 INFO Retrying request to /v1/messages in 3.000000 seconds
+2026-04-12 13:48:10,728 INFO HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+Baseline A:  32%|###1      | 159/500 [08:37<19:53,  3.50s/it]2026-04-12 13:48:13,274 INFO HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+Baseline A:  32%|###2      | 160/500 [08:39<18:21,  3.24s/it]2026-04-12 13:48:16,064 INFO HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+Baseline A:  32%|###2      | 161/500 [08:42<17:12,  3.05s/it]2026-04-12 13:48:17,868 INFO HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+Baseline A:  32%|###2      | 162/500 [08:44<15:03,  2.67s/it]2026-04-12 13:48:19,889 INFO HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+Baseline A:  33%|###2      | 163/500 [08:46<14:14,  2.54s/it]2026-04-12 13:48:20,184 INFO HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 429 Too Many Requests"
+2026-04-12 13:48:20,184 INFO Retrying request to /v1/messages in 2.000000 seconds
+2026-04-12 13:48:25,392 INFO HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+Baseline A:  33%|###2      | 164/500 [08:51<19:01,  3.40s/it]2026-04-12 13:48:26,922 INFO HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+Baseline A:  33%|###3      | 165/500 [08:53<15:42,  2.81s/it]2026-04-12 13:48:28,791 INFO HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+Baseline A:  33%|###3      | 166/500 [08:55<14:20,  2.58s/it]2026-04-12 13:48:29,034 INFO HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 429 Too Many Requests"
+2026-04-12 13:48:29,034 INFO Retrying request to /v1/messages in 2.000000 seconds
+2026-04-12 13:48:32,812 INFO HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+Baseline A:  33%|###3      | 167/500 [08:59<16:38,  3.00s/it]2026-04-12 13:48:34,528 INFO HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+Baseline A:  34%|###3      | 168/500 [09:00<14:14,  2.57s/it]2026-04-12 13:48:34,665 INFO HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 429 Too Many Requests"
+2026-04-12 13:48:34,665 INFO Retrying request to /v1/messages in 2.000000 seconds
+2026-04-12 13:48:38,308 INFO HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+Baseline A:  34%|###3      | 169/500 [09:04<16:13,  2.94s/it]2026-04-12 13:48:40,066 INFO HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+Baseline A:  34%|###4      | 170/500 [09:06<14:25,  2.62s/it]2026-04-12 13:48:40,297 INFO HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 429 Too Many Requests"
+2026-04-12 13:48:40,297 INFO Retrying request to /v1/messages in 3.000000 seconds
+2026-04-12 13:48:44,709 INFO HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+Baseline A:  34%|###4      | 171/500 [09:10<17:39,  3.22s/it]2026-04-12 13:48:46,730 INFO HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+Baseline A:  34%|###4      | 172/500 [09:13<15:45,  2.88s/it]2026-04-12 13:48:48,785 INFO HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+Baseline A:  35%|###4      | 173/500 [09:15<14:10,  2.60s/it]2026-04-12 13:48:49,062 INFO HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 429 Too Many Requests"
+2026-04-12 13:48:49,062 INFO Retrying request to /v1/messages in 2.000000 seconds
+2026-04-12 13:48:53,194 INFO HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+Baseline A:  35%|###4      | 174/500 [09:19<16:57,  3.12s/it]2026-04-12 13:48:54,830 INFO HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+Baseline A:  35%|###5      | 175/500 [09:21<14:35,  2.69s/it]2026-04-12 13:48:54,968 INFO HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 429 Too Many Requests"
+2026-04-12 13:48:54,968 INFO Retrying request to /v1/messages in 2.000000 seconds
+2026-04-12 13:48:58,413 INFO HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+Baseline A:  35%|###5      | 176/500 [09:24<16:00,  2.96s/it]2026-04-12 13:49:00,677 INFO HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+Baseline A:  35%|###5      | 177/500 [09:26<14:51,  2.76s/it]2026-04-12 13:49:00,861 INFO HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 429 Too Many Requests"
+2026-04-12 13:49:00,861 INFO Retrying request to /v1/messages in 2.000000 seconds
+2026-04-12 13:49:05,692 INFO HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+Baseline A:  36%|###5      | 178/500 [09:32<18:33,  3.46s/it]2026-04-12 13:49:08,003 INFO HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+Baseline A:  36%|###5      | 179/500 [09:34<16:55,  3.16s/it]2026-04-12 13:49:09,937 INFO HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+Baseline A:  36%|###6      | 180/500 [09:36<14:22,  2.70s/it]2026-04-12 13:49:11,301 INFO HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+Baseline A:  36%|###6      | 181/500 [09:37<12:12,  2.30s/it]2026-04-12 13:49:12,632 INFO HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+Baseline A:  36%|###6      | 182/500 [09:38<10:37,  2.01s/it]2026-04-12 13:49:13,705 INFO HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+Baseline A:  37%|###6      | 183/500 [09:39<09:07,  1.73s/it]2026-04-12 13:49:15,468 INFO HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+Baseline A:  37%|###6      | 184/500 [09:41<09:10,  1.74s/it]2026-04-12 13:49:17,274 INFO HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+Baseline A:  37%|###7      | 185/500 [09:43<09:13,  1.76s/it]2026-04-12 13:49:18,508 INFO HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+Baseline A:  37%|###7      | 186/500 [09:44<08:22,  1.60s/it]2026-04-12 13:49:20,326 INFO HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+Baseline A:  37%|###7      | 187/500 [09:46<08:41,  1.67s/it]2026-04-12 13:49:22,425 INFO HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+Baseline A:  38%|###7      | 188/500 [09:48<09:19,  1.79s/it]2026-04-12 13:49:24,045 INFO HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+Baseline A:  38%|###7      | 189/500 [09:50<09:01,  1.74s/it]2026-04-12 13:49:25,338 INFO HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+Baseline A:  38%|###8      | 190/500 [09:51<08:18,  1.61s/it]2026-04-12 13:49:27,123 INFO HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+Baseline A:  38%|###8      | 191/500 [09:53<08:33,  1.66s/it]2026-04-12 13:49:28,505 INFO HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+Baseline A:  38%|###8      | 192/500 [09:54<08:05,  1.58s/it]2026-04-12 13:49:29,717 INFO HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+Baseline A:  39%|###8      | 193/500 [09:55<07:30,  1.47s/it]2026-04-12 13:49:32,776 INFO HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+Baseline A:  39%|###8      | 194/500 [09:58<09:55,  1.95s/it]2026-04-12 13:49:34,318 INFO HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+Baseline A:  39%|###9      | 195/500 [10:00<09:16,  1.82s/it]2026-04-12 13:49:38,026 INFO HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+Baseline A:  39%|###9      | 196/500 [10:04<12:07,  2.39s/it]2026-04-12 13:49:41,329 INFO HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+Baseline A:  39%|###9      | 197/500 [10:07<13:29,  2.67s/it]2026-04-12 13:49:42,978 INFO HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+Baseline A:  40%|###9      | 198/500 [10:09<11:51,  2.36s/it]2026-04-12 13:49:44,365 INFO HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+Baseline A:  40%|###9      | 199/500 [10:10<10:25,  2.08s/it]2026-04-12 13:49:46,235 INFO HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+Baseline A:  40%|####      | 200/500 [10:12<10:13,  2.04s/it]2026-04-12 13:49:48,208 INFO HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+Baseline A:  40%|####      | 201/500 [10:14<10:01,  2.01s/it]2026-04-12 13:49:50,569 INFO HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+Baseline A:  40%|####      | 202/500 [10:16<10:23,  2.09s/it]2026-04-12 13:49:52,860 INFO HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+Baseline A:  41%|####      | 203/500 [10:19<10:40,  2.15s/it]2026-04-12 13:49:54,317 INFO HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+Baseline A:  41%|####      | 204/500 [10:20<09:32,  1.94s/it]2026-04-12 13:49:56,168 INFO HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+Baseline A:  41%|####1     | 205/500 [10:22<09:23,  1.91s/it]2026-04-12 13:49:58,243 INFO HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+Baseline A:  41%|####1     | 206/500 [10:24<09:37,  1.96s/it]2026-04-12 13:50:00,626 INFO HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+Baseline A:  41%|####1     | 207/500 [10:26<10:16,  2.10s/it]2026-04-12 13:50:02,250 INFO HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+Baseline A:  42%|####1     | 208/500 [10:28<09:29,  1.95s/it]2026-04-12 13:50:04,076 INFO HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+Baseline A:  42%|####1     | 209/500 [10:30<09:15,  1.91s/it]2026-04-12 13:50:04,931 INFO HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+Baseline A:  42%|####2     | 210/500 [10:31<07:40,  1.59s/it]2026-04-12 13:50:07,237 INFO HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+Baseline A:  42%|####2     | 211/500 [10:33<08:41,  1.80s/it]2026-04-12 13:50:08,290 INFO HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+Baseline A:  42%|####2     | 212/500 [10:34<07:34,  1.58s/it]2026-04-12 13:50:10,156 INFO HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+Baseline A:  43%|####2     | 213/500 [10:36<07:58,  1.67s/it]2026-04-12 13:50:11,585 INFO HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+Baseline A:  43%|####2     | 214/500 [10:37<07:36,  1.60s/it]2026-04-12 13:50:13,482 INFO HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+Baseline A:  43%|####3     | 215/500 [10:39<08:00,  1.69s/it]2026-04-12 13:50:15,351 INFO HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+Baseline A:  43%|####3     | 216/500 [10:41<08:15,  1.74s/it]2026-04-12 13:50:17,233 INFO HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+Baseline A:  43%|####3     | 217/500 [10:43<08:24,  1.78s/it]2026-04-12 13:50:19,468 INFO HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+Baseline A:  44%|####3     | 218/500 [10:45<09:00,  1.92s/it]2026-04-12 13:50:25,518 INFO HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+Baseline A:  44%|####3     | 219/500 [10:51<14:47,  3.16s/it]2026-04-12 13:50:26,609 INFO HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+Baseline A:  44%|####4     | 220/500 [10:52<11:49,  2.53s/it]2026-04-12 13:50:27,898 INFO HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+Baseline A:  44%|####4     | 221/500 [10:54<10:03,  2.16s/it]2026-04-12 13:50:29,493 INFO HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+Baseline A:  44%|####4     | 222/500 [10:55<09:14,  1.99s/it]2026-04-12 13:50:31,334 INFO HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+Baseline A:  45%|####4     | 223/500 [10:57<08:59,  1.95s/it]2026-04-12 13:50:35,200 INFO HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+Baseline A:  45%|####4     | 224/500 [11:01<11:35,  2.52s/it]2026-04-12 13:50:39,828 INFO HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+Baseline A:  45%|####5     | 225/500 [11:06<14:29,  3.16s/it]2026-04-12 13:50:44,807 INFO HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+Baseline A:  45%|####5     | 226/500 [11:10<16:54,  3.70s/it]2026-04-12 13:50:46,811 INFO HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+Baseline A:  45%|####5     | 227/500 [11:12<14:31,  3.19s/it]2026-04-12 13:50:49,316 INFO HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+Baseline A:  46%|####5     | 228/500 [11:15<13:32,  2.99s/it]2026-04-12 13:50:50,736 INFO HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+Baseline A:  46%|####5     | 229/500 [11:17<11:42,  2.59s/it]2026-04-12 13:50:51,919 INFO HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+Baseline A:  46%|####6     | 230/500 [11:18<09:24,  2.09s/it]2026-04-12 13:50:55,350 INFO HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+Baseline A:  46%|####6     | 231/500 [11:21<11:10,  2.49s/it]2026-04-12 13:50:56,867 INFO HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+Baseline A:  46%|####6     | 232/500 [11:23<09:49,  2.20s/it]2026-04-12 13:50:58,180 INFO HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+Baseline A:  47%|####6     | 233/500 [11:24<08:38,  1.94s/it]2026-04-12 13:50:59,339 INFO HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+Baseline A:  47%|####6     | 234/500 [11:25<07:33,  1.70s/it]2026-04-12 13:51:00,875 INFO HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+Baseline A:  47%|####6     | 235/500 [11:27<07:16,  1.65s/it]2026-04-12 13:51:03,192 INFO HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+Baseline A:  47%|####7     | 236/500 [11:29<08:08,  1.85s/it]2026-04-12 13:51:05,219 INFO HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+Baseline A:  47%|####7     | 237/500 [11:31<08:21,  1.91s/it]2026-04-12 13:51:07,141 INFO HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+Baseline A:  48%|####7     | 238/500 [11:33<08:20,  1.91s/it]2026-04-12 13:51:09,380 INFO HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+Baseline A:  48%|####7     | 239/500 [11:35<08:44,  2.01s/it]2026-04-12 13:51:10,803 INFO HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+Baseline A:  48%|####8     | 240/500 [11:37<07:57,  1.84s/it]2026-04-12 13:51:12,935 INFO HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+Baseline A:  48%|####8     | 241/500 [11:39<08:17,  1.92s/it]2026-04-12 13:51:15,078 INFO HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+Baseline A:  48%|####8     | 242/500 [11:41<08:32,  1.98s/it]2026-04-12 13:51:17,724 INFO HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+Baseline A:  49%|####8     | 243/500 [11:43<09:22,  2.19s/it]2026-04-12 13:51:19,842 INFO HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+Baseline A:  49%|####8     | 244/500 [11:46<09:14,  2.17s/it]2026-04-12 13:51:21,070 INFO HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+Baseline A:  49%|####9     | 245/500 [11:47<08:52,  2.09s/it]2026-04-12 13:51:24,870 INFO HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+Baseline A:  49%|####9     | 246/500 [12:51<1:26:28, 20.43s/it]2026-04-12 13:52:26,517 INFO HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+Baseline A:  49%|####9     | 247/500 [12:52<1:02:14, 14.76s/it]2026-04-12 13:52:27,983 INFO HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+Baseline A:  50%|####9     | 248/500 [12:54<45:14, 10.77s/it]  2026-04-12 13:52:29,651 INFO HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+Baseline A:  50%|####9     | 249/500 [12:55<33:38,  8.04s/it]2026-04-12 13:52:31,676 INFO HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+Baseline A:  50%|#####     | 250/500 [12:57<25:59,  6.24s/it]2026-04-12 13:52:33,152 INFO HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+Baseline A:  50%|#####     | 251/500 [12:59<19:56,  4.81s/it]2026-04-12 13:52:34,957 INFO HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+Baseline A:  50%|#####     | 252/500 [13:01<16:22,  3.96s/it]2026-04-12 13:52:36,843 INFO HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+Baseline A:  51%|#####     | 253/500 [13:03<13:32,  3.29s/it]2026-04-12 13:52:40,876 INFO HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+Baseline A:  51%|#####     | 254/500 [13:07<14:22,  3.51s/it]2026-04-12 13:52:42,417 INFO HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+Baseline A:  51%|#####1    | 255/500 [13:08<11:54,  2.92s/it]2026-04-12 13:52:43,496 INFO HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+Baseline A:  51%|#####1    | 256/500 [13:09<09:38,  2.37s/it]2026-04-12 13:52:45,112 INFO HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+Baseline A:  51%|#####1    | 257/500 [13:11<08:49,  2.18s/it]2026-04-12 13:52:47,160 INFO HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+Baseline A:  52%|#####1    | 258/500 [13:13<08:28,  2.10s/it]2026-04-12 13:52:48,839 INFO HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+Baseline A:  52%|#####1    | 259/500 [13:15<07:56,  1.98s/it]2026-04-12 13:52:51,241 INFO HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+Baseline A:  52%|#####2    | 260/500 [13:17<08:24,  2.10s/it]2026-04-12 13:52:53,435 INFO HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+Baseline A:  52%|#####2    | 261/500 [13:19<08:28,  2.13s/it]2026-04-12 13:52:54,677 INFO HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+Baseline A:  52%|#####2    | 262/500 [13:20<07:23,  1.86s/it]2026-04-12 13:52:56,008 INFO HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+Baseline A:  53%|#####2    | 263/500 [13:22<06:43,  1.70s/it]2026-04-12 13:52:57,842 INFO HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+Baseline A:  53%|#####2    | 264/500 [13:24<06:51,  1.74s/it]2026-04-12 13:52:59,440 INFO HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+Baseline A:  53%|#####3    | 265/500 [13:25<06:39,  1.70s/it]2026-04-12 13:53:01,151 INFO HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+Baseline A:  53%|#####3    | 266/500 [13:27<06:38,  1.70s/it]2026-04-12 13:53:03,164 INFO HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+Baseline A:  53%|#####3    | 267/500 [13:29<06:58,  1.80s/it]2026-04-12 13:53:05,306 INFO HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+Baseline A:  54%|#####3    | 268/500 [13:31<07:20,  1.90s/it]2026-04-12 13:53:06,725 INFO HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+Baseline A:  54%|#####3    | 269/500 [13:32<06:45,  1.75s/it]2026-04-12 13:53:08,007 INFO HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+Baseline A:  54%|#####4    | 270/500 [13:34<06:10,  1.61s/it]2026-04-12 13:53:09,601 INFO HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+Baseline A:  54%|#####4    | 271/500 [13:35<06:08,  1.61s/it]2026-04-12 13:53:11,504 INFO HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+Baseline A:  54%|#####4    | 272/500 [13:37<06:26,  1.70s/it]2026-04-12 13:53:13,688 INFO HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+Baseline A:  55%|#####4    | 273/500 [13:39<06:59,  1.85s/it]2026-04-12 13:53:16,016 INFO HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+Baseline A:  55%|#####4    | 274/500 [13:42<07:28,  1.99s/it]2026-04-12 13:53:17,755 INFO HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+Baseline A:  55%|#####5    | 275/500 [13:43<07:10,  1.91s/it]2026-04-12 13:53:20,014 INFO HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+Baseline A:  55%|#####5    | 276/500 [13:46<07:31,  2.02s/it]2026-04-12 13:53:21,363 INFO HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+Baseline A:  55%|#####5    | 277/500 [13:47<06:44,  1.82s/it]2026-04-12 13:53:22,509 INFO HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+Baseline A:  56%|#####5    | 278/500 [13:48<05:59,  1.62s/it]2026-04-12 13:53:23,899 INFO HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+Baseline A:  56%|#####5    | 279/500 [13:50<05:41,  1.55s/it]2026-04-12 13:53:24,965 INFO HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+Baseline A:  56%|#####6    | 280/500 [13:51<05:08,  1.40s/it]2026-04-12 13:53:27,088 INFO HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+Baseline A:  56%|#####6    | 281/500 [13:53<05:54,  1.62s/it]2026-04-12 13:53:29,295 INFO HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+Baseline A:  56%|#####6    | 282/500 [13:55<06:31,  1.80s/it]2026-04-12 13:53:30,918 INFO HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+Baseline A:  57%|#####6    | 283/500 [13:57<06:18,  1.74s/it]2026-04-12 13:53:31,810 INFO HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+Baseline A:  57%|#####6    | 284/500 [13:57<05:21,  1.49s/it]2026-04-12 13:53:33,030 INFO HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+Baseline A:  57%|#####6    | 285/500 [13:59<05:02,  1.41s/it]2026-04-12 13:53:34,433 INFO HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+Baseline A:  57%|#####7    | 286/500 [14:00<05:01,  1.41s/it]2026-04-12 13:53:35,884 INFO HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+Baseline A:  57%|#####7    | 287/500 [14:02<05:03,  1.42s/it]2026-04-12 13:53:37,288 INFO HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+Baseline A:  58%|#####7    | 288/500 [14:03<04:59,  1.41s/it]2026-04-12 13:53:38,924 INFO HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+Baseline A:  58%|#####7    | 289/500 [14:05<05:12,  1.48s/it]2026-04-12 13:53:40,477 INFO HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+Baseline A:  58%|#####8    | 290/500 [14:06<05:16,  1.51s/it]2026-04-12 13:53:43,303 INFO HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+Baseline A:  58%|#####8    | 291/500 [14:09<06:36,  1.90s/it]2026-04-12 13:53:47,561 INFO HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+Baseline A:  58%|#####8    | 292/500 [14:13<09:01,  2.61s/it]2026-04-12 13:53:49,335 INFO HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+Baseline A:  59%|#####8    | 293/500 [14:15<08:07,  2.36s/it]2026-04-12 13:53:52,004 INFO HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+Baseline A:  59%|#####8    | 294/500 [14:18<08:25,  2.45s/it]2026-04-12 13:53:54,135 INFO HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+Baseline A:  59%|#####8    | 295/500 [14:20<08:03,  2.36s/it]2026-04-12 13:53:56,048 INFO HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+Baseline A:  59%|#####9    | 296/500 [14:22<07:33,  2.22s/it]2026-04-12 13:53:57,818 INFO HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+Baseline A:  59%|#####9    | 297/500 [14:23<07:03,  2.08s/it]2026-04-12 13:53:59,582 INFO HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+Baseline A:  60%|#####9    | 298/500 [14:25<06:45,  2.01s/it]2026-04-12 13:54:00,685 INFO HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+Baseline A:  60%|#####9    | 299/500 [14:26<05:49,  1.74s/it]2026-04-12 13:54:01,688 INFO HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+Baseline A:  60%|######    | 300/500 [14:27<05:01,  1.51s/it]2026-04-12 13:54:03,217 INFO HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+Baseline A:  60%|######    | 301/500 [14:29<05:22,  1.62s/it]2026-04-12 13:54:05,128 INFO HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+Baseline A:  60%|######    | 302/500 [14:31<05:50,  1.77s/it]2026-04-12 13:54:08,508 INFO HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+Baseline A:  61%|######    | 303/500 [14:34<07:06,  2.16s/it]2026-04-12 13:54:10,345 INFO HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+Baseline A:  61%|######    | 304/500 [14:36<06:45,  2.07s/it]2026-04-12 13:54:11,713 INFO HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+Baseline A:  61%|######1   | 305/500 [14:37<05:44,  1.77s/it]2026-04-12 13:54:12,889 INFO HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+Baseline A:  61%|######1   | 306/500 [14:39<05:33,  1.72s/it]2026-04-12 13:54:15,170 INFO HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+Baseline A:  61%|######1   | 307/500 [14:41<05:59,  1.86s/it]2026-04-12 13:54:16,738 INFO HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+Baseline A:  62%|######1   | 308/500 [14:43<05:51,  1.83s/it]2026-04-12 13:54:18,889 INFO HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+Baseline A:  62%|######1   | 309/500 [14:45<05:45,  1.81s/it]2026-04-12 13:54:20,678 INFO HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+Baseline A:  62%|######2   | 310/500 [14:47<05:59,  1.89s/it]2026-04-12 13:54:22,140 INFO HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+Baseline A:  62%|######2   | 311/500 [14:48<05:08,  1.63s/it]2026-04-12 13:54:23,556 INFO HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+Baseline A:  62%|######2   | 312/500 [14:49<05:08,  1.64s/it]2026-04-12 13:54:24,995 INFO HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+Baseline A:  63%|######2   | 313/500 [14:51<04:53,  1.57s/it]2026-04-12 13:54:26,175 INFO HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+Baseline A:  63%|######2   | 314/500 [14:52<04:23,  1.42s/it]2026-04-12 13:54:27,600 INFO HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+Baseline A:  63%|######3   | 315/500 [14:53<04:25,  1.43s/it]2026-04-12 13:54:28,919 INFO HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+Baseline A:  63%|######3   | 316/500 [14:55<04:23,  1.43s/it]2026-04-12 13:54:30,824 INFO HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+Baseline A:  63%|######3   | 317/500 [14:57<04:49,  1.58s/it]2026-04-12 13:54:32,890 INFO HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+Baseline A:  64%|######3   | 318/500 [15:00<06:23,  2.11s/it]2026-04-12 13:54:36,407 INFO HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+Baseline A:  64%|######3   | 319/500 [15:02<06:13,  2.07s/it]2026-04-12 13:54:37,879 INFO HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+Baseline A:  64%|######4   | 320/500 [15:05<06:42,  2.24s/it]2026-04-12 13:54:40,127 INFO HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+Baseline A:  64%|######4   | 321/500 [15:06<05:46,  1.94s/it]2026-04-12 13:54:44,227 INFO HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+Baseline A:  64%|######4   | 322/500 [15:11<08:44,  2.95s/it]2026-04-12 13:54:48,520 INFO HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+Baseline A:  65%|######4   | 323/500 [15:14<08:42,  2.95s/it]2026-04-12 13:54:50,833 INFO HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+Baseline A:  65%|######4   | 324/500 [15:17<08:25,  2.87s/it]2026-04-12 13:54:53,081 INFO HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+Baseline A:  65%|######5   | 325/500 [15:19<07:32,  2.59s/it]2026-04-12 13:54:54,405 INFO HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+Baseline A:  65%|######5   | 326/500 [15:21<06:52,  2.37s/it]2026-04-12 13:54:56,664 INFO HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+Baseline A:  65%|######5   | 327/500 [15:23<06:51,  2.38s/it]2026-04-12 13:55:02,651 INFO HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+Baseline A:  66%|######5   | 328/500 [15:37<16:37,  5.80s/it]2026-04-12 13:55:13,053 INFO HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+Baseline A:  66%|######5   | 329/500 [15:39<13:46,  4.83s/it]2026-04-12 13:55:15,848 INFO HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+Baseline A:  66%|######6   | 330/500 [15:43<12:19,  4.35s/it]2026-04-12 13:55:19,072 INFO HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+Baseline A:  66%|######6   | 331/500 [15:45<10:20,  3.67s/it]2026-04-12 13:55:21,103 INFO HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+Baseline A:  66%|######6   | 332/500 [15:47<08:52,  3.17s/it]2026-04-12 13:55:22,212 INFO HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+Baseline A:  67%|######6   | 333/500 [15:48<07:09,  2.57s/it]2026-04-12 13:55:24,004 INFO HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+Baseline A:  67%|######6   | 334/500 [15:50<06:36,  2.39s/it]2026-04-12 13:55:25,621 INFO HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+Baseline A:  67%|######7   | 335/500 [15:52<06:12,  2.26s/it]2026-04-12 13:55:27,458 INFO HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+Baseline A:  67%|######7   | 336/500 [15:54<05:52,  2.15s/it]2026-04-12 13:55:30,059 INFO HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+Baseline A:  67%|######7   | 337/500 [15:57<06:21,  2.34s/it]2026-04-12 13:55:32,448 INFO HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+Baseline A:  68%|######7   | 338/500 [15:59<06:10,  2.29s/it]2026-04-12 13:55:34,341 INFO HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+Baseline A:  68%|######7   | 339/500 [16:01<06:03,  2.26s/it]2026-04-12 13:55:36,664 INFO HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+Baseline A:  68%|######8   | 340/500 [16:03<05:44,  2.15s/it]2026-04-12 13:55:39,747 INFO HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+Baseline A:  68%|######8   | 341/500 [30:25<11:29:35, 260.22s/it]2026-04-12 14:10:01,684 INFO HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+Baseline A:  68%|######8   | 342/500 [30:27<8:01:23, 182.80s/it] 2026-04-12 14:10:02,867 INFO HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+Baseline A:  69%|######8   | 343/500 [30:29<5:35:53, 128.36s/it]2026-04-12 14:10:04,536 INFO HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+Baseline A:  69%|######8   | 344/500 [30:31<3:55:14, 90.48s/it] 2026-04-12 14:10:07,286 INFO HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+Baseline A:  69%|######9   | 345/500 [30:34<2:45:44, 64.16s/it]2026-04-12 14:10:09,601 INFO HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+Baseline A:  69%|######9   | 346/500 [30:35<1:56:42, 45.47s/it]2026-04-12 14:10:11,120 INFO HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+Baseline A:  69%|######9   | 347/500 [30:39<1:24:05, 32.98s/it]2026-04-12 14:10:14,601 INFO HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+Baseline A:  70%|######9   | 348/500 [30:40<59:25, 23.46s/it]  2026-04-12 14:10:16,750 INFO HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+Baseline A:  70%|######9   | 349/500 [30:43<43:25, 17.26s/it]2026-04-12 14:10:19,440 INFO HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+Baseline A:  70%|#######   | 350/500 [30:46<32:09, 12.86s/it]2026-04-12 14:10:22,329 INFO HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+Baseline A:  70%|#######   | 351/500 [30:49<24:41,  9.94s/it]2026-04-12 14:10:25,910 INFO HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+Baseline A:  70%|#######   | 352/500 [30:54<20:36,  8.36s/it]2026-04-12 14:10:30,088 INFO HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+Baseline A:  71%|#######   | 353/500 [30:56<16:20,  6.67s/it]2026-04-12 14:10:32,276 INFO HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+Baseline A:  71%|#######   | 354/500 [31:01<14:43,  6.05s/it]2026-04-12 14:10:36,228 INFO HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+Baseline A:  71%|#######1  | 355/500 [31:02<11:02,  4.57s/it]2026-04-12 14:10:37,568 INFO HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+Baseline A:  71%|#######1  | 356/500 [31:03<08:35,  3.58s/it]2026-04-12 14:10:39,151 INFO HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+Baseline A:  71%|#######1  | 357/500 [31:06<07:48,  3.28s/it]2026-04-12 14:10:41,552 INFO HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+Baseline A:  72%|#######1  | 358/500 [31:07<06:27,  2.73s/it]2026-04-12 14:10:43,474 INFO HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+Baseline A:  72%|#######1  | 359/500 [31:10<06:17,  2.68s/it]2026-04-12 14:10:46,531 INFO HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+Baseline A:  72%|#######2  | 360/500 [31:12<06:05,  2.61s/it]2026-04-12 14:10:47,522 INFO HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+Baseline A:  72%|#######2  | 361/500 [31:13<04:53,  2.11s/it]2026-04-12 14:10:48,979 INFO HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+Baseline A:  72%|#######2  | 362/500 [31:15<04:26,  1.93s/it]2026-04-12 14:10:50,505 INFO HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+Baseline A:  73%|#######2  | 363/500 [31:17<04:32,  1.99s/it]2026-04-12 14:10:52,451 INFO HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+Baseline A:  73%|#######2  | 364/500 [31:18<04:04,  1.80s/it]2026-04-12 14:10:54,195 INFO HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+Baseline A:  73%|#######3  | 365/500 [31:20<03:59,  1.78s/it]2026-04-12 14:10:55,894 INFO HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+Baseline A:  73%|#######3  | 366/500 [31:22<03:48,  1.71s/it]2026-04-12 14:10:57,089 INFO HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+Baseline A:  73%|#######3  | 367/500 [31:23<03:41,  1.67s/it]2026-04-12 14:10:58,795 INFO HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+Baseline A:  74%|#######3  | 368/500 [31:25<03:33,  1.62s/it]2026-04-12 14:11:00,623 INFO HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+Baseline A:  74%|#######3  | 369/500 [31:27<03:51,  1.77s/it]2026-04-12 14:11:03,090 INFO HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+Baseline A:  74%|#######4  | 370/500 [31:29<04:14,  1.96s/it]2026-04-12 14:11:05,144 INFO HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+Baseline A:  74%|#######4  | 371/500 [31:31<03:59,  1.86s/it]2026-04-12 14:11:06,876 INFO HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+Baseline A:  74%|#######4  | 372/500 [31:33<04:07,  1.93s/it]2026-04-12 14:11:09,038 INFO HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+Baseline A:  75%|#######4  | 373/500 [31:37<05:09,  2.44s/it]2026-04-12 14:11:11,748 INFO HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+Baseline A:  75%|#######4  | 374/500 [31:38<04:15,  2.03s/it]2026-04-12 14:11:13,512 INFO HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+Baseline A:  75%|#######5  | 375/500 [31:39<04:03,  1.95s/it]2026-04-12 14:11:14,989 INFO HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+Baseline A:  75%|#######5  | 376/500 [31:41<03:37,  1.75s/it]2026-04-12 14:11:16,203 INFO HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+Baseline A:  75%|#######5  | 377/500 [31:42<03:23,  1.65s/it]2026-04-12 14:11:17,592 INFO HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+Baseline A:  76%|#######5  | 378/500 [31:43<03:11,  1.57s/it]2026-04-12 14:11:19,426 INFO HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+Baseline A:  76%|#######5  | 379/500 [31:45<03:16,  1.62s/it]2026-04-12 14:11:21,252 INFO HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+Baseline A:  76%|#######6  | 380/500 [31:47<03:31,  1.77s/it]2026-04-12 14:11:23,031 INFO HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+Baseline A:  76%|#######6  | 381/500 [31:49<03:22,  1.70s/it]2026-04-12 14:11:24,954 INFO HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+Baseline A:  76%|#######6  | 382/500 [31:51<03:23,  1.72s/it]2026-04-12 14:11:26,911 INFO HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+Baseline A:  77%|#######6  | 383/500 [31:53<03:34,  1.83s/it]2026-04-12 14:11:28,515 INFO HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+Baseline A:  77%|#######6  | 384/500 [31:54<03:20,  1.73s/it]2026-04-12 14:11:30,152 INFO HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+Baseline A:  77%|#######7  | 385/500 [31:56<03:21,  1.76s/it]2026-04-12 14:11:32,277 INFO HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+Baseline A:  77%|#######7  | 386/500 [31:58<03:26,  1.81s/it]2026-04-12 14:11:33,872 INFO HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+Baseline A:  77%|#######7  | 387/500 [32:00<03:22,  1.79s/it]2026-04-12 14:11:35,590 INFO HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+Baseline A:  78%|#######7  | 388/500 [32:01<03:16,  1.76s/it]2026-04-12 14:11:38,251 INFO HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+Baseline A:  78%|#######7  | 389/500 [32:04<03:58,  2.15s/it]2026-04-12 14:11:41,686 INFO HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+Baseline A:  78%|#######8  | 390/500 [32:08<04:41,  2.56s/it]2026-04-12 14:11:44,494 INFO HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+Baseline A:  78%|#######8  | 391/500 [32:11<04:53,  2.70s/it]2026-04-12 14:11:46,951 INFO HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+Baseline A:  78%|#######8  | 392/500 [32:13<04:23,  2.44s/it]2026-04-12 14:11:48,890 INFO HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+Baseline A:  79%|#######8  | 393/500 [32:15<04:05,  2.30s/it]2026-04-12 14:11:51,482 INFO HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+Baseline A:  79%|#######8  | 394/500 [34:24<1:11:34, 40.51s/it]2026-04-12 14:14:00,513 INFO HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+Baseline A:  79%|#######9  | 395/500 [34:26<50:37, 28.93s/it]  2026-04-12 14:14:03,789 INFO HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+Baseline A:  79%|#######9  | 396/500 [34:31<37:22, 21.56s/it]2026-04-12 14:14:06,724 INFO HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+Baseline A:  79%|#######9  | 397/500 [34:32<26:46, 15.59s/it]2026-04-12 14:14:08,933 INFO HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+Baseline A:  80%|#######9  | 398/500 [34:35<20:04, 11.81s/it]2026-04-12 14:14:11,014 INFO HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+Baseline A:  80%|#######9  | 399/500 [34:37<14:35,  8.67s/it]2026-04-12 14:14:13,367 INFO HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+Baseline A:  80%|########  | 400/500 [34:39<11:19,  6.79s/it]2026-04-12 14:14:15,223 INFO HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+Baseline A:  80%|########  | 401/500 [34:41<08:48,  5.33s/it]2026-04-12 14:14:16,832 INFO HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+Baseline A:  80%|########  | 402/500 [34:43<06:48,  4.17s/it]2026-04-12 14:14:18,501 INFO HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+Baseline A:  81%|########  | 403/500 [34:44<05:32,  3.43s/it]2026-04-12 14:14:19,772 INFO HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+Baseline A:  81%|########  | 404/500 [34:45<04:26,  2.77s/it]2026-04-12 14:14:21,325 INFO HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+Baseline A:  81%|########1 | 405/500 [34:47<03:50,  2.43s/it]2026-04-12 14:14:22,787 INFO HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+Baseline A:  81%|########1 | 406/500 [34:48<03:18,  2.11s/it]2026-04-12 14:14:23,915 INFO HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+Baseline A:  81%|########1 | 407/500 [34:50<02:49,  1.82s/it]2026-04-12 14:14:25,993 INFO HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+Baseline A:  82%|########1 | 408/500 [34:52<02:54,  1.89s/it]2026-04-12 14:14:27,248 INFO HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+Baseline A:  82%|########1 | 409/500 [34:53<02:35,  1.71s/it]2026-04-12 14:14:29,494 INFO HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+Baseline A:  82%|########2 | 410/500 [34:55<02:47,  1.86s/it]2026-04-12 14:14:32,406 INFO HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+Baseline A:  82%|########2 | 411/500 [34:58<03:14,  2.18s/it]2026-04-12 14:14:33,873 INFO HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+Baseline A:  82%|########2 | 412/500 [35:00<02:52,  1.96s/it]2026-04-12 14:14:35,183 INFO HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+Baseline A:  83%|########2 | 413/500 [35:01<02:33,  1.77s/it]2026-04-12 14:14:36,726 INFO HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+Baseline A:  83%|########2 | 414/500 [35:02<02:26,  1.70s/it]2026-04-12 14:14:38,476 INFO HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+Baseline A:  83%|########2 | 415/500 [35:04<02:25,  1.72s/it]2026-04-12 14:14:39,695 INFO HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+Baseline A:  83%|########3 | 416/500 [35:05<02:11,  1.57s/it]2026-04-12 14:14:41,304 INFO HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+Baseline A:  83%|########3 | 417/500 [35:07<02:11,  1.58s/it]2026-04-12 14:14:42,744 INFO HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+Baseline A:  84%|########3 | 418/500 [35:08<02:06,  1.54s/it]2026-04-12 14:14:44,252 INFO HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+Baseline A:  84%|########3 | 419/500 [35:10<02:04,  1.53s/it]2026-04-12 14:14:45,770 INFO HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+Baseline A:  84%|########4 | 420/500 [35:11<02:01,  1.52s/it]2026-04-12 14:14:47,193 INFO HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+Baseline A:  84%|########4 | 421/500 [35:13<01:58,  1.49s/it]2026-04-12 14:14:51,511 INFO HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+Baseline A:  84%|########4 | 422/500 [35:17<03:02,  2.34s/it]2026-04-12 14:14:53,227 INFO HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+Baseline A:  85%|########4 | 423/500 [35:19<02:45,  2.15s/it]2026-04-12 14:14:55,258 INFO HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+Baseline A:  85%|########4 | 424/500 [35:21<02:41,  2.12s/it]2026-04-12 14:14:57,610 INFO HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+Baseline A:  85%|########5 | 425/500 [35:23<02:43,  2.19s/it]2026-04-12 14:15:00,082 INFO HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+Baseline A:  85%|########5 | 426/500 [35:26<02:48,  2.28s/it]2026-04-12 14:15:02,019 INFO HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+Baseline A:  85%|########5 | 427/500 [35:28<02:39,  2.18s/it]2026-04-12 14:15:03,452 INFO HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+Baseline A:  86%|########5 | 428/500 [35:29<02:20,  1.96s/it]2026-04-12 14:15:05,391 INFO HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+Baseline A:  86%|########5 | 429/500 [35:31<02:17,  1.94s/it]2026-04-12 14:15:06,676 INFO HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+Baseline A:  86%|########6 | 430/500 [35:32<02:02,  1.75s/it]2026-04-12 14:15:09,635 INFO HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+Baseline A:  86%|########6 | 431/500 [35:35<02:25,  2.11s/it]2026-04-12 14:15:11,598 INFO HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+Baseline A:  86%|########6 | 432/500 [35:37<02:20,  2.06s/it]2026-04-12 14:15:13,944 INFO HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+Baseline A:  87%|########6 | 433/500 [35:40<02:25,  2.16s/it]2026-04-12 14:15:16,051 INFO HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+Baseline A:  87%|########6 | 434/500 [35:42<02:20,  2.13s/it]2026-04-12 14:15:18,292 INFO HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+Baseline A:  87%|########7 | 435/500 [35:44<02:20,  2.17s/it]2026-04-12 14:15:19,736 INFO HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+Baseline A:  87%|########7 | 436/500 [35:45<02:04,  1.95s/it]2026-04-12 14:15:21,734 INFO HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+Baseline A:  87%|########7 | 437/500 [35:47<02:03,  1.96s/it]2026-04-12 14:15:23,358 INFO HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+Baseline A:  88%|########7 | 438/500 [35:49<01:55,  1.86s/it]2026-04-12 14:15:26,421 INFO HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+Baseline A:  88%|########7 | 439/500 [35:52<02:16,  2.24s/it]2026-04-12 14:15:27,735 INFO HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+Baseline A:  88%|########8 | 440/500 [35:53<01:57,  1.96s/it]2026-04-12 14:15:30,273 INFO HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+Baseline A:  88%|########8 | 441/500 [35:56<02:05,  2.12s/it]2026-04-12 14:15:31,827 INFO HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+Baseline A:  88%|########8 | 442/500 [35:58<01:53,  1.95s/it]2026-04-12 14:15:34,128 INFO HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+Baseline A:  89%|########8 | 443/500 [36:00<01:57,  2.07s/it]2026-04-12 14:15:36,111 INFO HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+Baseline A:  89%|########8 | 444/500 [36:02<01:53,  2.03s/it]2026-04-12 14:15:38,688 INFO HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+Baseline A:  89%|########9 | 445/500 [36:04<02:00,  2.20s/it]2026-04-12 14:15:41,004 INFO HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+Baseline A:  89%|########9 | 446/500 [36:07<02:00,  2.23s/it]2026-04-12 14:15:42,670 INFO HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+Baseline A:  89%|########9 | 447/500 [36:08<01:50,  2.08s/it]2026-04-12 14:15:46,717 INFO HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+Baseline A:  90%|########9 | 448/500 [36:12<02:18,  2.66s/it]2026-04-12 14:15:48,693 INFO HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+Baseline A:  90%|########9 | 449/500 [36:14<02:04,  2.44s/it]2026-04-12 14:15:51,221 INFO HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+Baseline A:  90%|######### | 450/500 [36:17<02:03,  2.47s/it]2026-04-12 14:15:53,016 INFO HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+Baseline A:  90%|######### | 451/500 [36:19<01:50,  2.26s/it]2026-04-12 14:15:55,132 INFO HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+Baseline A:  90%|######### | 452/500 [36:21<01:46,  2.22s/it]2026-04-12 14:15:56,803 INFO HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+Baseline A:  91%|######### | 453/500 [36:22<01:36,  2.06s/it]2026-04-12 14:15:58,392 INFO HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+Baseline A:  91%|######### | 454/500 [36:24<01:28,  1.91s/it]2026-04-12 14:16:01,226 INFO HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+Baseline A:  91%|#########1| 455/500 [36:27<01:38,  2.19s/it]2026-04-12 14:16:03,327 INFO HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+Baseline A:  91%|#########1| 456/500 [36:29<01:35,  2.17s/it]2026-04-12 14:16:05,245 INFO HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+Baseline A:  91%|#########1| 457/500 [36:31<01:29,  2.09s/it]2026-04-12 14:16:07,133 INFO HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+Baseline A:  92%|#########1| 458/500 [36:33<01:25,  2.03s/it]2026-04-12 14:16:09,124 INFO HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+Baseline A:  92%|#########1| 459/500 [36:35<01:22,  2.02s/it]2026-04-12 14:16:10,831 INFO HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+Baseline A:  92%|#########2| 460/500 [36:37<01:17,  1.93s/it]2026-04-12 14:16:14,242 INFO HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+Baseline A:  92%|#########2| 461/500 [36:40<01:32,  2.38s/it]2026-04-12 14:16:16,583 INFO HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+Baseline A:  92%|#########2| 462/500 [36:42<01:30,  2.37s/it]2026-04-12 14:16:19,531 INFO HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+Baseline A:  93%|#########2| 463/500 [36:45<01:33,  2.53s/it]2026-04-12 14:16:21,449 INFO HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+Baseline A:  93%|#########2| 464/500 [36:47<01:24,  2.35s/it]2026-04-12 14:16:24,480 INFO HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+Baseline A:  93%|#########3| 465/500 [36:50<01:29,  2.56s/it]2026-04-12 14:16:28,122 INFO HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+Baseline A:  93%|#########3| 466/500 [36:54<01:37,  2.88s/it]2026-04-12 14:16:30,955 INFO HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+Baseline A:  93%|#########3| 467/500 [36:57<01:34,  2.88s/it]2026-04-12 14:16:33,601 INFO HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+Baseline A:  94%|#########3| 468/500 [36:59<01:29,  2.79s/it]2026-04-12 14:16:37,721 INFO HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+Baseline A:  94%|#########3| 469/500 [37:04<01:48,  3.51s/it]2026-04-12 14:16:40,374 INFO HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+Baseline A:  94%|#########3| 470/500 [37:06<01:28,  2.93s/it]2026-04-12 14:16:42,206 INFO HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+Baseline A:  94%|#########4| 471/500 [37:08<01:15,  2.60s/it]2026-04-12 14:16:45,838 INFO HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+Baseline A:  94%|#########4| 472/500 [37:12<01:21,  2.91s/it]2026-04-12 14:16:47,888 INFO HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+Baseline A:  95%|#########4| 473/500 [37:14<01:11,  2.65s/it]2026-04-12 14:16:50,251 INFO HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+Baseline A:  95%|#########4| 474/500 [37:16<01:06,  2.57s/it]2026-04-12 14:16:52,370 INFO HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+Baseline A:  95%|#########5| 475/500 [37:18<01:00,  2.43s/it]2026-04-12 14:16:54,467 INFO HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+Baseline A:  95%|#########5| 476/500 [37:20<00:55,  2.33s/it]2026-04-12 14:16:56,614 INFO HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+Baseline A:  95%|#########5| 477/500 [37:22<00:52,  2.27s/it]2026-04-12 14:16:58,720 INFO HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+Baseline A:  96%|#########5| 478/500 [37:24<00:48,  2.22s/it]2026-04-12 14:17:01,754 INFO HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+Baseline A:  96%|#########5| 479/500 [37:29<00:59,  2.84s/it]2026-04-12 14:17:08,276 INFO HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+Baseline A:  96%|#########6| 480/500 [37:34<01:11,  3.57s/it]2026-04-12 14:17:09,697 INFO HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+Baseline A:  96%|#########6| 481/500 [37:35<00:55,  2.93s/it]2026-04-12 14:17:12,626 INFO HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+Baseline A:  96%|#########6| 482/500 [37:38<00:52,  2.93s/it]2026-04-12 14:17:14,869 INFO HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+Baseline A:  97%|#########6| 483/500 [37:41<00:46,  2.72s/it]2026-04-12 14:17:16,532 INFO HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+Baseline A:  97%|#########6| 484/500 [37:42<00:38,  2.40s/it]2026-04-12 14:17:17,806 INFO HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+Baseline A:  97%|#########7| 485/500 [37:43<00:30,  2.06s/it]2026-04-12 14:17:19,716 INFO HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+Baseline A:  97%|#########7| 486/500 [37:45<00:28,  2.02s/it]2026-04-12 14:17:21,598 INFO HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+Baseline A:  97%|#########7| 487/500 [37:48<00:27,  2.08s/it]2026-04-12 14:17:23,392 INFO HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+Baseline A:  98%|#########7| 488/500 [37:49<00:22,  1.89s/it]2026-04-12 14:17:25,920 INFO HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+Baseline A:  98%|#########7| 489/500 [37:52<00:22,  2.08s/it]2026-04-12 14:17:28,337 INFO HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+Baseline A:  98%|#########8| 490/500 [37:55<00:26,  2.60s/it]2026-04-12 14:17:31,373 INFO HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+Baseline A:  98%|#########8| 491/500 [37:57<00:20,  2.31s/it]2026-04-12 14:17:33,367 INFO HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+Baseline A:  98%|#########8| 492/500 [37:59<00:17,  2.22s/it]2026-04-12 14:17:34,654 INFO HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+Baseline A:  99%|#########8| 493/500 [38:01<00:14,  2.07s/it]2026-04-12 14:17:37,848 INFO HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+Baseline A:  99%|#########8| 494/500 [38:04<00:13,  2.27s/it]2026-04-12 14:17:41,119 INFO HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+Baseline A:  99%|#########9| 495/500 [38:07<00:12,  2.57s/it]2026-04-12 14:17:45,966 INFO HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+Baseline A:  99%|#########9| 496/500 [38:12<00:13,  3.26s/it]2026-04-12 14:17:48,049 INFO HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+Baseline A:  99%|#########9| 497/500 [38:14<00:08,  2.90s/it]2026-04-12 14:17:54,908 INFO HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+Baseline A: 100%|#########9| 498/500 [38:21<00:08,  4.09s/it]2026-04-12 14:17:56,505 INFO HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+Baseline A: 100%|#########9| 499/500 [38:22<00:03,  3.34s/it]2026-04-12 14:17:58,383 INFO HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+Baseline A: 100%|##########| 500/500 [38:24<00:00,  2.91s/it]Baseline A: 100%|##########| 500/500 [38:24<00:00,  4.61s/it]
+2026-04-12 14:17:58,412 INFO Results saved to results/baseline_a.json
+2026-04-12 14:18:00,705 INFO MLflow run 'baseline_a' logged. EX=0.6020
+2026-04-12 14:18:00,705 INFO Baseline A — EX: 60.20% (301/500)

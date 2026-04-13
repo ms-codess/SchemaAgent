@@ -135,8 +135,10 @@ def test_run_execution_error_then_success():
         (None, "no such table: nonexistent_table_xyz"),  # attempt 1 fails
         (FAKE_ROWS, None),                               # attempt 2 succeeds
     ]
+    full_schema = "Table schools: CDSCode TEXT, School TEXT"
     with patch("src.agent.get_db_connection") as mock_conn, \
-         patch("src.agent.execute_sql", side_effect=exec_results):
+         patch("src.agent.execute_sql", side_effect=exec_results), \
+         patch("src.agent.get_full_schema", return_value=full_schema) as mock_full:
         mock_conn.return_value = MagicMock()
         result = agent.run("How many schools?", DB_ID, DB_PATH)
 
@@ -144,10 +146,12 @@ def test_run_execution_error_then_success():
     assert result.attempts == 2
     assert client.messages.create.call_count == 2
 
-    # Second call must have more messages than the first (correction turns appended)
-    first_msg_count = len(client.messages.create.call_args_list[0][1]["messages"])
-    second_msg_count = len(client.messages.create.call_args_list[1][1]["messages"])
-    assert second_msg_count > first_msg_count
+    # On execution error with RAG context, agent resets to a fresh single-message
+    # prompt using the full schema — NOT an appended correction turn.
+    mock_full.assert_called_once_with(DB_PATH)
+    second_call_messages = client.messages.create.call_args_list[1][1]["messages"]
+    assert len(second_call_messages) == 1
+    assert full_schema in second_call_messages[0]["content"]
 
 
 # ── Empty result → retry → success ───────────────────────────────────────────
