@@ -472,15 +472,21 @@ def _process_question(prompt: str) -> None:
         st.markdown(f'<div class="ub">{prompt}</div>', unsafe_allow_html=True)
 
     with st.chat_message("assistant", avatar="assistant"):
-        with st.spinner("Thinking…"):
+        result = None
+        err_msg = None
+
+        with st.status("Working…", expanded=True) as status:
             try:
+                st.write("⚙ Loading AI components…")
                 _, schema_rag, _, fusion = _load_components()
                 schema_rag.top_k = st.session_state.get("_top_k_schema", 5)
 
+                st.write("🔀 Routing question…")
                 full_q = _contextual_question(
-                    prompt, st.session_state.messages[:-1]  # exclude just-appended user msg
+                    prompt, st.session_state.messages[:-1]
                 )
 
+                st.write("🗄 Running pipeline…")
                 result = fusion.answer(
                     question=full_q,
                     db_id=st.session_state.db_id or "",
@@ -489,22 +495,31 @@ def _process_question(prompt: str) -> None:
                     top_k_docs=st.session_state.get("_top_k_docs", 3),
                 )
 
-                _render_result(result)
-                st.session_state.messages.append({
-                    "role": "assistant",
-                    "content": result.answer,
-                    "result": result,
-                })
+                route_label = result.intent.upper()
+                sql_label   = f"  ·  {result.sql_attempts} SQL attempt{'s' if result.sql_attempts != 1 else ''}" if result.sql else ""
+                status.update(label=f"✓  {route_label}{sql_label}", state="complete", expanded=False)
 
             except Exception as exc:
-                err_msg = str(exc)
-                st.markdown(f'<div class="err">⚠ {err_msg}</div>',
-                            unsafe_allow_html=True)
-                st.session_state.messages.append({
-                    "role": "assistant",
-                    "content": err_msg,
-                    "result": None,
-                })
+                import traceback
+                err_msg = traceback.format_exc()
+                status.update(label="✗  Error", state="error", expanded=True)
+                st.code(err_msg, language="text")
+
+        if result is not None:
+            _render_result(result)
+            st.session_state.messages.append({
+                "role": "assistant",
+                "content": result.answer,
+                "result": result,
+            })
+        elif err_msg:
+            short = err_msg.strip().splitlines()[-1]
+            st.markdown(f'<div class="err">⚠ {short}</div>', unsafe_allow_html=True)
+            st.session_state.messages.append({
+                "role": "assistant",
+                "content": short,
+                "result": None,
+            })
 
 
 # -- Sidebar -------------------------------------------------------------------
