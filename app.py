@@ -650,32 +650,23 @@ with st.sidebar:
 # -- Main chat area ------------------------------------------------------------
 no_db = st.session_state.db_path is None
 
-# (question, type)  type: "db" | "doc" | "hybrid"
-_EXAMPLE_QUESTIONS = [
-    ("How many drivers are in the database?",           "db"),
-    ("Who has the most race wins?",                     "db"),
-    ("Which constructor won the most races?",           "db"),
-    ("List the top 5 circuits by number of races",      "db"),
-    ("What is the minimum age for a Superlicence?",     "doc"),
-    ("How long is a Q2 qualifying session?",            "doc"),
-    ("Which drivers meet the FIA Hall of Merit criteria?", "hybrid"),
-    ("Which constructors qualify as historic elite?",   "hybrid"),
+# Generic DB questions — work for any SQLite database
+_DB_QUESTIONS = [
+    "How many records are in each table?",
+    "Show me the first 10 rows of the main table",
+    "What are the column names in each table?",
+    "Which table has the most rows?",
 ]
 
-_TYPE_BADGE = {
-    "db":     ('<span style="font-size:10px;font-weight:700;letter-spacing:.6px;'
-               'color:#60A5FA;background:rgba(59,130,246,.12);border:1px solid '
-               'rgba(59,130,246,.22);border-radius:10px;padding:1px 7px;'
-               'margin-right:7px">DB</span>'),
-    "doc":    ('<span style="font-size:10px;font-weight:700;letter-spacing:.6px;'
-               'color:#34D399;background:rgba(16,185,129,.1);border:1px solid '
-               'rgba(16,185,129,.22);border-radius:10px;padding:1px 7px;'
-               'margin-right:7px">DOC</span>'),
-    "hybrid": ('<span style="font-size:10px;font-weight:700;letter-spacing:.6px;'
-               'color:#A78BFA;background:rgba(139,92,246,.1);border:1px solid '
-               'rgba(139,92,246,.22);border-radius:10px;padding:1px 7px;'
-               'margin-right:7px">HYBRID</span>'),
-}
+# DOC / HYBRID questions — only shown once documents are indexed
+_DOC_QUESTIONS  = [
+    "Summarise the key rules from the documents",
+    "What are the main criteria described?",
+]
+_HYBRID_QUESTIONS = [
+    "Which records in the database match the criteria in the documents?",
+    "Does the data meet the requirements described in the documents?",
+]
 
 # Welcome screen
 if not st.session_state.messages:
@@ -691,31 +682,38 @@ if not st.session_state.messages:
     </div>
     """, unsafe_allow_html=True)
 
-    # Legend
-    st.markdown(
-        '<div style="display:flex;justify-content:center;gap:18px;margin-bottom:16px">'
-        + _TYPE_BADGE["db"]     + ' queries the database'
-        + '&nbsp;&nbsp;'
-        + _TYPE_BADGE["doc"]    + ' searches documents'
-        + '&nbsp;&nbsp;'
-        + _TYPE_BADGE["hybrid"] + ' uses both'
-        + '</div>',
-        unsafe_allow_html=True,
-    )
+    has_docs = bool(st.session_state.indexed_docs)
+
+    # Legend — only show relevant types
+    legend_parts = ['<div style="display:flex;justify-content:center;gap:20px;'
+                    'flex-wrap:wrap;margin-bottom:18px;font-size:12px;color:#6B6B9A">',
+                    '<span>⬡ &nbsp;Database query</span>']
+    if has_docs:
+        legend_parts += ['<span>◻ &nbsp;Document search</span>',
+                         '<span>⬢ &nbsp;Both together</span>']
+    legend_parts.append('</div>')
+    st.markdown("".join(legend_parts), unsafe_allow_html=True)
+
+    # Build question list
+    questions = [("⬡  " + q) for q in _DB_QUESTIONS]
+    if has_docs:
+        questions += [("◻  " + q) for q in _DOC_QUESTIONS]
+        questions += [("⬢  " + q) for q in _HYBRID_QUESTIONS]
 
     col_a, col_b = st.columns(2)
-    for i, (q, qtype) in enumerate(_EXAMPLE_QUESTIONS):
-        label = _TYPE_BADGE[qtype] + q
+    for i, label in enumerate(questions):
+        # Strip the prefix to get the clean question to send
+        clean_q = label[3:].strip()
         with (col_a if i % 2 == 0 else col_b):
             if st.button(label, key=f"chip_{i}", disabled=no_db,
                          use_container_width=True):
-                st.session_state.pending_question = q
+                st.session_state.pending_question = clean_q
                 st.rerun()
 
     if no_db:
         st.markdown(
-            '<p style="text-align:center;font-size:12px;color:#44446A;margin-top:12px">'
-            'Connect a database in the sidebar to enable example questions</p>',
+            '<p style="text-align:center;font-size:12px;color:#44446A;margin-top:10px">'
+            'Connect a database in the sidebar to enable these questions</p>',
             unsafe_allow_html=True,
         )
 
