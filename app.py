@@ -475,18 +475,14 @@ def _process_question(prompt: str) -> None:
         result = None
         err_msg = None
 
-        with st.status("Working…", expanded=True) as status:
+        with st.spinner("Thinking…"):
             try:
-                st.write("⚙ Loading AI components…")
+                import traceback
                 _, schema_rag, _, fusion = _load_components()
                 schema_rag.top_k = st.session_state.get("_top_k_schema", 5)
-
-                st.write("🔀 Routing question…")
                 full_q = _contextual_question(
                     prompt, st.session_state.messages[:-1]
                 )
-
-                st.write("🗄 Running pipeline…")
                 result = fusion.answer(
                     question=full_q,
                     db_id=st.session_state.db_id or "",
@@ -494,16 +490,9 @@ def _process_question(prompt: str) -> None:
                     use_hyde=st.session_state.get("_use_hyde", False),
                     top_k_docs=st.session_state.get("_top_k_docs", 3),
                 )
-
-                route_label = result.intent.upper()
-                sql_label   = f"  ·  {result.sql_attempts} SQL attempt{'s' if result.sql_attempts != 1 else ''}" if result.sql else ""
-                status.update(label=f"✓  {route_label}{sql_label}", state="complete", expanded=False)
-
-            except Exception as exc:
-                import traceback
+            except Exception:
                 err_msg = traceback.format_exc()
-                status.update(label="✗  Error", state="error", expanded=True)
-                st.code(err_msg, language="text")
+                result = None
 
         if result is not None:
             _render_result(result)
@@ -512,12 +501,11 @@ def _process_question(prompt: str) -> None:
                 "content": result.answer,
                 "result": result,
             })
-        elif err_msg:
-            short = err_msg.strip().splitlines()[-1]
-            st.markdown(f'<div class="err">⚠ {short}</div>', unsafe_allow_html=True)
+        else:
+            st.code(err_msg, language="text")
             st.session_state.messages.append({
                 "role": "assistant",
-                "content": short,
+                "content": err_msg.strip().splitlines()[-1],
                 "result": None,
             })
 
@@ -662,14 +650,32 @@ with st.sidebar:
 # -- Main chat area ------------------------------------------------------------
 no_db = st.session_state.db_path is None
 
+# (question, type)  type: "db" | "doc" | "hybrid"
 _EXAMPLE_QUESTIONS = [
-    "How many drivers are in the database?",
-    "Who has the most race wins?",
-    "Which constructor won the most races?",
-    "List the top 5 circuits by races held",
-    "How many races were held each year?",
-    "Which drivers meet the FIA Hall of Merit criteria?",
+    ("How many drivers are in the database?",           "db"),
+    ("Who has the most race wins?",                     "db"),
+    ("Which constructor won the most races?",           "db"),
+    ("List the top 5 circuits by number of races",      "db"),
+    ("What is the minimum age for a Superlicence?",     "doc"),
+    ("How long is a Q2 qualifying session?",            "doc"),
+    ("Which drivers meet the FIA Hall of Merit criteria?", "hybrid"),
+    ("Which constructors qualify as historic elite?",   "hybrid"),
 ]
+
+_TYPE_BADGE = {
+    "db":     ('<span style="font-size:10px;font-weight:700;letter-spacing:.6px;'
+               'color:#60A5FA;background:rgba(59,130,246,.12);border:1px solid '
+               'rgba(59,130,246,.22);border-radius:10px;padding:1px 7px;'
+               'margin-right:7px">DB</span>'),
+    "doc":    ('<span style="font-size:10px;font-weight:700;letter-spacing:.6px;'
+               'color:#34D399;background:rgba(16,185,129,.1);border:1px solid '
+               'rgba(16,185,129,.22);border-radius:10px;padding:1px 7px;'
+               'margin-right:7px">DOC</span>'),
+    "hybrid": ('<span style="font-size:10px;font-weight:700;letter-spacing:.6px;'
+               'color:#A78BFA;background:rgba(139,92,246,.1);border:1px solid '
+               'rgba(139,92,246,.22);border-radius:10px;padding:1px 7px;'
+               'margin-right:7px">HYBRID</span>'),
+}
 
 # Welcome screen
 if not st.session_state.messages:
@@ -685,12 +691,24 @@ if not st.session_state.messages:
     </div>
     """, unsafe_allow_html=True)
 
-    st.markdown('<div class="chips-label" style="text-align:center">Try an example</div>',
-                unsafe_allow_html=True)
+    # Legend
+    st.markdown(
+        '<div style="display:flex;justify-content:center;gap:18px;margin-bottom:16px">'
+        + _TYPE_BADGE["db"]     + ' queries the database'
+        + '&nbsp;&nbsp;'
+        + _TYPE_BADGE["doc"]    + ' searches documents'
+        + '&nbsp;&nbsp;'
+        + _TYPE_BADGE["hybrid"] + ' uses both'
+        + '</div>',
+        unsafe_allow_html=True,
+    )
+
     col_a, col_b = st.columns(2)
-    for i, q in enumerate(_EXAMPLE_QUESTIONS):
+    for i, (q, qtype) in enumerate(_EXAMPLE_QUESTIONS):
+        label = _TYPE_BADGE[qtype] + q
         with (col_a if i % 2 == 0 else col_b):
-            if st.button(q, key=f"chip_{i}", disabled=no_db):
+            if st.button(label, key=f"chip_{i}", disabled=no_db,
+                         use_container_width=True):
                 st.session_state.pending_question = q
                 st.rerun()
 
