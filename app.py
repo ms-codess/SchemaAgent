@@ -192,7 +192,7 @@ section[data-testid="stSidebar"] {
     letter-spacing: -1.2px; margin-bottom: 12px;
 }
 .wsub {
-    font-size: 15px; color: #55556A; line-height: 1.7;
+    font-size: 15px; color: #EEEEF5; line-height: 1.7;
     max-width: 460px; margin-bottom: 38px;
 }
 .chips { display: flex; flex-wrap: wrap; gap: 9px; justify-content: center; max-width: 580px; }
@@ -566,7 +566,7 @@ if not st.session_state.messages:
       <div class="wsub">
         Connect a SQLite database in the sidebar, then ask questions
         in plain English. SchemaAgent generates SQL, executes it, and
-        explains the results — with optional document awareness.
+        explains the results with optional document awareness.
       </div>
       <div class="chips">
         <div class="chip">How many records are in each table?</div>
