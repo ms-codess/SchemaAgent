@@ -1,0 +1,94 @@
+UNIVERSITY OF WASHINGTON
+GRADING SYSTEM AND GPA POLICY
+Office of the Registrar — Updated September 2023
+
+1. GRADING SCALE
+
+UW uses a 4.0 grading scale with decimal grades. The following grade points correspond to letter grades:
+
+A  = 4.0    Excellent
+A- = 3.7
+B+ = 3.3
+B  = 3.0    Good
+B- = 2.7
+C+ = 2.3
+C  = 2.0    Satisfactory
+C- = 1.7
+D+ = 1.3
+D  = 1.0    Poor (passing but below satisfactory)
+D- = 0.7
+F  = 0.0    Failing
+
+2. NON-GRADE MARKS
+
+W  — Withdrawal. Assigned when a student drops a course after week 2. Does not affect GPA.
+CR — Credit. Assigned in courses taken on a Credit/No Credit basis. Equivalent to C or higher.
+NC — No Credit. Assigned in Credit/No Credit courses. Equivalent to below C.
+I  — Incomplete. Temporary mark assigned when a student cannot complete coursework due to circumstances beyond their control (see Section 4).
+N  — No Grade Submitted. Temporary mark; treated as F if not resolved within one quarter.
+HW — Hardship Withdrawal. Assigned for medical or hardship withdrawals (see enrollment policy).
+
+3. GPA CALCULATION
+
+3.1 Formula
+GPA = Sum(grade points × course credits) / Sum(attempted credits)
+
+Only graded credits (A through F) are included. W, CR, NC, and I grades are excluded from GPA calculation.
+
+3.2 Example
+A student enrolled in:
+- CSE414 (4 credits, grade A = 4.0): 16 grade points
+- MATH308 (3 credits, grade B+ = 3.3): 9.9 grade points
+- STAT311 (4 credits, grade B = 3.0): 12 grade points
+
+Total grade points: 37.9
+Total attempted credits: 11
+GPA: 37.9 / 11 = 3.45
+
+3.3 Cumulative vs. Quarterly GPA
+The quarterly GPA covers only the current quarter. The cumulative GPA covers all graded credits at UW. Transfer credits are accepted but transfer grades are NOT included in the UW GPA.
+
+4. INCOMPLETE GRADES
+
+4.1 Conditions
+An Incomplete (I) may be assigned only when:
+- The student has completed at least 70% of the course requirements
+- The remaining work cannot be completed due to circumstances beyond the student's control (illness, family emergency, military deployment)
+- The instructor and student agree in writing on a completion plan before the end of the quarter
+
+4.2 Deadline
+The default deadline to resolve an Incomplete is the end of the following quarter. An extension of up to one additional quarter may be granted with departmental approval. If not resolved, the I converts to a 0.0 (F).
+
+4.3 Effect on GPA
+While an Incomplete is pending, it does not affect the GPA. Once resolved, the final grade replaces the I mark.
+
+5. CREDIT/NO CREDIT OPTION
+
+5.1 Eligibility
+Students may elect Credit/No Credit (CR/NC) grading for up to 25% of their total UW credits. CR/NC elections must be made by the end of the second week of the quarter.
+
+5.2 Restrictions
+Major and prerequisite courses may not be taken CR/NC unless the course is only offered on a CR/NC basis. Students on academic probation may not use the CR/NC option without adviser approval.
+
+6. ACADEMIC STANDING
+
+6.1 Good Standing
+Undergraduate: cumulative GPA ≥ 2.0
+Graduate: cumulative GPA ≥ 3.0
+
+6.2 Probation
+Undergraduate: cumulative GPA falls below 2.0
+Graduate: cumulative GPA falls below 3.0
+
+A student on probation has two quarters to return to good standing. If GPA does not recover, the student is subject to academic dismissal.
+
+6.3 Dean's List
+Undergraduate students who complete 12 or more graded credits in a quarter with a quarterly GPA of 3.8 or higher are placed on the Dean's List for that quarter.
+
+7. GRADE APPEALS
+
+A student who believes a grade was assigned in error or without following the published grading criteria may appeal to the instructor within 30 calendar days of the grade posting. If unresolved, the appeal may be escalated to the department chair and then to the Faculty Council on Academic Standards.
+
+8. CONTACT
+
+Registrar Grading Questions: registrar@uw.edu, (206) 543-5378
