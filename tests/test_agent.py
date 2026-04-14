@@ -151,7 +151,10 @@ def test_run_execution_error_then_success():
     mock_full.assert_called_once_with(DB_PATH)
     second_call_messages = client.messages.create.call_args_list[1][1]["messages"]
     assert len(second_call_messages) == 1
-    assert full_schema in second_call_messages[0]["content"]
+    # Content may be a plain string or a cached list — extract text either way.
+    raw = second_call_messages[0]["content"]
+    content_text = raw[0]["text"] if isinstance(raw, list) else raw
+    assert full_schema in content_text
 
 
 # ── Empty result → retry → success ───────────────────────────────────────────
@@ -175,8 +178,13 @@ def test_run_empty_result_then_success():
     assert result.attempts == 2
 
     second_call_messages = client.messages.create.call_args_list[1].kwargs["messages"]
+
+    def _text(msg):
+        raw = msg["content"]
+        return raw[0]["text"] if isinstance(raw, list) else raw
+
     assert any(
-        "no rows" in m["content"].lower() or "empty" in m["content"].lower()
+        "no rows" in _text(m).lower() or "empty" in _text(m).lower()
         for m in second_call_messages
         if m["role"] == "user"
     )

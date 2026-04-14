@@ -30,6 +30,7 @@ from typing import List, Optional, Tuple
 import sqlglot
 import sqlglot.errors
 
+from src.config import MODEL_SQL, MAX_TOKENS_SQL
 from src.schema import SchemaRAG
 from src.utils import get_db_connection, execute_sql, extract_sql_from_response
 from baselines.runner import (
@@ -97,7 +98,7 @@ class SQLAgent:
         self,
         schema_rag: SchemaRAG,
         client,
-        model: str = "claude-sonnet-4-5",
+        model: str = MODEL_SQL,
         max_attempts: int = MAX_ATTEMPTS,
     ):
         self.schema_rag = schema_rag
@@ -227,12 +228,37 @@ class SQLAgent:
         return get_full_schema(db_path)
 
     def _call_claude(self, messages: list) -> str:
-        """Single Claude API call; returns the raw reply text."""
+        """Single Claude API call with prompt caching; returns the raw reply text."""
+        # Cache the system prompt — identical across every call in a session.
+        cached_system = [{"type": "text", "text": SYSTEM_PROMPT, "cache_control": {"type": "ephemeral"}}]
+
+        # Cache the first user message (schema context) — large and repeated on retries.
+        cached_messages = list(messages)
+        if cached_messages and cached_messages[0]["role"] == "user":
+            cached_messages[0] = {
+                **cached_messages[0],
+                "content": [
+                    {
+                        "type": "text",
+                        "text": cached_messages[0]["content"],
+                        "cache_control": {"type": "ephemeral"},
+                    }
+                ],
+            }
+
         response = self.client.messages.create(
             model=self.model,
-            max_tokens=512,
-            system=SYSTEM_PROMPT,
-            messages=messages,
+            max_tokens=MAX_TOKENS_SQL,
+            system=cached_system,
+            messages=cached_messages,
+        )
+        usage = response.usage
+        logger.debug(
+            "SQL call — in: %d, out: %d, cache_read: %d, cache_write: %d",
+            usage.input_tokens,
+            usage.output_tokens,
+            getattr(usage, "cache_read_input_tokens", 0),
+            getattr(usage, "cache_creation_input_tokens", 0),
         )
         return response.content[0].text
 

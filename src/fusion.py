@@ -38,6 +38,14 @@ from dataclasses import dataclass, field
 from typing import List, Optional
 
 from src.agent import SQLAgent, AgentResult
+from src.config import (
+    MODEL_SQL,
+    MODEL_SYNTH_DB,
+    MODEL_SYNTH_DOC,
+    MODEL_SYNTH_HYBRID,
+    MAX_TOKENS_SYNTH,
+    MAX_TOKENS_FUSION,
+)
 from src.doc_rag import DocRAG
 from src.router import IntentRouter, RouteResult
 from src.schema import SchemaRAG
@@ -158,7 +166,7 @@ class HybridFusion:
         schema_rag: SchemaRAG,
         doc_rag: DocRAG,
         router: IntentRouter,
-        model: str = "claude-sonnet-4-5",
+        model: str = MODEL_SQL,
     ):
         self.client = client
         self.doc_rag = doc_rag
@@ -293,6 +301,8 @@ class HybridFusion:
             return self._call_claude(
                 system=_DOC_SYSTEM,
                 user=_DOC_USER.format(question=question, doc_passages=doc_passages),
+                model=MODEL_SYNTH_DOC,
+                max_tokens=MAX_TOKENS_SYNTH,
             )
 
         # hybrid
@@ -305,6 +315,8 @@ class HybridFusion:
                 db_result=db_result_str,
                 doc_passages=doc_str,
             ),
+            model=MODEL_SYNTH_HYBRID,
+            max_tokens=MAX_TOKENS_FUSION,
         )
 
     def _answer_from_db(
@@ -329,6 +341,8 @@ class HybridFusion:
                 question=question,
                 db_result=self._format_db_result(agent_result),
             ),
+            model=MODEL_SYNTH_DB,
+            max_tokens=MAX_TOKENS_SYNTH,
         )
 
     @staticmethod
@@ -345,12 +359,28 @@ class HybridFusion:
         suffix = f"\n(... {len(rows) - 10} more rows)" if len(rows) > 10 else ""
         return f"SQL: {agent_result.sql}\nRows:\n" + "\n".join(lines) + suffix
 
-    def _call_claude(self, system: str, user: str) -> str:
-        """Single Claude API call for synthesis."""
+    def _call_claude(
+        self,
+        system: str,
+        user: str,
+        model: str = MODEL_SYNTH_HYBRID,
+        max_tokens: int = MAX_TOKENS_FUSION,
+    ) -> str:
+        """Single Claude API call with prompt caching and token logging."""
+        cached_system = [{"type": "text", "text": system, "cache_control": {"type": "ephemeral"}}]
         response = self.client.messages.create(
-            model=self.model,
-            max_tokens=1024,
-            system=system,
+            model=model,
+            max_tokens=max_tokens,
+            system=cached_system,
             messages=[{"role": "user", "content": user}],
+        )
+        usage = response.usage
+        logger.debug(
+            "Fusion call [%s] — in: %d, out: %d, cache_read: %d, cache_write: %d",
+            model,
+            usage.input_tokens,
+            usage.output_tokens,
+            getattr(usage, "cache_read_input_tokens", 0),
+            getattr(usage, "cache_creation_input_tokens", 0),
         )
         return response.content[0].text.strip()
