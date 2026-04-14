@@ -1,0 +1,40 @@
+
+
+venv/
+_pycache_
+.claude
+
+.env
+claude.md
+project_plan.md
+papers.md
+.claudeignore
+.gitignore
+.git_backup_*/
+data/*
+!data/uw_courses/
+data/uw_courses/*
+!data/uw_courses/uw_courses.sqlite
+
+# Python cache files
+__pycache__/
+*.pyc
+*.pyo
+.pytest_cache/
+
+# Database files
+*.db
+*.sqlite3
+
+# MLflow experiment data
+mlruns/
+
+# VS Code settings
+.vscode/
+
+# ChromaDB local storage
+chroma_db/
+
+# OS files
+.DS_Store
+Thumbs.db
