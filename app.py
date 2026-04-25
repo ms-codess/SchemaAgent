@@ -14,6 +14,8 @@ import pandas as pd
 import streamlit as st
 from dotenv import load_dotenv
 
+from src.config import LLM_OPTIONS, DEFAULT_LLM
+
 load_dotenv()
 
 # -- Page config ---------------------------------------------------------------
@@ -32,7 +34,15 @@ st.markdown("""
 html, body, [class*="css"] {
     font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif !important;
 }
-#MainMenu, footer, header { visibility: hidden; }
+#MainMenu, footer { visibility: hidden; }
+header {
+    visibility: visible !important;
+    background: transparent !important;
+}
+[data-testid="collapsedControl"] {
+    display: flex !important;
+    visibility: visible !important;
+}
 .stDeployButton { display: none; }
 
 /* Backgrounds */
@@ -305,6 +315,7 @@ _DEFAULTS: dict = {
     "indexed_dbs":       set(),
     "indexed_docs":      [],
     "pending_question":  None,   # set by chip buttons
+    "selected_llm":      DEFAULT_LLM,
 }
 for _k, _v in _DEFAULTS.items():
     if _k not in st.session_state:
@@ -312,24 +323,61 @@ for _k, _v in _DEFAULTS.items():
 
 # -- Cached AI components ------------------------------------------------------
 @st.cache_resource(show_spinner="Initialising AI components…")
-def _load_components():
+def _load_components(sql_provider: str = "anthropic", sql_model: str = "claude-sonnet-4-5"):
+    """
+    Build and cache all AI components.  Cache key includes sql_provider +
+    sql_model so switching LLMs creates a fresh set of components without
+    polluting the previous one.
+    """
     import anthropic
+    from src.llm_client import UnifiedClient, make_client
     from src.schema import SchemaRAG
     from src.doc_rag import DocRAG
     from src.router import IntentRouter
     from src.fusion import HybridFusion
 
-    client     = anthropic.Anthropic()
+    # Claude is always used for routing and synthesis (cheap, reliable JSON)
+    claude_client = anthropic.Anthropic()
+
+    # SQL-generation client — may be Claude or an OpenAI-compat model (Qwen)
+    if sql_provider == "anthropic":
+        sql_client = claude_client
+    else:
+        llm_cfg = next(
+            (v for v in LLM_OPTIONS.values()
+             if v["provider"] == sql_provider and v["model"] == sql_model),
+            None,
+        )
+        if llm_cfg is None:
+            raise ValueError(f"No LLM config found for provider={sql_provider!r} model={sql_model!r}")
+        sql_client = make_client(llm_cfg)
+
     schema_rag = SchemaRAG()
     doc_rag    = DocRAG()
-    router     = IntentRouter(client)
+    router     = IntentRouter(claude_client)
     fusion     = HybridFusion(
-        client=client, schema_rag=schema_rag, doc_rag=doc_rag, router=router,
+        client=sql_client,
+        schema_rag=schema_rag,
+        doc_rag=doc_rag,
+        router=router,
+        model=sql_model,
+        synth_client=claude_client,   # synthesis always Claude
     )
-    return client, schema_rag, doc_rag, fusion
+    return claude_client, schema_rag, doc_rag, fusion
 
 
 # -- Helpers -------------------------------------------------------------------
+def _current_llm_cfg() -> dict:
+    """Return the LLM_OPTIONS entry for the currently selected LLM."""
+    key = st.session_state.get("selected_llm", DEFAULT_LLM)
+    return LLM_OPTIONS.get(key, LLM_OPTIONS[DEFAULT_LLM])
+
+
+def _get_components():
+    cfg = _current_llm_cfg()
+    return _load_components(cfg["provider"], cfg["model"])
+
+
 def _try_connect(db_path: str) -> str | None:
     """Validate a SQLite path. Returns error string or None."""
     p = Path(db_path)
@@ -347,7 +395,7 @@ def _try_connect(db_path: str) -> str | None:
 def _index_db(db_path: str, db_id: str) -> str | None:
     """Index schema into ChromaDB. Returns error string or None."""
     try:
-        _, schema_rag, _, _ = _load_components()
+        _, schema_rag, _, _ = _get_components()
         schema_rag.index(db_path=db_path, db_id=db_id)
         st.session_state.indexed_dbs.add(db_id)
     except Exception as exc:
@@ -412,6 +460,7 @@ def _render_result(result) -> None:
 
     # Context used
     rows = []
+    rows.append(("model", st.session_state.get("selected_llm", DEFAULT_LLM)))
     rows.append(("route", result.intent))
     rows.append(("confidence", result.route_confidence))
     if result.route_reasoning:
@@ -478,7 +527,7 @@ def _process_question(prompt: str) -> None:
         with st.spinner("Thinking…"):
             try:
                 import traceback
-                _, schema_rag, _, fusion = _load_components()
+                _, schema_rag, _, fusion = _get_components()
                 schema_rag.top_k = st.session_state.get("_top_k_schema", 5)
                 full_q = _contextual_question(
                     prompt, st.session_state.messages[:-1]
@@ -604,7 +653,7 @@ with st.sidebar:
     if doc_files:
         doc_dir = Path("data/uploads/docs")
         doc_dir.mkdir(parents=True, exist_ok=True)
-        _, _, doc_rag, _ = _load_components()
+        _, _, doc_rag, _ = _get_components()
         for f in doc_files:
             if f.name not in st.session_state.indexed_docs:
                 with open(doc_dir / f.name, "wb") as fh:
@@ -625,6 +674,24 @@ with st.sidebar:
 
     # Settings — store in session_state so _process_question can read them
     with st.expander("Settings"):
+        llm_names = list(LLM_OPTIONS.keys())
+        current_idx = llm_names.index(
+            st.session_state.get("selected_llm", DEFAULT_LLM)
+        )
+        selected = st.selectbox(
+            "SQL generation model",
+            options=llm_names,
+            index=current_idx,
+            help=(
+                "Claude: uses Anthropic API (ANTHROPIC_API_KEY).\n"
+                "Qwen: uses Together.ai API (TOGETHER_API_KEY).\n"
+                "Routing and synthesis always use Claude."
+            ),
+        )
+        if selected != st.session_state.get("selected_llm"):
+            st.session_state["selected_llm"] = selected
+            st.rerun()
+
         st.session_state["_top_k_schema"] = st.slider("Schema tables (top-k)", 1, 10, 5)
         st.session_state["_top_k_docs"]   = st.slider("Doc passages (top-k)",  1, 10, 3)
         st.session_state["_use_hyde"]     = st.checkbox(

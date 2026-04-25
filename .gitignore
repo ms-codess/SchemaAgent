@@ -35,6 +35,20 @@ mlruns/
 # ChromaDB local storage
 chroma_db/
 
+# Local benchmark payloads
+_bird_data/
+_bird_mini_dev/
+_bird_minidev.zip
+
+# Local environments
+.venv/
+.venv_local/
+
 # OS files
 .DS_Store
 Thumbs.db
+
+# Local logs
+streamlit.err.log
+streamlit.out.log
+results/run_baseline*.log

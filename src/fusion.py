@@ -148,8 +148,8 @@ class HybridFusion:
 
     Parameters
     ----------
-    client : anthropic.Anthropic
-        Authenticated Anthropic API client.
+    client : anthropic.Anthropic | UnifiedClient
+        Client used for SQL generation (may be Claude or an OpenAI-compat model).
     schema_rag : SchemaRAG
         Schema retrieval facade (used inside SQLAgent).
     doc_rag : DocRAG
@@ -157,7 +157,11 @@ class HybridFusion:
     router : IntentRouter
         Intent classifier — decides which pipeline(s) to run.
     model : str
-        Claude model used for fusion and doc synthesis.
+        Model ID passed to SQLAgent for SQL generation.
+    synth_client : optional
+        Separate client for synthesis/fusion calls. Defaults to ``client``.
+        Pass a Claude client here when ``client`` is a non-Claude model so
+        that natural-language synthesis always uses Claude.
     """
 
     def __init__(
@@ -167,8 +171,10 @@ class HybridFusion:
         doc_rag: DocRAG,
         router: IntentRouter,
         model: str = MODEL_SQL,
+        synth_client=None,
     ):
         self.client = client
+        self._synth_client = synth_client if synth_client is not None else client
         self.doc_rag = doc_rag
         self.router = router
         self.model = model
@@ -366,9 +372,9 @@ class HybridFusion:
         model: str = MODEL_SYNTH_HYBRID,
         max_tokens: int = MAX_TOKENS_FUSION,
     ) -> str:
-        """Single Claude API call with prompt caching and token logging."""
+        """Single LLM API call for synthesis; always uses synth_client (Claude)."""
         cached_system = [{"type": "text", "text": system, "cache_control": {"type": "ephemeral"}}]
-        response = self.client.messages.create(
+        response = self._synth_client.messages.create(
             model=model,
             max_tokens=max_tokens,
             system=cached_system,
