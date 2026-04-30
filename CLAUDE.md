@@ -17,14 +17,14 @@ This tests whether enterprise-style data dictionaries can recover missing domain
 
 ## Key design decisions
 
-- **SQL generation is pluggable:** `SQLAgent` and `HybridFusion` accept any `UnifiedClient` (`src/llm_client.py`). Routing and synthesis always use Claude for reliability.
+- **Claude-only runtime:** `SQLAgent` and `HybridFusion` use Anthropic clients via `src/llm_client.py`.
 - **Dual client:** `HybridFusion` has `client` for SQL generation and `synth_client` for answer synthesis.
 - **Schema escalation:** If RAG context caused an execution error, `SQLAgent` automatically falls back to the full schema on the next attempt.
-- **Prompt caching:** Anthropic calls in `agent.py` and `fusion.py` use `cache_control` blocks. `UnifiedClient` strips these for non-Anthropic backends.
+- **Prompt caching:** Anthropic calls in `agent.py` and `fusion.py` use `cache_control` blocks.
 
-## LLM model registry
+## Claude model registry
 
-All model names and providers live in `src/config.py -> LLM_OPTIONS`. Adding a new model should only require one dict entry there.
+All Claude model names live in `src/config.py -> LLM_OPTIONS`.
 
 ## BIRD data paths
 
@@ -41,7 +41,7 @@ Paths are configured in `src/config.py` and can be overridden with `BIRD_DB_ROOT
 ```bash
 python -m baselines.baseline_d --llm claude
 python -m baselines.baseline_d --llm claude --limit 20
-python -m baselines.baseline_d --llm qwen
+python -m baselines.baseline_d --llm haiku
 python -m baselines.baseline_e --mode no_doc
 python -m baselines.baseline_e --mode with_doc
 ```
@@ -54,14 +54,13 @@ Results go to `results/` and MLflow experiment `SchemaAgent-Ablation`.
 streamlit run app.py
 ```
 
-The LLM selector lives in the sidebar Settings expander.
+The Claude model selector lives in the sidebar Settings expander.
 
 ## Environment variables needed
 
 | Var | Required for |
 |-----|--------------|
 | `ANTHROPIC_API_KEY` | All modes, including routing, synthesis, and Claude SQL generation |
-| `OPENROUTER_API_KEY` | Qwen via OpenRouter |
 
 ## Test suite
 
@@ -80,8 +79,8 @@ pytest tests/ -v
 | `src/schema/` | SchemaRAG serializer, indexer, retriever |
 | `src/doc_rag.py` | DocRAG for uploaded documents |
 | `src/bird_desc_rag.py` | BirdDescRAG for BIRD data dictionaries |
-| `src/llm_client.py` | Unified client adapter |
-| `src/config.py` | Model names, paths, and LLM registry |
+| `src/llm_client.py` | Anthropic client wrapper |
+| `src/config.py` | Model names and data paths |
 | `src/utils.py` | BIRD loader, DB connection, SQL extractor |
 | `baselines/runner.py` | Shared schema dump, EX matching, MLflow logging |
 | `baselines/baseline_{a-e}.py` | Ablation configurations |

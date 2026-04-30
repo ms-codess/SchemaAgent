@@ -48,7 +48,7 @@ The research claim is that enterprise Text-to-SQL needs more than schema seriali
 
 ```text
 1. Retrieve schema context with SchemaRAG
-2. Generate SQL with the configured LLM
+2. Generate SQL with the configured Claude model
 3. Validate syntax with sqlglot
 4. Execute on SQLite
 5. If syntax, execution, or empty-result failure occurs, retry with correction feedback
@@ -100,11 +100,11 @@ The design uses two clients:
 - `client` for SQL generation
 - `synth_client` for final natural-language synthesis
 
-This keeps SQL generation pluggable while holding synthesis quality constant.
+This keeps the SQL and synthesis paths configurable within the Claude family while holding the architecture constant.
 
 ### UnifiedClient (`src/llm_client.py`)
 
-Unified adapter for Anthropic and OpenAI-compatible providers. This allows the same SQLAgent interface to drive Claude or Qwen backends.
+Thin Anthropic wrapper used by the UI and baselines so the rest of the code can depend on a single `messages.create(...)` interface.
 
 ---
 

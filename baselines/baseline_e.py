@@ -77,7 +77,7 @@ def run(
         "no_doc"   — drop the gold evidence, no retrieval.
         "with_doc" — replace gold evidence with BirdDescRAG retrieval.
     llm_key : str
-        Key into LLM_OPTIONS.
+        Key into LLM_OPTIONS for the Claude model used for SQL generation.
     limit : int
         Cap number of questions (0 = all).
 
@@ -201,15 +201,15 @@ if __name__ == "__main__":
         required=True,
         choices=["no_doc", "with_doc"],
         help=(
-            "no_doc   → drop evidence entirely (ablation)\n"
-            "with_doc → replace evidence with DocRAG over BIRD description CSVs"
+            "no_doc   - drop evidence entirely (ablation)\n"
+            "with_doc - replace evidence with DocRAG over BIRD description CSVs"
         ),
     )
     parser.add_argument(
         "--llm",
         default="claude",
         choices=["claude", "haiku"],
-        help="LLM for SQL generation (default: claude = claude-sonnet-4-5)",
+        help="Claude model for SQL generation (default: claude = Claude Sonnet 4.5)",
     )
     parser.add_argument(
         "--limit",

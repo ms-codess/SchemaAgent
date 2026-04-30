@@ -149,7 +149,7 @@ class HybridFusion:
     Parameters
     ----------
     client : anthropic.Anthropic | UnifiedClient
-        Client used for SQL generation (may be Claude or an OpenAI-compat model).
+        Client used for Claude SQL generation.
     schema_rag : SchemaRAG
         Schema retrieval facade (used inside SQLAgent).
     doc_rag : DocRAG
@@ -160,8 +160,7 @@ class HybridFusion:
         Model ID passed to SQLAgent for SQL generation.
     synth_client : optional
         Separate client for synthesis/fusion calls. Defaults to ``client``.
-        Pass a Claude client here when ``client`` is a non-Claude model so
-        that natural-language synthesis always uses Claude.
+        This can be used to keep a dedicated Claude client for synthesis.
     """
 
     def __init__(

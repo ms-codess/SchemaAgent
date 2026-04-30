@@ -323,34 +323,27 @@ for _k, _v in _DEFAULTS.items():
 
 # -- Cached AI components ------------------------------------------------------
 @st.cache_resource(show_spinner="Initialising AI components…")
-def _load_components(sql_provider: str = "anthropic", sql_model: str = "claude-sonnet-4-5"):
+def _load_components(sql_model: str = "claude-sonnet-4-5"):
     """
-    Build and cache all AI components.  Cache key includes sql_provider +
-    sql_model so switching LLMs creates a fresh set of components without
-    polluting the previous one.
+    Build and cache all AI components. Cache key includes the selected Claude
+    model so switching between Sonnet and Haiku creates a fresh set of
+    components without polluting the previous one.
     """
     import anthropic
-    from src.llm_client import UnifiedClient, make_client
+    from src.llm_client import make_client
     from src.schema import SchemaRAG
     from src.doc_rag import DocRAG
     from src.router import IntentRouter
     from src.fusion import HybridFusion
 
-    # Claude is always used for routing and synthesis (cheap, reliable JSON)
     claude_client = anthropic.Anthropic()
-
-    # SQL-generation client — may be Claude or an OpenAI-compat model (Qwen)
-    if sql_provider == "anthropic":
-        sql_client = claude_client
-    else:
-        llm_cfg = next(
-            (v for v in LLM_OPTIONS.values()
-             if v["provider"] == sql_provider and v["model"] == sql_model),
-            None,
-        )
-        if llm_cfg is None:
-            raise ValueError(f"No LLM config found for provider={sql_provider!r} model={sql_model!r}")
-        sql_client = make_client(llm_cfg)
+    llm_cfg = next(
+        (v for v in LLM_OPTIONS.values() if v["model"] == sql_model),
+        None,
+    )
+    if llm_cfg is None:
+        raise ValueError(f"No Claude config found for model={sql_model!r}")
+    sql_client = make_client(llm_cfg)
 
     schema_rag = SchemaRAG()
     doc_rag    = DocRAG()
@@ -375,7 +368,7 @@ def _current_llm_cfg() -> dict:
 
 def _get_components():
     cfg = _current_llm_cfg()
-    return _load_components(cfg["provider"], cfg["model"])
+    return _load_components(cfg["model"])
 
 
 def _try_connect(db_path: str) -> str | None:
@@ -679,13 +672,13 @@ with st.sidebar:
             st.session_state.get("selected_llm", DEFAULT_LLM)
         )
         selected = st.selectbox(
-            "SQL generation model",
+            "Claude model",
             options=llm_names,
             index=current_idx,
             help=(
-                "Claude: uses Anthropic API (ANTHROPIC_API_KEY).\n"
-                "Qwen: uses Together.ai API (TOGETHER_API_KEY).\n"
-                "Routing and synthesis always use Claude."
+                "SQL generation uses the selected Claude model.\n"
+                "Routing and synthesis also run on Claude.\n"
+                "Requires ANTHROPIC_API_KEY."
             ),
         )
         if selected != st.session_state.get("selected_llm"):

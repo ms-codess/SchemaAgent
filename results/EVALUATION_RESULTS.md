@@ -6,6 +6,19 @@ Run date: April 25 2026
 
 ---
 
+## Current Rerun Status
+
+As of April 30, 2026, a fresh rerun from this repo is blocked by Anthropic billing.
+
+- `baseline_a` was retried on April 30, 2026 and failed on question 1 with: `Your credit balance is too low to access the Anthropic API.`
+- The existing full-run artifact that is still complete is `results/baseline_d_claude_sonnet_45.json` from April 25, 2026.
+- `results/run_baseline_e_no_doc.log` shows an older April 25, 2026 `E-noDoc` run reaching 330/500 questions before failing with the same insufficient-credit error.
+- `results/baseline_e_no_doc.json` and `results/baseline_e_with_doc.json` currently contain 5-question smoke outputs, not full 500-question runs.
+
+Until credits are restored, the only fully reproducible local result artifact in `results/` is Config D.
+
+---
+
 ## Thesis Contribution: Five-Config Ablation
 
 The experiment measures three compounding contributions:
@@ -36,7 +49,7 @@ Key findings (A-D):
   an execution error; the correction loop then resolves this, firing on 3.4% of
   questions in Config D vs 1.4% in Config C alone.
 
-Config E interpretation (pending):
+Config E interpretation (pending full rerun):
 - E-noDoc vs D: measures how much Config D relied on the gold evidence hint
 - E-withDoc vs E-noDoc: measures how much BirdDescRAG recovers from the hint removal
 - Recovery gap (D - E-withDoc): the irreducible advantage of a perfect hand-crafted hint
@@ -89,11 +102,12 @@ Schema RAG + self-correction. Gold evidence hint dropped. No replacement.
 | Metric | Value |
 |--------|-------|
 | Model | claude-sonnet-4-5 |
-| Questions | 500 |
-| Correct | pending |
-| EX% | pending |
+| Full rerun status | interrupted at 330 / 500 |
+| Failure mode | Anthropic insufficient-credit error |
+| Smoke sample artifact | `results/baseline_e_no_doc.json` |
+| Smoke sample EX | 60.0% (3 / 5) |
 
-Results file: results/baseline_e_no_doc.json (eval running)
+Full-run evidence: `results/run_baseline_e_no_doc.log`
 
 ---
 
@@ -105,21 +119,11 @@ database_description/*.csv column descriptions. No gold hint used.
 | Metric | Value |
 |--------|-------|
 | Model | claude-sonnet-4-5 |
-| Questions | 500 |
-| Correct | pending |
-| EX% | pending |
+| Full rerun status | not available in repo |
+| Smoke sample artifact | `results/baseline_e_with_doc.json` |
+| Smoke sample EX | 60.0% (3 / 5) |
 
-Results file: results/baseline_e_with_doc.json (eval running after E-noDoc)
-
----
-
-## Config D (Qwen2.5-Coder-32B) -- Pending
-
-Requires OPENROUTER_API_KEY (free at openrouter.ai) and pip install openai.
-
-  python -m baselines.baseline_d --llm qwen
-
-Results file: results/baseline_d_qwen25-coder-32b.json
+There is currently no 500-question `E-withDoc` result artifact in `results/`.
 
 ---
 
@@ -130,7 +134,6 @@ Results file: results/baseline_d_qwen25-coder-32b.json
 
   # Set in .env:
   #   ANTHROPIC_API_KEY=...
-  #   OPENROUTER_API_KEY=...  (free at openrouter.ai, for Qwen)
 
   # Config A -- zero-shot
   python -m baselines.baseline_a
@@ -144,8 +147,8 @@ Results file: results/baseline_d_qwen25-coder-32b.json
   # Config D -- full system, gold hint, Claude
   python -m baselines.baseline_d --llm claude
 
-  # Config D -- full system, gold hint, Qwen (free)
-  python -m baselines.baseline_d --llm qwen
+  # Config D -- full system, gold hint, Claude Haiku variant
+  python -m baselines.baseline_d --llm haiku
 
   # Config E -- no hint (ablation)
   python -m baselines.baseline_e --mode no_doc

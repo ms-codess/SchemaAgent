@@ -2,19 +2,15 @@
 Baseline D — Full system: Schema RAG + self-correction loop.
 
 SQLAgent retrieves relevant tables via SchemaRAG, generates SQL with the
-selected LLM, executes it, and retries up to 3 times feeding errors back into
-the prompt. This is the thesis contribution — expected to be the best config.
-
-Supported LLMs
---------------
-  --llm claude   (default) claude-sonnet-4-5 via Anthropic API
-  --llm qwen                Qwen/Qwen2.5-Coder-32B-Instruct via Together.ai
+selected Claude model, executes it, and retries up to 3 times feeding errors
+back into the prompt. This is the thesis contribution — expected to be the
+best config.
 
 Usage
 -----
   python -m baselines.baseline_d               # Claude, all 500 questions
   python -m baselines.baseline_d --limit 20    # Claude, quick smoke test
-  python -m baselines.baseline_d --llm qwen    # Qwen, all 500 questions
+  python -m baselines.baseline_d --llm haiku   # Claude Haiku variant
 """
 import argparse
 import logging
@@ -46,9 +42,6 @@ logger = logging.getLogger(__name__)
 _LLM_ALIASES = {
     "claude":      "Claude Sonnet 4.5",
     "haiku":       "Claude Haiku 4.5",
-    "qwen":        "Qwen2.5-Coder-32B",                         # OpenRouter free tier
-    "qwen-hf":     "Qwen2.5-Coder-32B (HuggingFace PRO)",      # requires HF PRO
-    "qwen-together": "Qwen2.5-Coder-32B (Together.ai)",         # requires TOGETHER_API_KEY
 }
 
 
@@ -64,7 +57,7 @@ def run(
     Parameters
     ----------
     llm_key : str
-        Key into LLM_OPTIONS (e.g. "Claude Sonnet 4.5", "Qwen2.5-Coder-32B").
+        Key into LLM_OPTIONS (e.g. "Claude Sonnet 4.5").
     limit : int
         Cap number of questions (0 = all).
 
@@ -86,7 +79,6 @@ def run(
     if limit:
         questions = questions[:limit]
 
-    # Results path: baseline_d.json for Claude, baseline_d_<alias>.json otherwise
     slug = llm_key.lower().replace(" ", "_").replace(".", "").replace("/", "_")
     results_path = f"results/baseline_d_{slug}.json"
 
@@ -162,11 +154,7 @@ if __name__ == "__main__":
         "--llm",
         default="claude",
         choices=list(_LLM_ALIASES),
-        help=(
-            "LLM for SQL generation (default: claude). "
-            "'qwen' uses Together.ai (TOGETHER_API_KEY + pip install openai). "
-            "'qwen-hf' uses HuggingFace (HF_TOKEN, requires PRO for 32B)."
-        ),
+        help="Claude model for SQL generation (default: claude = Claude Sonnet 4.5).",
     )
     parser.add_argument(
         "--limit",

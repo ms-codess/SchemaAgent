@@ -39,14 +39,7 @@ BIRD_DEV_JSON = os.environ.get(
     str(PROJECT_ROOT / "_bird_data" / "minidev" / "MINIDEV" / "mini_dev_sqlite.json"),
 )
 
-# ── LLM provider registry ─────────────────────────────────────────────────────
-# provider options:
-#   "anthropic"    — anthropic SDK (ANTHROPIC_API_KEY)
-#   "huggingface"  — huggingface_hub InferenceClient (HF_TOKEN, requires PRO for 32B)
-#   "openai_compat"— openai-compatible REST endpoint (pip install openai)
-#
-# Qwen note: HuggingFace free tier depletes quickly on 32B models.
-# Set TOGETHER_API_KEY and use the Together.ai entry for reliable evals.
+# ── Claude model registry ─────────────────────────────────────────────────────
 LLM_OPTIONS: dict = {
     "Claude Sonnet 4.5": {
         "provider": "anthropic",
@@ -55,27 +48,6 @@ LLM_OPTIONS: dict = {
     "Claude Haiku 4.5": {
         "provider": "anthropic",
         "model":    "claude-haiku-4-5-20251001",
-    },
-    # OpenRouter — FREE tier (rate-limited), same 32B model, requires: pip install openai
-    # Sign up free at openrouter.ai → copy API key → set OPENROUTER_API_KEY in .env
-    "Qwen2.5-Coder-32B": {
-        "provider":    "openai_compat",
-        "model":       "qwen/qwen-2.5-coder-32b-instruct:free",
-        "base_url":    "https://openrouter.ai/api/v1",
-        "api_key_env": "OPENROUTER_API_KEY",
-    },
-    # HuggingFace Serverless — requires HF_TOKEN + HF PRO subscription for 32B
-    "Qwen2.5-Coder-32B (HuggingFace PRO)": {
-        "provider":    "huggingface",
-        "model":       "Qwen/Qwen2.5-Coder-32B-Instruct",
-        "api_key_env": "HF_TOKEN",
-    },
-    # Together.ai — pay-per-token, requires: pip install openai + TOGETHER_API_KEY
-    "Qwen2.5-Coder-32B (Together.ai)": {
-        "provider":    "openai_compat",
-        "model":       "Qwen/Qwen2.5-Coder-32B-Instruct",
-        "base_url":    "https://api.together.xyz/v1",
-        "api_key_env": "TOGETHER_API_KEY",
     },
 }
 

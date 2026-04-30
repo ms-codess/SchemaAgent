@@ -38,13 +38,13 @@ IntentRouter (Claude Haiku) -> "database" | "document" | "hybrid"
 HybridFusion.answer()
     |-- [database / hybrid] SQLAgent
     |       |-- SchemaRAG -> top-k relevant tables via ChromaDB embeddings
-    |       |-- LLM: generate SQL <- Claude Sonnet 4.5 or Qwen2.5-Coder-32B
+    |       |-- Claude: generate SQL
     |       +-- Self-correction loop (up to 3 attempts on syntax/exec/empty errors)
     |-- [document / hybrid] DocRAG -> relevant passages from uploaded PDFs/DOCX
     +-- Synthesis (Claude Haiku/Sonnet) -> natural language answer
 ```
 
-**Key design choice:** SQL generation is pluggable (Claude or Qwen). Routing and synthesis always use Claude.
+**Key design choice:** the system is Claude-based end to end. You can switch between Claude Sonnet and Claude Haiku for SQL generation, while routing and synthesis remain on Claude.
 
 ---
 
@@ -56,17 +56,13 @@ HybridFusion.answer()
 git clone <repo>
 cd SchemaAgent
 pip install -r requirements.txt
-pip install openai   # required for Qwen via OpenRouter
 ```
 
 ### 2. Set API keys in `.env`
 
 ```env
 ANTHROPIC_API_KEY=sk-ant-...        # required for all modes
-OPENROUTER_API_KEY=sk-or-...        # required for Qwen (free tier at openrouter.ai)
 ```
-
-OpenRouter provides Qwen2.5-Coder-32B for **free** (rate-limited). Sign up at `openrouter.ai` if you want to run the open-weight baseline.
 
 ### 3. Download BIRD Mini-Dev data
 
@@ -83,7 +79,7 @@ OpenRouter provides Qwen2.5-Coder-32B for **free** (rate-limited). Sign up at `o
 streamlit run app.py
 ```
 
-Connect a SQLite database in the sidebar, choose your LLM in Settings, and start asking questions.
+Connect a SQLite database in the sidebar, choose your Claude model in Settings, and start asking questions.
 
 ---
 
@@ -93,8 +89,8 @@ Connect a SQLite database in the sidebar, choose your LLM in Settings, and start
 # Claude Sonnet 4.5 -- thesis contribution model
 python -m baselines.baseline_d --llm claude
 
-# Qwen2.5-Coder-32B via OpenRouter (free)
-python -m baselines.baseline_d --llm qwen
+# Claude Haiku 4.5 variant
+python -m baselines.baseline_d --llm haiku
 
 # Quick smoke test
 python -m baselines.baseline_d --llm claude --limit 20
@@ -108,6 +104,8 @@ python -m baselines.baseline_e --mode with_doc
 
 Results are saved to `results/` and logged to MLflow.
 
+As of April 30, 2026, fresh reruns are currently blocked by Anthropic billing: a new Config A run failed on question 1 with an insufficient-credit API error. The repo still contains the full April 25, 2026 Config D result, an interrupted April 25, 2026 `E-noDoc` run that stopped at 330/500 for the same reason, and 5-question smoke outputs for both Config E modes.
+
 ---
 
 ## Ablation Results (BIRD Mini-Dev, 500 questions)
@@ -120,7 +118,6 @@ Results are saved to `results/` and logged to MLflow.
 | **D** | **Claude Sonnet 4.5** | **RAG + self-correction + gold hint** | **63.2%** | **316/500** | **+3.0 pp** |
 | E-noDoc | Claude Sonnet 4.5 | RAG + self-correction, no hint | pending | -- | -- |
 | E-withDoc | Claude Sonnet 4.5 | RAG + self-correction + BirdDescRAG | pending | -- | -- |
-| D | Qwen2.5-Coder-32B | RAG + self-correction + gold hint | pending | -- | -- |
 
 **Key findings:** Configs A-D show that RAG and self-correction are super-additive. Config E extends the thesis by testing whether BirdDescRAG can recover domain knowledge from BIRD's `database_description/*.csv` files after the gold evidence hint is removed.
 
@@ -140,13 +137,13 @@ SchemaAgent/
 |   |-- schema/               # SchemaRAG -- serializer, indexer, retriever
 |   |-- doc_rag.py            # DocRAG -- PDF/DOCX/TXT indexing and retrieval
 |   |-- bird_desc_rag.py      # BirdDescRAG -- BIRD data-dictionary retrieval
-|   |-- llm_client.py         # UnifiedClient -- Anthropic + HuggingFace + OpenAI-compat
-|   +-- config.py             # Centralised model names, paths, LLM registry
+|   |-- llm_client.py         # Anthropic client wrapper used by UI and baselines
+|   +-- config.py             # Centralised Claude model names and data paths
 |-- baselines/
 |   |-- baseline_a.py         # Config A: zero-shot
 |   |-- baseline_b.py         # Config B: RAG only
 |   |-- baseline_c.py         # Config C: self-correction only
-|   |-- baseline_d.py         # Config D: full system (--llm claude|qwen|qwen-hf)
+|   |-- baseline_d.py         # Config D: full system (--llm claude|haiku)
 |   |-- baseline_e.py         # Config E: no hint vs BirdDescRAG replacement
 |   +-- runner.py             # Shared: schema dump, execution match, MLflow logging
 |-- tests/                    # Unit tests for all components
@@ -154,24 +151,20 @@ SchemaAgent/
 |   +-- uw_courses/           # Sample SQLite database (tracked in git)
 |-- docs/
 |   |-- ARCHITECTURE.md       # Detailed architecture and data flow
-|   |-- LLM_PROVIDERS.md      # How to set up each LLM provider
 |   +-- THESIS_ABSTRACT.md    # Thesis-ready abstract
 +-- results/                  # Evaluation outputs
 ```
 
 ---
 
-## LLM Configuration
+## Claude Configuration
 
-Models are registered in `src/config.py`. Adding a new model requires only one dict entry there.
+Models are registered in `src/config.py`.
 
 | UI Label | Provider | Model | API Key |
 |----------|----------|-------|---------|
 | Claude Sonnet 4.5 | Anthropic | claude-sonnet-4-5 | `ANTHROPIC_API_KEY` |
 | Claude Haiku 4.5 | Anthropic | claude-haiku-4-5-20251001 | `ANTHROPIC_API_KEY` |
-| Qwen2.5-Coder-32B | OpenRouter (free) | qwen/qwen-2.5-coder-32b-instruct:free | `OPENROUTER_API_KEY` |
-
-See `docs/LLM_PROVIDERS.md` for full setup instructions.
 
 ---
 
@@ -186,7 +179,6 @@ pytest tests/ -v
 ## Technologies
 
 - **Claude Sonnet/Haiku** -- SQL generation, intent routing, answer synthesis
-- **Qwen2.5-Coder-32B** -- open-weight SQL generation
 - **ChromaDB** + `all-MiniLM-L6-v2` -- schema and document vector store
 - **SQLite** + `sqlglot` -- database execution and SQL validation
 - **Streamlit** -- web UI
