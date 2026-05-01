@@ -1,18 +1,29 @@
 """
 Tests for src/schema/ — serializer, indexer, retriever.
-Uses the BIRD Mini-Dev california_schools database (always present in data/bird/).
+
+These tests use the BIRD Mini-Dev california_schools database when the local
+benchmark payload is available. In the published repo that payload is optional,
+so the module skips cleanly if it is missing.
 """
-import os
-import tempfile
+from pathlib import Path
+
 import pytest
 
 from src.schema.serializer import SchemaSerializer, SchemaChunk
 from src.schema.indexer import SchemaIndexer
 from src.schema.retriever import SchemaRetriever
-from src.config import PROJECT_ROOT
+from src.config import BIRD_DB_ROOT
 
-DB_PATH = str(PROJECT_ROOT / "data" / "bird" / "dev_databases" / "california_schools" / "california_schools.sqlite")
+DB_ROOT = Path(BIRD_DB_ROOT)
+DB_PATH = str(DB_ROOT / "california_schools" / "california_schools.sqlite")
 DB_ID = "california_schools"
+
+if not Path(DB_PATH).exists():
+    pytest.skip(
+        "BIRD Mini-Dev SQLite payload not present locally; schema RAG tests require "
+        "the optional benchmark download.",
+        allow_module_level=True,
+    )
 
 
 # ── Serializer ────────────────────────────────────────────────────────────────
@@ -109,8 +120,7 @@ def test_retriever_returns_results(indexed_retriever):
 
 def test_retriever_scoped_to_db_id(tmp_chroma):
     """Results from one db_id must not include tables from another db_id."""
-    from src.config import PROJECT_ROOT
-    card_db = str(PROJECT_ROOT / "data" / "bird" / "dev_databases" / "card_games" / "card_games.sqlite")
+    card_db = str(DB_ROOT / "card_games" / "card_games.sqlite")
 
     serializer = SchemaSerializer()
     indexer = SchemaIndexer(chroma_path=tmp_chroma)
