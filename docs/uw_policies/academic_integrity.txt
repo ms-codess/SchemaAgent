@@ -1,0 +1,58 @@
+UNIVERSITY OF WASHINGTON
+ACADEMIC INTEGRITY POLICY
+Office of the Dean of Students — Updated September 2023
+
+1. OVERVIEW
+
+The University of Washington is committed to the highest standards of academic integrity. All members of the university community — students, faculty, and staff — share the responsibility of maintaining an environment in which honest intellectual work is valued and dishonesty is not tolerated.
+
+2. DEFINITIONS
+
+Academic misconduct includes but is not limited to:
+
+2.1 Cheating
+Using or attempting to use unauthorized materials, information, or study aids in any academic exercise. This includes copying from another student's exam, using prohibited notes, or accessing unauthorized electronic devices during assessments.
+
+2.2 Plagiarism
+Representing the words, ideas, or data of another person as one's own without proper attribution. This applies to written, oral, and electronic submissions. Submitting AI-generated text without disclosure is considered a form of plagiarism under current policy.
+
+2.3 Unauthorized Collaboration
+Working with other students on individual assignments unless explicitly permitted by the instructor. In computer science courses (CSE), sharing code between students in different submissions is prohibited unless the assignment is designated as a group project.
+
+2.4 Fabrication
+Falsifying or inventing data, citations, or results in any academic exercise, including laboratory reports, surveys, or research papers.
+
+2.5 Multiple Submission
+Submitting the same or substantially similar work for credit in more than one course without prior written approval from both instructors.
+
+3. CONSEQUENCES
+
+3.1 Course-Level Sanctions
+Instructors may assign a failing grade on the assignment or a failing grade for the entire course. The instructor must report all violations to the Office of Student Conduct within five business days.
+
+3.2 University-Level Sanctions
+The Office of Student Conduct may impose additional sanctions including academic probation, suspension for one or more quarters, or permanent dismissal from the university.
+
+3.3 Notation on Transcript
+A suspension or dismissal for academic misconduct is permanently noted on the student's official academic transcript and cannot be removed.
+
+4. PROCEDURES
+
+4.1 Reporting
+Any faculty member, teaching assistant, or student who has reasonable grounds to believe academic misconduct has occurred must report the incident to the Office of Student Conduct using the online Academic Misconduct Report form.
+
+4.2 Investigation
+The Office of Student Conduct will notify the student in writing within ten business days. The student has the right to respond in writing and to request a formal hearing before the Academic Conduct Board.
+
+4.3 Appeal
+A student may appeal any sanction to the Faculty Council on Academic Standards within 20 calendar days of receiving the written decision.
+
+5. AI AND GENERATIVE TOOLS
+
+As of Autumn 2023, the use of generative AI tools (including ChatGPT, Claude, Copilot, and similar systems) is governed by individual course policies. Students must check the syllabus for each course. If no policy is stated, the default rule is that AI-generated content must be disclosed. Submitting undisclosed AI-generated work is treated as plagiarism under Section 2.2.
+
+6. RESOURCES
+
+Academic Integrity Tutorial: uwnetid.uw.edu/integrity
+Office of Student Conduct: 159 Mary Gates Hall, (206) 685-6194
+Writing and Research Center: Odegaard Library, Ground Floor

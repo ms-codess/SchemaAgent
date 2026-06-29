@@ -1,0 +1,36 @@
+[
+  {
+    "config": "A",
+    "rag": false,
+    "self_correction": false,
+    "execution_accuracy": 0.602,
+    "correct": 301,
+    "total": 500
+  },
+  {
+    "config": "B",
+    "rag": true,
+    "self_correction": false,
+    "execution_accuracy": 0.612,
+    "correct": 306,
+    "total": 500
+  },
+  {
+    "config": "C",
+    "rag": false,
+    "self_correction": true,
+    "execution_accuracy": 0.608,
+    "correct": 304,
+    "total": 500,
+    "avg_attempts": 1.21
+  },
+  {
+    "config": "D",
+    "rag": true,
+    "self_correction": true,
+    "execution_accuracy": 0.638,
+    "correct": 319,
+    "total": 500,
+    "avg_attempts": 1.18
+  }
+]
